@@ -88,7 +88,7 @@ $lang["phold_name"] = "Enter Name";
 $lang["phold_username"] = "Enter Username";
 $lang["phold_fname"] = "Enter First Name";
 $lang["phold_lname"] = "Enter Last Name";
-$lang["phold_email"] = "Enter Email";
+$lang["phold_email"] = "exemple@exemple.se";
 $lang["phold_phone"] = "733333333";
 $lang["phold_password"] = "Enter Password";
 $lang["phold_address"] = "Enter Address";
@@ -204,5 +204,54 @@ $lang["footer_desc"] = "Fixit is a multi-tool, which allows you to literally hav
                            This is a subscription service with a fixed monthly fee where training and support are included. You can use any kind of smartphones, tablet and MAC or PC.
                            Whether you are a sole proprietor or have several employees, Fixit will suit you.";
 
+$lang["invoice"] = "Invoice";
+$lang["invoice_number"] = "Invoice Number";
+$lang["customer_number"] = "Customer Number";
+$lang["invoice_date"] = "Invoice Date";
+$lang["page"] = "Page";
+$lang["billing_address"] = "Billing Address";
+$lang["var_reference"] = "Was Reference";
+$lang["terms_of_payment"] = "Terms of Payment";
+$lang["your_reference"] = "Your Reference";
+$lang["expiration_date"] = "Expiration Date";
+$lang["your_order_number"] = "Your Order Number";
+$lang["rot_status"] = "Rot Status";
+$lang["view_add_rot"] = "View/Add ROT Details";
+$lang["phold_item_name"] = "Enter item title and / or description";
+$lang["phold_item_price"] = "00.00";
+$lang["phold_item_discount"] = "Discount";
+$lang["phold_item_surcharge"] = "Surcharge";
+$lang["item"] = "Item";
+$lang["unit"] = "Unit";
+$lang["quantity"] = "Quantity";
+$lang["discount"] = "Discount";
+$lang["surcharge"] = "Surcharge";
+$lang["sub_total"] = "Sub Total";
+$lang["shipping"] = "Shipping";
+$lang["tax_vat"] = "TAX/VAT";
+$lang["rounding"] = "Rounding";
+$lang["tax_credit"] = "Tax Credit";
+$lang["total"] = "Total";
+$lang["save_invoice"] = "Save Invoice";
+$lang["enter_rot"] = "Enter ROT details";
+$lang["rot_label1"] = "cadastral";
+$lang["rot_label2"] = "Apartment Designation";
+$lang["rot_label3"] = "Housing association's org. No";
+$lang["rot_label4"] = "Personal";
+$lang["add_rot_data"] = "Add Rot Data";
+
+$lang["add_event"] = "Add Event";
+$lang["update_event"] = "Update Event";
+$lang["account_number"] = "Account Number";
+$lang["website"] = "Website";
+$lang["bank_data1"] = "Data1";
+$lang["bank_data2"] = "Data2";
+$lang["bank_data3"] = "Data3";
+$lang["bank_data4"] = "Data4";
+$lang["bank_data5"] = "Data5";
+$lang["rot_data"] = "Rot Data";
+$lang["all"] = "All";
+$lang["show_inprogress"] = "Show Inprogress";
+$lang["show_unassigned"] = "Show Unassigned";
 
 ?>

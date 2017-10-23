@@ -3,11 +3,15 @@
 $xheader = '
 <link href="' . base_url() . 'assets/plugins/select2/select2.min.css" rel="stylesheet">
 <link href="' . base_url() . 'assets/plugins/dataTables/datatables.min.css" rel="stylesheet">
+<link href="' . base_url() . 'assets/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
 ';
 $xfooter = '
 <!-- Select2 -->
     <script src="' . base_url() . 'assets/plugins/select2/select2.full.min.js"></script>
 <script src="' . base_url() . 'assets/plugins/dataTables/datatables.min.js"></script>
+<script src="' . base_url() . 'assets/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 ';
 include 'header.php';
 ?>
@@ -64,7 +68,8 @@ $js2 = array('id' => 'community', 'class' => 'js-example-basic-single', 'style' 
                             <?php echo form_open('settings/ticket-config/add_ini_type', 'class="form-horizontal"'); ?>
                             <div class="form-group"><label
                                         class="col-sm-3 control-label"><?php echo $this->lang->line('add_ini_type'); ?></label>
-                                <div class="col-sm-6"><input type="text" class="form-control" name="ini_type"></div>
+                                <div class="col-sm-6"><input type="text" class="form-control" name="ini_type"
+                                                             required=""></div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-3">
@@ -80,18 +85,19 @@ $js2 = array('id' => 'community', 'class' => 'js-example-basic-single', 'style' 
                                        cellspacing="0" cellpadding="0">
                                     <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>Sl.No.</th>
                                         <th>Initiator Types</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <?php
+                                    $slno = 1;
                                     foreach ($ini_types as $key) {
                                         echo '<tr>
-                                        <th>' . $key->id . '</th>
+                                        <th>' . $slno . '</th>
                                         <th>' . $key->ini_type . '</th>
                                     </tr>';
-
+                                        $slno = $slno + 1;
                                     }
                                     ?>
                                     </tbody>
@@ -104,7 +110,8 @@ $js2 = array('id' => 'community', 'class' => 'js-example-basic-single', 'style' 
                             <?php echo form_open('settings/ticket-config/add_community', 'class="form-horizontal"'); ?>
                             <div class="form-group"><label
                                         class="col-sm-3 control-label"><?php echo $this->lang->line('add_community'); ?></label>
-                                <div class="col-sm-6"><input type="text" class="form-control" name="community"></div>
+                                <div class="col-sm-6"><input type="text" class="form-control" name="community" required>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-3">
@@ -120,18 +127,19 @@ $js2 = array('id' => 'community', 'class' => 'js-example-basic-single', 'style' 
                                        cellspacing="0" cellpadding="0">
                                     <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>Sl.No.</th>
                                         <th>Community</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <?php
+                                    $slno = 1;
                                     foreach ($communities as $key) {
                                         echo '<tr>
-                                        <th>' . $key->id . '</th>
+                                        <th>' . $slno . '</th>
                                         <th>' . $key->community . '</th>
                                     </tr>';
-
+                                        $slno = $slno + 1;
                                     }
                                     ?>
                                     </tbody>
@@ -163,14 +171,15 @@ $js2 = array('id' => 'community', 'class' => 'js-example-basic-single', 'style' 
                             <div class="hr-line-dashed"></div>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-hover material" width="100%" border="0"
-                                       cellspacing="0" cellpadding="0">
+                                       cellspacing="0" cellpadding="0" id="users">
                                     <thead>
                                     <tr>
                                         <th>Item Name</th>
                                         <th>Unit</th>
                                         <th>Quantity</th>
                                         <th>Price</th>
-                                        <th>Discount</th>
+                                        <th>Discount %</th>
+                                        <th>Surcharge %</th>
                                         <th>Total</th>
                                     </tr>
                                     </thead>
@@ -178,14 +187,14 @@ $js2 = array('id' => 'community', 'class' => 'js-example-basic-single', 'style' 
                                     <?php
                                     foreach ($items as $item) {
                                         echo '<tr>
-                                        <th>' . $item->item_name . '</th>
-                                        <th>' . $item->item_unit . '</th>
-                                        <th>' . $item->item_quantity . '</th>
-                                        <th>' . $item->item_price . '</th>
-                                        <th>' . $item->item_discount . '</th>
-                                        <th>' . $item->item_total . '</th>
+                                        <td><a href="#" class="edit" id="item_name" data-type="text" data-pk="' . $item->id . '" data-url="ticket-config/material_update" data-title="Price">' . $item->item_name . '</a></td>
+                                        <td><a href="#" class="item_unit" id="item_unit" data-type="select" data-pk="' . $item->id . '" data-url="ticket-config/material_update" data-title="Price">' . $item->item_unit . '</a></td>
+                                        <td><a href="#" class="edit" id="item_quantity" data-type="text" data-pk="' . $item->id . '" data-url="ticket-config/material_update" data-title="Price">' . $item->item_quantity . '</a></td>
+                                        <td><a href="#" class="edit" id="item_price" data-type="text" data-pk="' . $item->id . '" data-url="ticket-config/material_update" data-title="Price">' . $item->item_price . '</a></td>
+                                        <td><a href="#" class="edit" id="item_discount" data-type="text" data-pk="' . $item->id . '" data-url="ticket-config/material_update" data-title="Price" data-value="">' . $item->item_discount . '</a></td>
+                                        <td><a href="#" class="edit" id="item_surcharge" data-type="text" data-pk="' . $item->id . '" data-url="ticket-config/material_update" data-title="Price" data-value="">' . $item->item_surcharge . '</a></td>
+                                        <td>' . $item->item_total . '</td>
                                     </tr>';
-
                                     }
                                     ?>
                                     </tbody>
@@ -217,4 +226,46 @@ $js2 = array('id' => 'community', 'class' => 'js-example-basic-single', 'style' 
 
     });
 
+</script>
+<script type="text/javascript">
+    var url = document.location.toString();
+    if (url.match('#')) {
+        $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+    }
+
+    // Change hash for page-reload
+    $('.nav-tabs a').on('shown.bs.tab', function (e) {
+        window.location.hash = e.target.hash;
+    })
+</script>
+
+<script>
+    $(document).ready(function () {
+        <?php if($this->session->alert_msg != ''){ ?>
+        var msg = "<?php echo $this->session->alert_msg; ?>";
+        swal({
+            title: msg,
+            text: "",
+            type: "success",
+        });
+    });
+    <?php } ?>
+    <?php $this->session->unset_userdata('alert_msg'); ?>
+</script>
+<script type="text/javascript">
+    $.fn.editable.defaults.mode = 'inline';
+    $.fn.editable.defaults.showbuttons = false;
+    //$.fn.editable.defaults.url = '/post';
+    //$.fn.editable.defaults.type = 'text';
+    $('.edit').editable();
+</script>
+<script>
+    $(function () {
+        $('.item_unit').editable({
+            source: [
+                {value: 'pieces', text: 'pieces'},
+                {value: 'hours', text: 'hours'},
+            ]
+        });
+    });
 </script>

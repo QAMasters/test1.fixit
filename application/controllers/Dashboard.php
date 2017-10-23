@@ -26,7 +26,7 @@ class Dashboard extends CI_Controller
     public function index()
     {
         if ($this->session->email) {
-            $rec = "status != 'Draft' AND status != 'Deleted' AND status != 'Closed'";
+            $rec = "status = 'Accepted by' OR status = 'Assigned to' OR status = 'New'";
             //$this->db->limit(10);
             $rec_tic = $this->F_Model->tickets($rec);
             $data['rec_tic'] = $rec_tic->result();
