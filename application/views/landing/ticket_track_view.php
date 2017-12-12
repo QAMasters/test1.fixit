@@ -210,7 +210,10 @@ echo form_hidden('ticket_id', $ticket->ticket_id);
                 <div class="portlet portlet-bordered">
                     <div class="portlet-title">
                         <p class="pull-left" style="font-size: 18px;"><?php echo $this->lang->line('lbl_pers_info'); ?>
-                            <input type="checkbox" class="emergency" name="emergency"/> <span
+                            <input type="checkbox" class="emergency"
+                                   name="emergency" <?php if ($ticket->emergency == '1') {
+                                echo 'checked';
+                            } ?> /> <span
                                     style="font-size: 15px; color: red; "><?php echo $this->lang->line('emergency_high_priority'); ?> </span>
                         </p>
                     </div>

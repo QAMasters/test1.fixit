@@ -154,7 +154,7 @@ $sub_serv_opt = array('class' => 'select2_demo_3', 'id' => 'new_select', 'style'
             if ($current_key_value >= 1) {
                 $previous_value = $tkt_array[$current_key_value - 1];
                 ?>
-                <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6">
+                <div class="col-lg-6">
                     <a class="btn btn-danger btn-rounded btn-sm btn-outline" href="<?php echo $previous_value; ?>">
                         << <?php echo $this->lang->line('previous_ticket'); ?></a></div>
                 <?php
@@ -162,7 +162,7 @@ $sub_serv_opt = array('class' => 'select2_demo_3', 'id' => 'new_select', 'style'
             if ($current_key_value < $last_key_value) {
                 $next_value = $tkt_array[$current_key_value + 1];
                 ?>
-                <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6 pull-right">
+                <div class="col-lg-6 pull-right">
                     <a class="btn btn-danger btn-rounded btn-sm btn-outline"
                        href="<?php echo $next_value; ?>"><?php echo $this->lang->line('next_ticket'); ?> >> </a></div>
                 <?php

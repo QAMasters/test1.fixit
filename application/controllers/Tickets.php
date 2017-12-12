@@ -415,6 +415,7 @@ class Tickets extends CI_Controller
                 $data['sub_services'] = $this->F_Model->edit_sub_service($data['ticket']->service);
                 $where = "status = 1 AND role_id = 2";
                 $act_vendor = $this->F_Model->vendors($where)->result();
+                $vendor_array = [];
                 foreach ($act_vendor as $key) {
                     $vendor_array[$key->id] = $key->fname;
                 }
