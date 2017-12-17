@@ -223,7 +223,7 @@ class Tickets extends CI_Controller
                     'comments' => 'Ticket Created by' . get_user_name($this->session->id)->fname,
                 );
                 $this->F_Model->add_history($his_data);
-                $data['message'] = 'Ticket Created Successfully';
+                $this->session->set_userdata('alert_msg', 'Ticket Created Successfully');
                 redirect('tickets/open');
             } else if (isset($save_draft)) {
                 $ini_type = $this->input->post('ini_type');
@@ -504,6 +504,8 @@ class Tickets extends CI_Controller
                 );
                 $this->F_Model->ticket_update($data, $where);
                 email_send($ticket_id, 'ticket_delete');
+                $where = 'title = "' . $ticket_id . '"';
+                $this->F_Model->delete_calendar_event($where);
                 $his_data = array(
                     'ticket_id' => $ticket_id,
                     'time' => current_time(),
@@ -593,6 +595,8 @@ class Tickets extends CI_Controller
                 redirect('tickets/open');
             }
             if ($this->input->post('ticket_id') AND $this->input->post('ticketreminder')) {
+                $ticket_id = $this->input->post('ticket_id');
+                email_send($ticket_id, 'send_reminder');
                 redirect($_SERVER['HTTP_REFERER']);
             }
         } else {

@@ -337,7 +337,16 @@ echo form_hidden('ticket_id', $ticket->ticket_id);
                             <div class="col-sm-6 form-group">
                                 <label class="control-label"><?php echo $this->lang->line('location'); ?></label>
                                 <div class="input-group col-md-12 col-xs-12">
-                                    <?php echo form_dropdown('service', $services, $ticket->service, $serv_opt); ?>
+                                    <?php //echo form_dropdown('service', $services, $ticket->service, $serv_opt); ?>
+                                    <select name="service" class="select2_demo_3" onchange="fetch_select(this.value);"
+                                            required="required" data-error="Please Select a Serice" style="width: 100%">
+                                        <option value=""><?php echo $this->lang->line('select') ?></option>
+                                        <?php foreach ($services as $service) { ?>
+                                            <option value="<?php echo $service ?>" <?php if ($service == $ticket->service) {
+                                                echo "selected";
+                                            } ?> ><?php echo $this->lang->line($service) ?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
                                 <div class="help-block with-errors"></div>
                             </div>
@@ -451,7 +460,7 @@ echo form_hidden('ticket_id', $ticket->ticket_id);
 <script type="text/javascript">
     $(document).ready(function () {
         $('#state').select2({
-            placeholder: "Select or Type to add",
+            placeholder: "<?php echo $this->lang->line('type_or_add');?>",
             allowClear: true,
             tags: true,
             tokenSeparators: [",", ""],
@@ -467,7 +476,7 @@ echo form_hidden('ticket_id', $ticket->ticket_id);
 <script type="text/javascript">
     $(document).ready(function () {
         $('#community').select2({
-            placeholder: "Select or Type to add",
+            placeholder: "<?php echo $this->lang->line('type_or_add');?>",
             allowClear: true,
             tags: true,
             tokenSeparators: [",", " "],

@@ -64,10 +64,9 @@ class F_Model extends CI_Model
     public function fetch_service()
     {
         $this->db->from('services');
-
+        $this->db->order_by("service", "asc");
         $result = $this->db->get();
         $return = array();
-        $return[''] = 'Select';
         if ($result->num_rows() > 0) {
             foreach ($result->result_array() as $row) {
                 $return[$row['service']] = $row['service'];
@@ -80,6 +79,7 @@ class F_Model extends CI_Model
     {
         $this->db->where('service', $service);
         $this->db->from('services');
+        $this->db->order_by("service asc,sub_service asc");
         $result = $this->db->get();
         $return = '<option value="">Select</option>';
         if ($result->num_rows() > 0) {
@@ -369,6 +369,18 @@ class F_Model extends CI_Model
     public function material_import($data)
     {
         $this->db->insert('material', $data);
+    }
+
+    public function material_update($where, $data)
+    {
+        $this->db->where($where);
+        $this->db->update('material', $data);
+    }
+
+    public function delete_calendar_event($where)
+    {
+        $this->db->where($where);
+        $this->db->delete('calendar_events');
     }
 }
 

@@ -31,9 +31,12 @@ class Login extends CI_Controller
                 $_SESSION['lname'] = $user_info->lname;
                 $_SESSION['role_id'] = $user_info->role_id;
                 redirect('dashboard');
+            } else {
+                $_SESSION['login_error'] = "Invalid Email or Password";
+                redirect('index.php#Login');
             }
         }
-        redirect('index.php#Login');
+        #redirect('index.php#Login');
     }
 
     public function logout()

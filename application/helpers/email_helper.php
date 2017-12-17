@@ -59,6 +59,8 @@ if (!function_exists('email_send')) {
         #$subject = trim("[Ticket: ".$ticket_id." ]");
         if ($tpl_name == 'share_ticket') {
             $attachment = "./tickets/" . $ticket_id . ".pdf";
+        } else if ($tpl_name == 'send_invoice') {
+            $attachment = "./invoices/" . $ticket_id . ".pdf";
         } else {
             $attachment = '';
         }

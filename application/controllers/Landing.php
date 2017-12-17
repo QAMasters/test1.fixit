@@ -14,6 +14,7 @@ class Landing extends CI_Controller
         $this->load->helper('string');
         $this->load->helper('directory');
         $this->load->model('F_Model');
+        $this->load->library('session');
 
         if (!isset($_COOKIE["lang"])) {
             $pref_lang = 'sw';

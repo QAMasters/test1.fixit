@@ -2,12 +2,14 @@
 
 $xheader = '
 <link href="' . base_url() . 'assets/plugins/dataTables/datatables.min.css" rel="stylesheet">
+<link href="' . base_url() . 'assets/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 <!--New-->
     <link href="https://cdn.datatables.net/responsive/1.0.7/css/responsive.dataTables.min.css" rel="stylesheet">
 ';
 $xfooter = '
 <script src="' . base_url() . 'assets/plugins/dataTables/datatables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.4.1/js/buttons.colVis.min.js"></script> 
+<script src="https://cdn.datatables.net/buttons/1.4.1/js/buttons.colVis.min.js"></script>
+<script src="' . base_url() . 'assets/plugins/sweetalert/sweetalert.min.js"></script> 
 <!--New-->
     <script src="https://cdn.datatables.net/responsive/1.0.7/js/dataTables.responsive.min.js"></script>
 ';
@@ -18,7 +20,7 @@ include 'header.php';
         <h2><?php echo $this->lang->line('tickets'); ?></h2>
         <ol class="breadcrumb">
             <li>
-                <a href="index.html"><?php echo $this->lang->line('home'); ?></a>
+                <a href="<?php echo base_url() ?>dashboard"><?php echo $this->lang->line('home'); ?></a>
             </li>
             <li>
                 <a><?php echo $this->lang->line('tickets'); ?></a>
@@ -45,16 +47,21 @@ include 'header.php';
                 </div>
                 <div class="ibox-content">
                     <ul class="list-inline">
-                        <li><a href="#" class="all btn btn-success btn-sm"">All</a></li>
-                        <li><a href="#" class="inprogress btn btn-success btn-sm"">Show Inprogress</a></li>
-                        <li><a href="#" class="unassigned btn btn-success btn-sm"">Show Unassigned</a></li>
+                        <li><a href="#" class="all btn btn-success btn-sm""><?php echo $this->lang->line('all'); ?></a>
+                        </li>
+                        <li><a href="#"
+                               class="inprogress btn btn-success btn-sm""><?php echo $this->lang->line('show_inprogress'); ?></a>
+                        </li>
+                        <li><a href="#"
+                               class="unassigned btn btn-success btn-sm""><?php echo $this->lang->line('show_unassigned'); ?></a>
+                        </li>
                     </ul>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover open-tickets" width="100%"
                                border="0" cellspacing="0" cellpadding="0">
                             <thead>
                             <tr>
-                                <th><?php echo $this->lang->line('ticket_id'); ?></th>
+                                <th><?php echo $this->lang->line('community'); ?></th>
                                 <th><?php echo $this->lang->line('name'); ?></th>
                                 <th><?php echo $this->lang->line('phone'); ?></th>
                                 <th><?php echo $this->lang->line('services'); ?></th>
@@ -77,10 +84,10 @@ include 'header.php';
                                     $vendor = '';
                                 }
                                 echo '<tr style="cursor: pointer;">
-                          <td>' . $key->ticket_id . '</td>
+                          <td>' . $key->community . '</td>
                           <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $key->ini_name . '</td>
                           <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $key->ini_phone . '</td>
-                          <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $key->service . '</td>
+                          <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $this->lang->line($key->service) . '</td>
                           <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $created_on . ' - ' . $ticket_age . ' day(s)</td>
                           <td onclick="window.document.location=\'' . $key->ticket_id . '\'"><span class="label label-' . status_label($key->status) . '">' . $key->status . ' ' . $vendor . '</span></td>
                           <td>
@@ -157,11 +164,11 @@ include 'header.php';
         responsive: true,
         paging: true,
         "language": {
-            "zeroRecords": "Sorry, Nothing Found here", //changes words used
-            "lengthMenu": "Show _MENU_ Tickets", //changes words usedwords used
-            "info": "Showing _START_ to _END_ of _TOTAL_ Tickets", //changes words used
+            "zeroRecords": "<?php echo $this->lang->line('search_result_zero_records'); ?>", //changes words used
+            "lengthMenu": "<?php echo $this->lang->line('search_label_show'); ?> _MENU_ <?php echo $this->lang->line('search_label_ticket'); ?>",
+            "info": "<?php echo $this->lang->line('search_label_showing'); ?> _START_ <?php echo $this->lang->line('search_label_to'); ?> _END_ <?php echo $this->lang->line('search_label_of'); ?> _TOTAL_ <?php echo $this->lang->line('search_label_ticket'); ?>", //changes words used
             "search": "", //changes words used originally - Search programs:
-            "searchPlaceholder": "Search",
+            "searchPlaceholder": "<?php echo $this->lang->line('search_field_placeholder'); ?>",
             "infoFiltered": "(filtered from _MAX_ total tickets)"
         },
         dom: '<"html5buttons"B>lTfgitp',
@@ -309,4 +316,18 @@ include 'header.php';
 
 <script type="text/javascript">
     $("[data-hover='tooltip']").tooltip();
+</script>
+
+<script>
+    <?php if($this->session->alert_msg != ''){ ?>
+    $(document).ready(function () {
+        var msg = "<?php echo $this->session->alert_msg; ?>";
+        swal({
+            title: msg,
+            text: "",
+            type: "success",
+        });
+    });
+    <?php } ?>
+    <?php $this->session->unset_userdata('alert_msg'); ?>
 </script>

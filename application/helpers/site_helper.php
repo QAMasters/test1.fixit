@@ -98,6 +98,17 @@ if (!function_exists('vendor_status')) {
         }
     }
 }
+if (!function_exists('invoice_status')) {
+    function invoice_status($ticket_id)
+    {
+        $ci =& get_instance();
+        $ci->load->database();
+
+        $ci->db->where('ticket_id = "' . $ticket_id . '"');
+        $query = $ci->db->get('invoices')->row();
+        return $query->inv_status;
+    }
+}
 if (!function_exists('gen_tic_id')) {
     function gen_tic_id()
     {

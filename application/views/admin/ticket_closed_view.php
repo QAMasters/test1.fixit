@@ -13,7 +13,7 @@ include 'header.php';
         <h2><?php echo $this->lang->line('tickets'); ?></h2>
         <ol class="breadcrumb">
             <li>
-                <a href="index.html"><?php echo $this->lang->line('home'); ?></a>
+                <a href="<?php echo base_url() ?>dashboard"><?php echo $this->lang->line('home'); ?></a>
             </li>
             <li>
                 <a><?php echo $this->lang->line('tickets'); ?></a>
@@ -44,7 +44,7 @@ include 'header.php';
                         <table class="table table-striped table-bordered table-hover dataTables-example">
                             <thead>
                             <tr>
-                                <th><?php echo $this->lang->line('ticket_id'); ?></th>
+                                <th><?php echo $this->lang->line('community'); ?></th>
                                 <th><?php echo $this->lang->line('name'); ?></th>
                                 <th><?php echo $this->lang->line('phone'); ?></th>
                                 <th><?php echo $this->lang->line('services'); ?></th>
@@ -59,10 +59,10 @@ include 'header.php';
                                 $ticket_age = ticket_age($key->created_on);
                                 $created_on = creation_date_only($key->created_on);
                                 echo '<tr style="cursor: pointer;">
-                          <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $key->ticket_id . '</td>
+                          <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $key->community . '</td>
                           <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $key->ini_name . '</td>
                           <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $key->ini_phone . '</td>
-                          <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $key->service . '</td>
+                          <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $this->lang->line($key->service) . '</td>
                           <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $created_on . ' - ' . $ticket_age . ' day(s)</td>
                           <td onclick="window.document.location=\'' . $key->ticket_id . '\'"><span class="label label-' . status_label($key->status) . '">' . $key->status . '</span></td>
                           <td>

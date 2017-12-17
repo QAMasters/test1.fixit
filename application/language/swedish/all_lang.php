@@ -1,5 +1,8 @@
 <?php
 
+$lang["placeholder_ticket_history_enter_ticket_id"] = "Ange ärende nr";
+
+
 $lang["new_ticket"] = "NYTT ÄRENDE";
 $lang["open_tickets"] = "Öppna";
 $lang["closed_tickets"] = "Stängda";
@@ -29,9 +32,10 @@ $lang["next_ticket"] = "Nästa";
 $lang["tickets"] = "Ärendehantering";
 $lang["vendors"] = "Hantverkare";
 $lang["invoices"] = "Fakturahantering";
+$lang["invoices_status"] = "Faktura status";
 $lang["services"] = "Tjänster";
 $lang["monthly_stats"] = "Månadsstatistik";
-$lang["invoice_stats"] = "Fakturastatestik";
+$lang["invoice_stats"] = "Faktura statistik";
 $lang["settings"] = "Inställningar";
 $lang["dashboard"] = "Dashboard";
 $lang["ticket_history"] = "Ärendehistorik";
@@ -45,6 +49,9 @@ $lang["email_templates"] = "Epostmall";
 $lang["template_name"] = "Mallnamn";
 $lang["subject"] = "Ämne";
 $lang["all_alerts"] = "Se Alla";
+
+$lang["search_field_placeholder"] = "Search";
+$lang["search_result_zero_records"] = "Sorry, Nothing Found here";
 
 $lang["home"] = "Hem";
 $lang["information"] = "Information";
@@ -254,11 +261,11 @@ $lang["add_event"] = "Lägg till Event";
 $lang["update_event"] = "Uppdatera Event";
 $lang["account_number"] = "Kontonummer";
 $lang["website"] = "Hemsida";
-$lang["bank_data1"] = "Data1";
-$lang["bank_data2"] = "Data2";
-$lang["bank_data3"] = "Data3";
-$lang["bank_data4"] = "Data4";
-$lang["bank_data5"] = "Data5";
+$lang["bank_data1"] = "Gatuadress";
+$lang["bank_data2"] = "Skätt Registration";
+$lang["bank_data3"] = "Postadress";
+$lang["bank_data4"] = "Ort";
+$lang["bank_data5"] = "Momsreg";
 $lang["rot_data"] = "Rot Data";
 $lang["all"] = "Alla";
 $lang["show_inprogress"] = "Pågående";

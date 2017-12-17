@@ -24,7 +24,7 @@ include 'header.php';
         <h2><?php echo $this->lang->line('tickets'); ?></h2>
         <ol class="breadcrumb">
             <li>
-                <a href="index.html"><?php echo $this->lang->line('home'); ?></a>
+                <a href="<?php echo base_url() ?>dashboard"><?php echo $this->lang->line('home'); ?></a>
             </li>
             <li>
                 <a><?php echo $this->lang->line('tickets'); ?></a>
@@ -214,11 +214,20 @@ echo form_open_multipart('tickets/new', 'data-toggle="validator"');
                     </div>
                 </a>
                 <div class="ibox-content">
+                    <?php //print_r($services); ?>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group"><label
                                         class="control-label"><?php echo $this->lang->line('location'); ?></label>
-                                <?php echo form_dropdown('service', $services, '', $serv_opt); ?>
+                                <?php //echo form_dropdown('service', $services, '', $serv_opt); ?>
+                                <select name="service" class="form-control select2_demo_3"
+                                        onchange="fetch_select(this.value);" required="required"
+                                        data-error="Please Select a Serice" style="width: 100%">
+                                    <option value=""><?php echo $this->lang->line('select') ?></option>
+                                    <?php foreach ($services as $service) { ?>
+                                        <option value="<?php echo $service ?>"><?php echo $this->lang->line($service) ?></option>
+                                    <?php } ?>
+                                </select>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
@@ -256,7 +265,8 @@ echo form_open_multipart('tickets/new', 'data-toggle="validator"');
                 <div class="ibox-content">
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="form-group"><label class="control-label">Select File</label>
+                            <div class="form-group"><label
+                                        class="control-label"><?php echo $this->lang->line('select_image'); ?></label>
                                 <input type="file" name="image" class="form-control">
                             </div>
                         </div>
@@ -285,7 +295,7 @@ include 'footer.php';
 <script type="text/javascript">
     $(document).ready(function () {
         $('#ini_type').select2({
-            placeholder: "Select or Type to add",
+            placeholder: "<?php echo $this->lang->line('type_or_add');?>",
             allowClear: true,
             tags: true,
             tokenSeparators: [",", ""],
@@ -301,7 +311,7 @@ include 'footer.php';
 <script type="text/javascript">
     $(document).ready(function () {
         $('#community').select2({
-            placeholder: "Select or Type to add",
+            placeholder: "<?php echo $this->lang->line('type_or_add');?>",
             allowClear: true,
             tags: true,
             tokenSeparators: [",", ""],

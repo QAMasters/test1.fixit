@@ -183,7 +183,19 @@ $stylesheet = '<link href="' . base_url() . 'assets/css/bootstrap.min.css" rel="
 $this->m_pdf->pdf->WriteHTML($stylesheet, 1);
 $this->m_pdf->pdf->WriteHTML($html);
 $this->m_pdf->pdf->SetTitle('Ticket ID : ' . $ticket->ticket_id);
-$this->m_pdf->pdf->Output($ticket->ticket_id, "I");
+
+$this->m_pdf->pdf->SetWatermarkText('FIXIT');
+$this->m_pdf->pdf->watermark_font = 'DejaVuSansCondensed';
+$this->m_pdf->pdf->showWatermarkText = true;
+
+if ($pdf == 'view') {
+    $this->m_pdf->pdf->Output($ticket->ticket_id, "I");
+} else if ($pdf == 'send_email') {
+    $file_path = "./invoices/" . $ticket->ticket_id . ".pdf";
+    $this->m_pdf->pdf->Output($file_path, "F");
+    email_send($ticket->ticket_id, 'send_invoice');
+    redirect($_SERVER['HTTP_REFERER']);
+}
 
 exit;
 ?>

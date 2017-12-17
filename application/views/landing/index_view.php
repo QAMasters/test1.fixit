@@ -351,6 +351,11 @@ if (!isset($_COOKIE['lang'])) {
                 <h4 class="modal-title" id="myModalLabel"><?php echo $this->lang->line('login'); ?></h4>
             </div>
             <div class="modal-body">
+                <?php if ($this->session->login_error != '') {
+                    echo '<font color="red">' . $this->lang->line('login_error') . '</font>';
+                    $this->session->unset_userdata('login_error');
+                }
+                ?>
                 <form method="POST" action="login">
                     <div class="form-group">
                         <label for="exampleInputEmail1"><?php echo $this->lang->line('email'); ?></label>

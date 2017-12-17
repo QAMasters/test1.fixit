@@ -7,6 +7,7 @@ class Invoices extends CI_Controller
         parent::__construct();
         $this->load->helper('url');
         $this->load->helper('site');
+        $this->load->helper('email');
         $this->load->model('F_Model');
         $this->load->helper('form');
         $this->load->helper('string');
@@ -75,6 +76,7 @@ class Invoices extends CI_Controller
         if ($this->session->email) {
             $inv = "status = 'Invoice Raised'";
             $inv_tic = $this->F_Model->tickets($inv);
+            $inv_tic = $this->F_Model->tickets($inv);
             $data['inv_tic'] = $inv_tic->result();
             $this->load->view('admin/invoice_raised_view', $data);
         } else {
@@ -122,6 +124,11 @@ class Invoices extends CI_Controller
                     $invoice_product_surcharge = $this->input->post('invoice_product_surcharge');
                     $invoice_product_sub = $this->input->post('invoice_product_sub');
                     $unit = $this->input->post('unit');
+                    if ($invoice_product_sub[$key] == 'NaN') {
+                        $invoice_product_sub_key = '0.00';
+                    } else {
+                        $invoice_product_sub_key = $invoice_product_sub[$key];
+                    }
                     $data = array(
                         'ticket_id' => $ticket_id,
                         'item_name' => $invoice_product[$key],
@@ -130,7 +137,7 @@ class Invoices extends CI_Controller
                         'price' => $invoice_product_price[$key],
                         'discount' => $invoice_product_discount[$key],
                         'surcharge' => $invoice_product_surcharge[$key],
-                        'sub_total' => $invoice_product_sub[$key]
+                        'sub_total' => $invoice_product_sub_key
                     );
                     if ($invoice_product[$key] != '') {
                         $this->F_Model->invoice_items($data);
@@ -181,7 +188,26 @@ class Invoices extends CI_Controller
             $data['inv_items'] = $this->F_Model->inv_items($where);
             $data['bank_details'] = $this->F_Model->bank_details()->row();
             $data['rot'] = $this->F_Model->get_rot($where);
-            #$data['pdf'] = "view";
+            $data['pdf'] = "view";
+            $this->load->view('admin/invoice_pdf_view', $data);
+        } else {
+            redirect('index.php#Login');
+        }
+    }
+
+    public function send_email()
+    {
+        if ($this->session->email) {
+            $this->load->library('m_pdf');
+            $ticket_id = $this->input->get('ticket_id');
+            $where = 'ticket_id = "' . $ticket_id . '"';
+            $data['ticket'] = $this->F_Model->tickets($where)->row();
+            $data['invoice'] = $this->F_Model->get_invoices($where)->row();
+            $data['appconfig'] = $this->F_Model->appconfig()->row();
+            $data['inv_items'] = $this->F_Model->inv_items($where);
+            $data['bank_details'] = $this->F_Model->bank_details()->row();
+            $data['rot'] = $this->F_Model->get_rot($where);
+            $data['pdf'] = "send_email";
             $this->load->view('admin/invoice_pdf_view', $data);
         } else {
             redirect('index.php#Login');
@@ -208,6 +234,61 @@ class Invoices extends CI_Controller
                 $this->F_Model->update_rot($where, $rot_data);
             }
             redirect($_SERVER['HTTP_REFERER']);
+        } else {
+            redirect('index.php#Login');
+        }
+    }
+
+    public function invoice_status_change()
+    {
+        if ($this->session->email) {
+            if ($this->input->get('ticket_id')) {
+                $ticket_id = $this->input->get('ticket_id');
+                $status = $this->input->get('status');
+                $where = 'ticket_id = "' . $ticket_id . '"';
+                $data = array(
+                    'inv_status' => $status,
+                );
+                $this->F_Model->invoice_update($data, $where);
+
+            }
+            redirect($_SERVER['HTTP_REFERER']);
+        } else {
+            redirect('index.php#Login');
+        }
+    }
+
+    public function invoice_date_change()
+    {
+        if ($this->session->email) {
+            $ticket_id = $this->input->get('ticket_id');
+            $date = $this->input->get('date');
+            if ($ticket_id != '' AND $date != '') {
+                $where = 'ticket_id = "' . $ticket_id . '"';
+                $data = array(
+                    'invoice_date' => $date,
+                );
+                $this->F_Model->invoice_update($data, $where);
+
+            }
+        } else {
+            redirect('index.php#Login');
+        }
+    }
+
+    public function change_bill_due()
+    {
+        if ($this->session->email) {
+            $ticket_id = $this->input->get('ticket_id');
+            $bill_due = $this->input->get('bill_due');
+            if ($ticket_id != '' AND $bill_due != '') {
+                $where = 'ticket_id = "' . $ticket_id . '"';
+                $data = array(
+                    'bill_due' => $bill_due,
+                );
+                $this->F_Model->invoice_update($data, $where);
+
+            }
         } else {
             redirect('index.php#Login');
         }

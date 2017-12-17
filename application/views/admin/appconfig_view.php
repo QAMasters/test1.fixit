@@ -1,8 +1,10 @@
 <?php
 $xheader = '
-
+<link href="' . base_url() . 'assets/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 ';
-$xfooter = '';
+$xfooter = '
+<script src="' . base_url() . 'assets/plugins/sweetalert/sweetalert.min.js"></script>
+';
 include 'header.php';
 ?>
 <div class="row wrapper border-bottom white-bg page-heading">
@@ -10,7 +12,7 @@ include 'header.php';
         <h2><?php echo $this->lang->line('settings'); ?></h2>
         <ol class="breadcrumb">
             <li>
-                <a href="index.html"><?php echo $this->lang->line('home'); ?></a>
+                <a href="<?php echo base_url() ?>dashboard"><?php echo $this->lang->line('home'); ?></a>
             </li>
             <li>
                 <a><?php echo $this->lang->line('settings'); ?></a>
@@ -80,12 +82,12 @@ include 'header.php';
                             <div class="form-group"><label
                                         class="col-sm-3 control-label"><?php echo $this->lang->line('title'); ?></label>
                                 <div class="col-sm-6"><input type="text" class="form-control" name="title"
-                                                             value="<?php echo $appconfig->title; ?>"></div>
+                                                             value="<?php echo $appconfig->title; ?>" required></div>
                             </div>
                             <div class="form-group"><label
                                         class="col-sm-3 control-label"><?php echo $this->lang->line('footer'); ?></label>
                                 <div class="col-sm-6"><input type="text" class="form-control" name="footer"
-                                                             value="<?php echo $appconfig->footer; ?>"></div>
+                                                             value="<?php echo $appconfig->footer; ?>" required></div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-3">
@@ -169,7 +171,7 @@ include 'header.php';
                             <div class="form-group"><label
                                         class="col-sm-3 control-label"><?php echo $this->lang->line('rot_data'); ?></label>
                                 <div class="col-sm-6"><input type="text" class="form-control" name="rot_data"
-                                                             value="<?php echo $appconfig->rot_data; ?>"></div>
+                                                             value="<?php echo $appconfig->rot_data; ?>" required></div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-3">
@@ -191,7 +193,7 @@ include 'header.php';
                                     <img src="<?php echo base_url('uploads/logo/') . $appconfig->logo; ?>" width="100px"
                                          height="100px">
                                     <br><br>
-                                    <input type="file" class="form-control" name="logo">
+                                    <input type="file" class="form-control" name="logo" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -231,4 +233,18 @@ include 'header.php';
     $('.nav-tabs a').on('shown.bs.tab', function (e) {
         window.location.hash = e.target.hash;
     })
+</script>
+
+<script>
+    $(document).ready(function () {
+        <?php if($this->session->alert_msg != ''){ ?>
+        var msg = "<?php echo $this->session->alert_msg; ?>";
+        swal({
+            title: msg,
+            text: "",
+            type: "success",
+        });
+    });
+    <?php } ?>
+    <?php $this->session->unset_userdata('alert_msg'); ?>
 </script>

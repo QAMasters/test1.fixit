@@ -224,7 +224,7 @@ foreach ($closed_tickets1 as $key1) {
             },
             data: {
                 columns: [
-                    ['Amount Billed', amt_billed],
+                    ['<?php echo $this->lang->line('comments'); ?>', amt_billed],
                     ['Discount', discount],
                     ['ROT', rot],
                     ['Tax', tax],

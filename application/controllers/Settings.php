@@ -46,7 +46,9 @@ class Settings extends CI_Controller
             if ($ini_type != '') {
                 $data = array('ini_type' => $ini_type);
                 $this->F_Model->add_ini_types($data);
+                $this->session->set_userdata('alert_msg', 'Initiator Type Added Successfully');
             }
+
             redirect('settings/ticket-config#tab-1');
         } else {
             redirect('index.php#Login');
@@ -60,6 +62,7 @@ class Settings extends CI_Controller
             if ($community != '') {
                 $data = array('community' => $community);
                 $this->F_Model->add_communities($data);
+                $this->session->set_userdata('alert_msg', 'Community Added Successfully');
             }
             redirect('settings/ticket-config#tab-2');
         } else {
@@ -130,6 +133,7 @@ class Settings extends CI_Controller
                     'address' => $this->input->post('address')
                 );
                 $this->F_Model->appconfig_update($data);
+                $this->session->set_userdata('alert_msg', 'Company Information Updated');
                 redirect(site_url('settings/appconfig'));
             }
             $app_update = $this->input->post('app_update');
@@ -141,6 +145,7 @@ class Settings extends CI_Controller
                     'defaultlang' => $this->input->post('defaultlang')
                 );
                 $this->F_Model->appconfig_update($data);
+                $this->session->set_userdata('alert_msg', 'App configuration Updated');
                 redirect(site_url('settings/appconfig#tab-2'));
             }
             $bank_update = $this->input->post('bank_update');
@@ -158,6 +163,7 @@ class Settings extends CI_Controller
                     'd5' => $this->input->post('d5'),
                 );
                 $this->F_Model->bank_update($data);
+                $this->session->set_userdata('alert_msg', 'Bank Details Updated');
                 redirect(site_url('settings/appconfig#tab-3'));
             }
             $inv_update = $this->input->post('inv_update');
@@ -166,6 +172,7 @@ class Settings extends CI_Controller
                     'rot_data' => $this->input->post('rot_data'),
                 );
                 $this->F_Model->appconfig_update($data);
+                $this->session->set_userdata('alert_msg', 'Invoice Information Updated');
                 redirect(site_url('settings/appconfig#tab-4'));
             }
             $logo_upload = $this->input->post('logo_upload');
@@ -187,6 +194,7 @@ class Settings extends CI_Controller
                     'logo' => $file_name,
                 );
                 $this->F_Model->appconfig_update($data);
+                $this->session->set_userdata('alert_msg', 'Logo Updated');
                 redirect(site_url('settings/appconfig#tab-5'));
             }
         } else {
@@ -226,8 +234,56 @@ class Settings extends CI_Controller
                         }
                     }
                 }
+                $this->session->set_userdata('alert_msg', 'Material Information Imported!');
                 redirect('settings/ticket-config#tab-3');
             }
+        } else {
+            redirect('index.php#Login');
+        }
+    }
+
+    public function material_update()
+    {
+        if ($this->session->email) {
+            $name = $this->input->post('name');
+            $value = $this->input->post('value');
+            $id = $this->input->post('pk');
+            if ($name == 'item_name') {
+                $where = 'id = "' . $id . '"';
+                $data = array('item_name' => $value,);
+            } else if ($name == 'item_unit') {
+                $where = 'id = "' . $id . '"';
+                $data = array('item_unit' => $value,);
+            } else if ($name == 'item_quantity') {
+                $where = 'id = "' . $id . '"';
+                $mat = $this->F_Model->material_select($where)->row();
+                $total = $value * $mat->item_price;
+                $sub_total1 = $total - (($mat->item_discount / 100) * $total);
+                $sub_total = $sub_total1 + (($mat->item_surcharge / 100) * $total);
+                $data = array('item_quantity' => $value, 'item_total' => $sub_total);
+            } else if ($name == 'item_price') {
+                $where = 'id = "' . $id . '"';
+                $mat = $this->F_Model->material_select($where)->row();
+                $total = $mat->item_quantity * $value;
+                $sub_total1 = $total - (($mat->item_discount / 100) * $total);
+                $sub_total = $sub_total1 + (($mat->item_surcharge / 100) * $total);
+                $data = array('item_price' => $value, 'item_total' => $sub_total);
+            } else if ($name == 'item_discount') {
+                $where = 'id = "' . $id . '"';
+                $mat = $this->F_Model->material_select($where)->row();
+                $total = $mat->item_quantity * $mat->item_price;
+                $sub_total1 = $total - (($value / 100) * $total);
+                $sub_total = $sub_total1 + (($mat->item_surcharge / 100) * $total);
+                $data = array('item_discount' => $value, 'item_total' => $sub_total);
+            } else if ($name == 'item_surcharge') {
+                $where = 'id = "' . $id . '"';
+                $mat = $this->F_Model->material_select($where)->row();
+                $total = $mat->item_quantity * $mat->item_price;
+                $sub_total1 = $total - (($mat->item_discount / 100) * $total);
+                $sub_total = $sub_total1 + (($value / 100) * $total);
+                $data = array('item_surcharge' => $value, 'item_total' => $sub_total);
+            }
+            $this->F_Model->material_update($where, $data);
         } else {
             redirect('index.php#Login');
         }
