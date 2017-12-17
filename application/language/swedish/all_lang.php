@@ -1,7 +1,20 @@
 <?php
 
 $lang["placeholder_ticket_history_enter_ticket_id"] = "Ange ärende nr";
+$lang["search_label_show"] = "Visa";
+$lang["search_label_ticket"] = "Ärende";
+$lang["search_label_showing"] = "Visas";
+$lang["search_label_to"] = "till";
+$lang["search_label_of"] = "av";
+$lang["invoices_status"] = "Faktura status";
+$lang["type_or_add"] = "Välj eller Skriv";
 
+$lang["amount_billed"] = "Fakturerad";
+$lang["rot"] = "ROT";
+$lang["moms"] = "MOMS";
+
+$lang["images"] = "Bilder";
+$lang["select_images"] = "Välj bild";
 
 $lang["new_ticket"] = "NYTT ÄRENDE";
 $lang["open_tickets"] = "Öppna";
@@ -32,7 +45,6 @@ $lang["next_ticket"] = "Nästa";
 $lang["tickets"] = "Ärendehantering";
 $lang["vendors"] = "Hantverkare";
 $lang["invoices"] = "Fakturahantering";
-$lang["invoices_status"] = "Faktura status";
 $lang["services"] = "Tjänster";
 $lang["monthly_stats"] = "Månadsstatistik";
 $lang["invoice_stats"] = "Faktura statistik";
@@ -50,8 +62,8 @@ $lang["template_name"] = "Mallnamn";
 $lang["subject"] = "Ämne";
 $lang["all_alerts"] = "Se Alla";
 
-$lang["search_field_placeholder"] = "Search";
-$lang["search_result_zero_records"] = "Sorry, Nothing Found here";
+$lang["search_field_placeholder"] = "Sök";
+$lang["search_result_zero_records"] = "Tyvär, vi hittar inget";
 
 $lang["home"] = "Hem";
 $lang["information"] = "Information";
@@ -199,8 +211,6 @@ $lang["Bedroom"] = "Sovrum";
 $lang["Living room"] = "Vardagsrum";
 $lang["Other"] = "Other";
 
-$lang["search_result_zero_records"] = "Other";
-
 /* Track */
 $lang["track_ur_ticket"] = "SPÅRA ÄRENDE";
 $lang["track_ticket"] = "SPÅRA ÄRENDE";
@@ -262,7 +272,7 @@ $lang["update_event"] = "Uppdatera Event";
 $lang["account_number"] = "Kontonummer";
 $lang["website"] = "Hemsida";
 $lang["bank_data1"] = "Gatuadress";
-$lang["bank_data2"] = "Skätt Registration";
+$lang["bank_data2"] = "Skatt Registration";
 $lang["bank_data3"] = "Postadress";
 $lang["bank_data4"] = "Ort";
 $lang["bank_data5"] = "Momsreg";

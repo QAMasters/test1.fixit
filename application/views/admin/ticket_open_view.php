@@ -47,13 +47,13 @@ include 'header.php';
                 </div>
                 <div class="ibox-content">
                     <ul class="list-inline">
-                        <li><a href="#" class="all btn btn-success btn-sm""><?php echo $this->lang->line('all'); ?></a>
+                        <li><a href="#" class="all btn btn-success btn-sm"><?php echo $this->lang->line('all'); ?></a>
                         </li>
                         <li><a href="#"
-                               class="inprogress btn btn-success btn-sm""><?php echo $this->lang->line('show_inprogress'); ?></a>
+                               class="inprogress btn btn-success btn-sm"><?php echo $this->lang->line('show_inprogress'); ?></a>
                         </li>
                         <li><a href="#"
-                               class="unassigned btn btn-success btn-sm""><?php echo $this->lang->line('show_unassigned'); ?></a>
+                               class="unassigned btn btn-success btn-sm"><?php echo $this->lang->line('show_unassigned'); ?></a>
                         </li>
                     </ul>
                     <div class="table-responsive">

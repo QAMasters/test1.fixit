@@ -387,7 +387,7 @@ echo form_open_multipart('', 'data-toggle="validator"');
 <script type="text/javascript">
     $(document).ready(function () {
         $('#state').select2({
-            placeholder: "Select or Type to add",
+            placeholder: "<?php echo $this->lang->line('type_or_add');?>",
             allowClear: true,
             tags: true,
             tokenSeparators: [",", ""],
@@ -403,7 +403,7 @@ echo form_open_multipart('', 'data-toggle="validator"');
 <script type="text/javascript">
     $(document).ready(function () {
         $('#community').select2({
-            placeholder: "Select or Type to add",
+            placeholder: "<?php echo $this->lang->line('type_or_add');?>",
             allowClear: true,
             tags: true,
             tokenSeparators: [",", " "],

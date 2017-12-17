@@ -256,7 +256,7 @@ echo form_open_multipart('tickets/new', 'data-toggle="validator"');
             <div class="ibox collapsed">
                 <a class="collapse-link" style="color: inherit;">
                     <div class="ibox-title">
-                        <h5>Images</h5>
+                        <h5><?php echo $this->lang->line('images'); ?></h5>
                         <div class="ibox-tools">
                             <i class="fa fa-chevron-up"></i>
                         </div>

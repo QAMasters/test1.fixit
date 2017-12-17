@@ -25,7 +25,6 @@ $xfooter = '
     ';
 include 'header.php';
 ?>
-<body>
 <div class="wrapper wrapper-content">
     <div class="row">
         <div class="col-lg-3">
@@ -193,7 +192,7 @@ include 'header.php';
         <div class="col-lg-8">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5><?php echo $this->lang->line('invoices'); ?></h5>
+                    <h5><?php echo $this->lang->line('invoices_status'); ?></h5>
                 </div>
                 <style>
                     .dataTables_wrapper {
@@ -213,7 +212,7 @@ include 'header.php';
                         <?php
                         foreach ($inv_tic as $key) {
                             echo '<tr>
-                                    <td>' . $key->name . '</td>
+                                    <td>' . $key->ticket_id . '</td>
                                     <td><span class="label label-' . status_label($key->inv_status) . '">' . $key->inv_status . '</span></td>                          
                                     </tr>';
                         }
@@ -229,7 +228,7 @@ include 'header.php';
 
     <?php include 'charts.php'; ?>
 
-</body>
+    </body>
     </html>
 
     <script>
@@ -249,6 +248,7 @@ include 'header.php';
                 "searchPlaceholder": "<?php echo $this->lang->line('search_field_placeholder'); ?>",
                 "infoFiltered": "(filtered from _MAX_ total tickets)"
             }
+
         });
 
         // table.column(1).visible(false);

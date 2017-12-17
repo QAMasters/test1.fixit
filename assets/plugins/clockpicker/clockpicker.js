@@ -138,7 +138,7 @@
             //        self.amOrPm = "AM";
             //        $('.clockpicker-span-am-pm').empty().append('AM');
             //    });
-            //    
+            //
             //$('clockpicker-pm-button')
             //    .on("click", function() {
             //         self.amOrPm = "PM";

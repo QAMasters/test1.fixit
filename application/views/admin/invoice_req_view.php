@@ -53,7 +53,7 @@ include 'header.php';
                                 $ticket_age = ticket_age($key->created_on);
                                 $created_on = creation_date_only($key->created_on);
                                 echo '<tr>
-                          <td>' . $key->ticket_id . '</td>
+                          <td>' . $key->community . '</td>
                           <td>' . $key->ini_name . '</td>
                           <td>' . $key->ini_phone . '</td>
                           <td>' . $key->service . '</td>

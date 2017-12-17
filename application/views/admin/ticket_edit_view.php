@@ -652,7 +652,7 @@ include 'footer.php';
     <script type="text/javascript">
         $(document).ready(function () {
             $('#community').select2({
-                placeholder: "Select or Type to add",
+                placeholder: "<?php echo $this->lang->line('type_or_add');?>",
                 tags: true,
                 tokenSeparators: [",", ""],
                 createTag: function (newTag) {
@@ -805,7 +805,7 @@ include 'footer.php';
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-small btn-success" type="submit"
-                            name="avatar"><?php echo $this->lang->line('close'); ?></button>
+                            name="avatar"><?php echo $this->lang->line('update'); ?></button>
                     <button type="button" class="btn btn-warning"
                             data-dismiss="modal"><?php echo $this->lang->line('close'); ?></button>
                 </div>

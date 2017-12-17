@@ -1,6 +1,24 @@
 <?php
 $lang["placeholder_ticket_history_enter_ticket_id"] = "Enter Ticket ID";
+$lang["search_label_show"] = "Show";
+$lang["search_label_ticket"] = "Tickets";
+$lang["search_label_showing"] = "Showing";
+$lang["search_label_to"] = "to";
+$lang["search_label_of"] = "of";
+$lang["type_or_add"] = "Select or Type to add";
+
+$lang["amount_billed"] = "Amount Billed";
+$lang["rot"] = "ROT";
+$lang["moms"] = "VAT";
 $lang["invoices_status"] = "Invoice status";
+
+$lang["images"] = "Images";
+$lang["select_images"] = "Select Image";
+
+
+$lang["search_field_placeholder"] = "Search";
+$lang["search_result_zero_records"] = "Sorry, Nothing Found here";
+
 
 $lang["new_ticket"] = "New Ticket";
 $lang["open_tickets"] = "Open Tickets";
@@ -186,7 +204,6 @@ $lang["kitchen"] = "Kitchen";
 $lang["bedroom"] = "Bedroom";
 $lang["living_room"] = "Living Room";
 
-
 $lang["Apartment"] = "Apartment";
 $lang["Bathroom"] = "Bathroom";
 $lang["Hall"] = "Hall";
@@ -260,7 +277,7 @@ $lang["bank_data1"] = "Address";
 $lang["bank_data2"] = "Tax Registration";
 $lang["bank_data3"] = "Post Code";
 $lang["bank_data4"] = "City";
-$lang["bank_data5"] = "Tax Registration";
+$lang["bank_data5"] = "Tax Registration Number";
 $lang["rot_data"] = "Rot Data";
 $lang["all"] = "All";
 $lang["show_inprogress"] = "Show Inprogress";

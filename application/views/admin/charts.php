@@ -164,13 +164,13 @@ foreach ($closed_tickets1 as $key1) {
             },
             data: {
                 columns: [
-                    ['Hall', hall],
-                    ['Bathroom', bathroom],
-                    ['Apartment', apartment],
-                    ['Kitchen', kitchen],
-                    ['Bedroom', bedroom],
-                    ['Livingroom', livingroom],
-                    ['Other', other],
+                    ['<?php echo $this->lang->line('Hall'); ?>', hall],
+                    ['<?php echo $this->lang->line('Bathroom'); ?>', bathroom],
+                    ['<?php echo $this->lang->line('Apartment'); ?>', apartment],
+                    ['<?php echo $this->lang->line('Kitchen'); ?>', kitchen],
+                    ['<?php echo $this->lang->line('Bedroom'); ?>', bedroom],
+                    ['<?php echo $this->lang->line('Living room'); ?>', livingroom],
+                    ['<?php echo $this->lang->line('Other'); ?>', other],
                 ],
                 type: 'donut',
                 onclick: function (d, i) {
@@ -224,10 +224,10 @@ foreach ($closed_tickets1 as $key1) {
             },
             data: {
                 columns: [
-                    ['<?php echo $this->lang->line('comments'); ?>', amt_billed],
-                    ['Discount', discount],
-                    ['ROT', rot],
-                    ['Tax', tax],
+                    ['<?php echo $this->lang->line('amount_billed'); ?>', amt_billed],
+                    ['<?php echo $this->lang->line('discount'); ?>', discount],
+                    ['<?php echo $this->lang->line('rot'); ?>', rot],
+                    ['<?php echo $this->lang->line('moms'); ?>', tax],
                 ],
                 type: 'donut',
                 onclick: function (d, i) {
