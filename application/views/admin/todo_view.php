@@ -11,7 +11,7 @@ include 'header.php';
         <h2>TO DO List</h2>
         <ol class="breadcrumb">
             <li>
-                <a href="index.html">Home</a>
+                <a href="<?php echo base_url() ?>dashboard">Home</a>
             </li>
             <li class="active">
                 <strong>Todo List</strong>

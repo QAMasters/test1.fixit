@@ -1,5 +1,21 @@
 <?php
 
+$lang["placeholder_ticket_history_enter_ticket_id"] = "Ange ärende nr";
+$lang["search_label_show"] = "Visa";
+$lang["search_label_ticket"] = "Ärende";
+$lang["search_label_showing"] = "Visas";
+$lang["search_label_to"] = "till";
+$lang["search_label_of"] = "av";
+$lang["invoices_status"] = "Faktura status";
+$lang["type_or_add"] = "Välj eller Skriv";
+
+$lang["amount_billed"] = "Fakturerad";
+$lang["rot"] = "ROT";
+$lang["moms"] = "MOMS";
+
+$lang["images"] = "Bilder";
+$lang["select_images"] = "Välj bild";
+
 $lang["new_ticket"] = "NYTT ÄRENDE";
 $lang["open_tickets"] = "Öppna";
 $lang["closed_tickets"] = "Stängda";
@@ -25,13 +41,13 @@ $lang["add_vendor"] = "Lägg Till";
 $lang["change_vendor"] = "Ändra";
 $lang["share_ticket"] = "Dela Via Epost";
 $lang["previous_ticket"] = "Föregående";
-$lang["next_ticket"] = "Nesta";
+$lang["next_ticket"] = "Nästa";
 $lang["tickets"] = "Ärendehantering";
 $lang["vendors"] = "Hantverkare";
 $lang["invoices"] = "Fakturahantering";
 $lang["services"] = "Tjänster";
 $lang["monthly_stats"] = "Månadsstatistik";
-$lang["invoice_stats"] = "Fakturastatestik";
+$lang["invoice_stats"] = "Faktura statistik";
 $lang["settings"] = "Inställningar";
 $lang["dashboard"] = "Dashboard";
 $lang["ticket_history"] = "Ärendehistorik";
@@ -45,6 +61,9 @@ $lang["email_templates"] = "Epostmall";
 $lang["template_name"] = "Mallnamn";
 $lang["subject"] = "Ämne";
 $lang["all_alerts"] = "Se Alla";
+
+$lang["search_field_placeholder"] = "Sök";
+$lang["search_result_zero_records"] = "Tyvär, vi hittar inget";
 
 $lang["home"] = "Hem";
 $lang["information"] = "Information";
@@ -88,7 +107,7 @@ $lang["phold_username"] = "Användarnamn";
 $lang["phold_fname"] = "Förnamn";
 $lang["phold_lname"] = "Efternamn";
 $lang["phold_email"] = "exemple@exemple.se";
-$lang["phold_phone"] = "733333333";
+$lang["phold_phone"] = "0733333333";
 $lang["phold_password"] = "Lösenord";
 $lang["phold_address"] = "Adress";
 $lang["phold_doorcode"] = "Dörr/Port/Alarm";
@@ -148,7 +167,7 @@ $lang["jan"] = "Jan";
 $lang["feb"] = "Feb";
 $lang["mar"] = "Mar";
 $lang["apr"] = "Apr";
-$lang["may"] = "May";
+$lang["may"] = "Maj";
 $lang["jun"] = "Jun";
 $lang["jul"] = "Jul";
 $lang["aug"] = "Aug";
@@ -161,7 +180,7 @@ $lang["dec"] = "Dec";
 /*Landing Page*/
 $lang["home"] = "HEM";
 $lang["how_it_works"] = "HUR DET FUNGERAR";
-$lang["services"] = "TJÄNSTER";
+$lang["services"] = "Tjänster";
 $lang["track"] = "SPÅRA ÄRENDEN";
 $lang["login"] = "LOGGA IN";
 $lang["logout"] = "Logout";
@@ -184,6 +203,14 @@ $lang["kitchen"] = "Kök";
 $lang["bedroom"] = "Sovrum";
 $lang["living_room"] = "Vardagsrum";
 
+$lang["Apartment"] = "Lägenhet";
+$lang["Bathroom"] = "Badrum";
+$lang["Hall"] = "Hall";
+$lang["Kitchen"] = "Kök";
+$lang["Bedroom"] = "Sovrum";
+$lang["Living room"] = "Vardagsrum";
+$lang["Other"] = "Other";
+
 /* Track */
 $lang["track_ur_ticket"] = "SPÅRA ÄRENDE";
 $lang["track_ticket"] = "SPÅRA ÄRENDE";
@@ -201,4 +228,58 @@ $lang["emergency_high_priority"] = "Jour/Hög Prioriterat";
 $lang["create_ticket"] = "Skapa Ärende";
 $lang["footer_data"] = "2017 &copy; Fixit | Utvecklad av reITsolution.se";
 $lang["footer_desc"] = "Fixit är ett multiverktyg, som gör att du bokstavligen kan ha kontoret mitt i handen. Den är enkel att använda och stödjer det dagliga arbetet från att kunden lägger ett ärende tills jobbet är klart och fakturan skickad. Detta är en abonnemangstjänst med en fast månadsavgift där utbildning och support ingår. Du kan använda alla slags smartphones, surfplattor samt MAC eller PC datorer. Oavsett om du är ett enmansföretag eller har flera anställda så kommer Fixit att passa dig.";
+
+$lang["invoice"] = "Faktura";
+$lang["invoice_number"] = "Fakturanummer";
+$lang["customer_number"] = "Kundnummber";
+$lang["invoice_date"] = "Fakturadatum";
+$lang["page"] = "Sida";
+$lang["billing_address"] = "Faktureringsadress";
+$lang["var_reference"] = "Vår referens";
+$lang["terms_of_payment"] = "Betalningsvillkor";
+$lang["your_reference"] = "Er referens";
+$lang["expiration_date"] = "Förfallodatum";
+$lang["your_order_number"] = "Ert Ordernummer";
+$lang["rot_status"] = "Rot Status";
+$lang["view_add_rot"] = "View/Add ROT Details";
+$lang["phold_item_name"] = "Enter item title and / or description";
+$lang["phold_item_price"] = "00.00";
+$lang["phold_item_discount"] = "Rabatt";
+$lang["phold_item_surcharge"] = "Påslag";
+$lang["item"] = "Artikel";
+$lang["unit"] = "Enhet";
+$lang["price"] = "Pris";
+$lang["quantity"] = "Antal";
+$lang["discount"] = "Rabatt";
+$lang["surcharge"] = "Påslag";
+$lang["sub_total"] = "Belope fore Moms";
+$lang["shipping"] = "Frakt";
+$lang["tax_vat"] = "Moms";
+$lang["rounding"] = "Öresutjämning";
+$lang["tax_credit"] = "Skattereduktion";
+$lang["total"] = "Total";
+$lang["save_invoice"] = "Spara faktura";
+$lang["enter_rot"] = "Skriv ROT detaljer";
+$lang["rot_label1"] = "Fastighetsbeteckning";
+$lang["rot_label2"] = "Lägenhetsbeteckning";
+$lang["rot_label3"] = "Bostadsrättsförenings org. nr";
+$lang["rot_label4"] = "Personnummer";
+$lang["rot_label4"] = "Personnummer";
+$lang["add_rot_data"] = "Lägg till Rot Data";
+
+$lang["add_event"] = "Lägg till Event";
+$lang["update_event"] = "Uppdatera Event";
+$lang["account_number"] = "Kontonummer";
+$lang["website"] = "Hemsida";
+$lang["bank_data1"] = "Gatuadress";
+$lang["bank_data2"] = "Skatt Registration";
+$lang["bank_data3"] = "Postadress";
+$lang["bank_data4"] = "Ort";
+$lang["bank_data5"] = "Momsreg";
+$lang["rot_data"] = "Rot Data";
+$lang["all"] = "Alla";
+$lang["show_inprogress"] = "Pågående";
+$lang["show_unassigned"] = "Ej tilldelade";
+$lang["login_error"] = "Ogiltig e-post eller lösenord";
+
 ?>

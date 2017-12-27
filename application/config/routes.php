@@ -84,17 +84,22 @@ $route['vendors/new'] = "Vendors/vendor_new";
 $route['vendor/edit/(:any)'] = "Vendors/vendor_edit/$1";
 
 $route['invoice/pdf'] = "Invoices/Invoice_pdf";
+$route['invoice/send_email'] = "Invoices/send_email";
 $route['invoice/update_rot'] = "Invoices/update_rot";
 $route['invoice/requested'] = "Invoices/requested";
 $route['invoice/mat_search'] = "Invoices/material_search";
 $route['invoice/generate/(:any)'] = "Invoices/generate/$1";
 $route['invoice/list'] = "Invoices/raised";
-$route['invoice/edit/(:any)'] = "Invoices/edit/$1";
+$route['invoice/invoice_status_change'] = "Invoices/invoice_status_change";
+$route['invoice/invoice_date_change'] = "Invoices/invoice_date_change";
+$route['invoice/change_bill_due'] = "Invoices/change_bill_due";
 $route['invoice/update'] = "Invoices/invoice_update";
+$route['invoice/edit/(:any)'] = "Invoices/edit/$1";
 
 $route['settings/ticket-config/add_ini_type'] = "Settings/add_ini_type";
 $route['settings/ticket-config/add_community'] = "Settings/add_community";
 $route['settings/ticket-config/material_import'] = "Settings/material_import";
+$route['settings/ticket-config/material_update'] = "Settings/material_update";
 $route['settings/ticket-config'] = "Settings/ticketconfig";
 $route['settings/email-templates'] = "Settings/email_tpl";
 $route['settings/email-templates/edit/(:any)'] = "Settings/email_tpl_edit/$1";

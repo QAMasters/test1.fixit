@@ -38,7 +38,7 @@ include 'header.php';
                         <table class="table table-striped table-bordered table-hover dataTables-example">
                             <thead>
                             <tr>
-                                <th><?php echo $this->lang->line('ticket_id'); ?></th>
+                                <th><?php echo $this->lang->line('community'); ?></th>
                                 <th><?php echo $this->lang->line('name'); ?></th>
                                 <th><?php echo $this->lang->line('phone'); ?></th>
                                 <th><?php echo $this->lang->line('services'); ?></th>
@@ -53,7 +53,7 @@ include 'header.php';
                                 $ticket_age = ticket_age($key->created_on);
                                 $created_on = creation_date_only($key->created_on);
                                 echo '<tr>
-                          <td>' . $key->ticket_id . '</td>
+                          <td>' . $key->community . '</td>
                           <td>' . $key->ini_name . '</td>
                           <td>' . $key->ini_phone . '</td>
                           <td>' . $key->service . '</td>

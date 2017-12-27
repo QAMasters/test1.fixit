@@ -38,7 +38,7 @@ include 'header.php';
                         <table class="table table-striped table-bordered table-hover dataTables-example">
                             <thead>
                             <tr>
-                                <th><?php echo $this->lang->line('ticket_id'); ?></th>
+                                <th><?php echo $this->lang->line('community'); ?></th>
                                 <th><?php echo $this->lang->line('name'); ?></th>
                                 <th><?php echo $this->lang->line('phone'); ?></th>
                                 <th><?php echo $this->lang->line('services'); ?></th>
@@ -52,14 +52,23 @@ include 'header.php';
                             foreach ($inv_tic as $key) {
                                 $ticket_age = ticket_age($key->created_on);
                                 $created_on = creation_date_only($key->created_on);
-                                echo '<tr>
-                          <td>' . $key->ticket_id . '</td>
-                          <td>' . $key->ini_name . '</td>
-                          <td>' . $key->ini_phone . '</td>
-                          <td>' . $key->service . '</td>
-                          <td>' . $created_on . ' - ' . $ticket_age . ' day(s)</td>
-                          <td><span class="label label-' . status_label($key->status) . '">' . $key->status . '</span></td>
-                          <td><a class="btn btn-success btn-sm waves-effect" href="' . base_url() . 'invoice/edit/' . $key->ticket_id . '"><i class="fa fa-edit"></i> ' . $this->lang->line('manage') . '</a></td>
+                                $invoice_status = invoice_status($key->ticket_id);
+                                echo '<tr style="cursor: pointer;">
+                          <td onclick="window.document.location=\'edit/' . $key->ticket_id . '\'">' . $key->community . '</td>
+                          <td onclick="window.document.location=\'edit/' . $key->ticket_id . '\'">' . $key->ini_name . '</td>
+                          <td onclick="window.document.location=\'edit/' . $key->ticket_id . '\'">' . $key->ini_phone . '</td>
+                          <td onclick="window.document.location=\'edit/' . $key->ticket_id . '\'">' . $key->service . '</td>
+                          <td onclick="window.document.location=\'edit/' . $key->ticket_id . '\'">' . $created_on . ' - ' . $ticket_age . ' day(s)</td>
+                          <td onclick="window.document.location=\'edit/' . $key->ticket_id . '\'"><span class="label label-' . status_label($invoice_status) . '">' . $invoice_status . '</span></td>
+                          <td>
+                          <div class="btn-group">
+                            <button data-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle" aria-expanded="false">Change Status <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="invoice_status_change?ticket_id=' . $key->ticket_id . '&status=Paid">Paid</a></li>
+                                <li><a href="invoice_status_change?ticket_id=' . $key->ticket_id . '&status=UnPaid">UnPaid</a></li>
+                            </ul>
+                        </div>
+                          </td>
                         </tr>';
                             }
                             ?>

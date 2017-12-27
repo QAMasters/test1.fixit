@@ -52,7 +52,7 @@ jQuery(document).ready(function ($) {
                 //give higher z-index to the pricing table items selected by the radio input
                 show_selected_items(table_elements[selected_filter]);
 
-                //rotate each cd-pricing-wrapper 
+                //rotate each cd-pricing-wrapper
                 //at the end of the animation hide the not-selected pricing tables and rotate back the .cd-pricing-wrapper
 
                 if (!Modernizr.cssanimations) {
