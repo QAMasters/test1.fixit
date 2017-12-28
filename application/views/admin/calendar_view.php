@@ -80,7 +80,6 @@ include 'footer.php';
                     <label for="p-in"
                            class="col-md-4 label-heading"><?php echo $this->lang->line('start_date'); ?></label>
                     <div class="col-md-8">
-                        <!--<input type="text" class="form-control" name="start_date" value="<?php echo date("Y-m-d h:m"); ?>">-->
                         <input size="16" type="text" readonly class="start_datetime form-control" name="start_date"
                                value="<?php echo date("Y-m-d h:m"); ?>">
                         <small><?php echo $this->lang->line('date_format'); ?> YYYY/MM/DD HH:MM</small>
@@ -90,7 +89,6 @@ include 'footer.php';
                     <label for="p-in"
                            class="col-md-4 label-heading"><?php echo $this->lang->line('end_date'); ?></label>
                     <div class="col-md-8">
-                        <!--<input type="text" class="form-control" name="end_date" value="<?php echo date("Y-m-d h:m"); ?>">-->
                         <input size="16" type="text" readonly class="end_datetime form-control" name="end_date"
                                value="<?php echo date("Y-m-d h:m"); ?>">
                         <small><?php echo $this->lang->line('date_format'); ?> YYYY/MM/DD HH:MM</small>
@@ -98,9 +96,7 @@ include 'footer.php';
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default"
-                        data-dismiss="modal"><?php echo $this->lang->line('close'); ?></button>
-                <input type="submit" class="btn btn-primary" value="Add Event">
+                <input type="submit" class="btn btn-success" value="<?php echo $this->lang->line('add_event'); ?>">
                 <?php echo form_close() ?>
             </div>
         </div>
@@ -113,7 +109,7 @@ include 'footer.php';
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel"><?php echo $this->lang->line('update_calendar_evenr'); ?></h4>
+                <h4 class="modal-title" id="myModalLabel"><?php echo $this->lang->line('update_calendar_event'); ?></h4>
             </div>
             <div class="modal-body">
                 <?php echo form_open(base_url("calendar/edit_event"), array("class" => "form-horizontal")) ?>
@@ -161,9 +157,7 @@ include 'footer.php';
                 <input type="hidden" name="eventid" id="event_id" value="0"/>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default"
-                        data-dismiss="modal"><?php echo $this->lang->line('close'); ?></button>
-                <input type="submit" class="btn btn-primary" value="Update Event">
+                <input type="submit" class="btn btn-success" value="<?php echo $this->lang->line('update_event'); ?>">
                 <?php echo form_close() ?>
             </div>
         </div>
