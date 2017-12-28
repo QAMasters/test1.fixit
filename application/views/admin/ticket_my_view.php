@@ -5,7 +5,6 @@ $xheader = '
 ';
 $xfooter = '
 <script src="' . base_url() . 'assets/plugins/dataTables/datatables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.4.1/js/buttons.colVis.min.js"></script> 
 ';
 include 'header.php';
 ?>
@@ -14,13 +13,13 @@ include 'header.php';
         <h2><?php echo $this->lang->line('tickets'); ?></h2>
         <ol class="breadcrumb">
             <li>
-                <a href="index.html"><?php echo $this->lang->line('home'); ?></a>
+                <a href="<?php echo base_url() ?>dashboard"><?php echo $this->lang->line('home'); ?></a>
             </li>
             <li>
                 <a><?php echo $this->lang->line('tickets'); ?></a>
             </li>
             <li class="active">
-                <strong>Draft Tickets</strong>
+                <strong><?php echo $this->lang->line('open_tickets'); ?></strong>
             </li>
         </ol>
     </div>
@@ -37,7 +36,7 @@ include 'header.php';
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5><?php echo $this->lang->line('draft_tickets'); ?></h5>
+                    <h5><?php echo $this->lang->line('open_tickets'); ?></h5>
                 </div>
                 <div class="ibox-content">
 
@@ -56,26 +55,29 @@ include 'header.php';
                             </thead>
                             <tbody>
                             <?php
-                            foreach ($draft_tic as $key) {
+                            foreach ($open_tic as $key) {
                                 $ticket_age = ticket_age($key->created_on);
                                 $created_on = creation_date_only($key->created_on);
 
-                                $this->db->where('id = "' . $key->vendor . '"');
-                                $vendor = $this->db->get('users')->row();
                                 if (substr($key->status, 0, 11) == 'Assigned to') {
-                                    $vendor = $vendor->fname;
+                                    $vendor = get_user_name($key->vendor)->fname;
+                                } else if (substr($key->status, 0, 11) == 'Accepted by') {
+                                    $vendor = get_user_name($key->vendor)->fname;
                                 } else {
                                     $vendor = '';
                                 }
+
                                 echo '<tr style="cursor: pointer;">
                           <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $key->ticket_id . '</td>
                           <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $key->ini_name . '</td>
                           <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $key->ini_phone . '</td>
-                          <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $key->service . '</td>
+                          <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $this->lang->line($key->service) . '</td>
                           <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $created_on . ' - ' . $ticket_age . ' ' . $this->lang->line('day(s)') . '</td>
                           <td onclick="window.document.location=\'' . $key->ticket_id . '\'"><span class="label label-' . status_label($key->status) . '">' . $key->status . ' ' . $vendor . '</span></td>
                           <td>
-                            <a class="btn btn-success btn-sm waves-effect" href="' . base_url() . 'tickets/' . $key->ticket_id . '"><i class="fa fa-edit"></i> Edit </a>                            
+                            <a href="#Accept" data-toggle="modal" data-hover="tooltip" title="Accept Ticket" data-placement="top" data-whatever="' . $key->ticket_id . '" class="btn btn-primary btn-circle btn-outline"><span class="glyphicon glyphicon-ok"></a>
+                            <a href="#Reject" data-toggle="modal" data-hover="tooltip" title="Giveup Ticket" data-placement="top" data-whatever="' . $key->ticket_id . '" class="btn btn-danger btn-circle btn-outline"><span class="glyphicon glyphicon-remove"></a>
+
                           </td>
                         </tr>';
                             }
@@ -92,7 +94,6 @@ include 'header.php';
     </div>
 </div>
 
-
 <?php include 'footer.php'; ?>
 
 <!-- Page-Level Scripts -->
@@ -104,10 +105,10 @@ include 'header.php';
             order: [],
             dom: '<"html5buttons"B>lTfgitp',
             buttons: [
-                {extend: 'copy', title: 'Drafttickets'},
-                {extend: 'csv', title: 'Drafttickets'},
-                {extend: 'excel', title: 'Drafttickets'},
-                {extend: 'pdf', title: 'Drafttickets'},
+                {extend: 'copy', title: 'Mytickets'},
+                {extend: 'csv', title: 'Mytickets'},
+                {extend: 'excel', title: 'Mytickets'},
+                {extend: 'pdf', title: 'Mytickets'},
 
                 {
                     extend: 'print',
@@ -120,7 +121,8 @@ include 'header.php';
                             .css('font-size', 'inherit');
                     }
                 }
-            ],
+            ]
+
         });
 
     });
@@ -132,104 +134,62 @@ include 'header.php';
 </html>
 
 <!-- Localized -->
-<!--=============================Ticket Close Modal====================-->
-<div class="modal fade" id="Close" tabindex="-1" role="dialog" aria-labelledby="CloseLabel">
-    <div class="modal-dialog" role="document">
+<!--=============================Ticket Accept Modal====================-->
+<div class="modal fade" id="Accept" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="CloseLabel"><?php echo $this->lang->line('close_ticket'); ?></h4>
+            <div class="modal-header modal-header-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h2><i class="fa fa-check"></i> Accept Ticket</h2>
             </div>
             <?php echo form_open('tickets/status/change'); ?>
             <div class="modal-body">
                 <input type="hidden" name="ticket_id" class="form-control" id="recipient-name">
-                <input type="hidden" name="ticketclose" class="form-control" id="recipient-name">
+                <input type="hidden" name="ticketaccept" class="form-control" id="recipient-name">
                 <div class="form-group">
                     <label for="message-text" class="control-label"><?php echo $this->lang->line('comment'); ?>:</label>
                     <textarea class="form-control" name="comment" id="message-text" required=""></textarea>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default"
-                        data-dismiss="modal"><?php echo $this->lang->line('close'); ?></button>
-                <input type="submit" value="close" class="btn btn-primary"/>
+                <input type="submit" value="Accept Ticket" class="btn btn-success"/>
             </div>
             <?php echo form_close(); ?>
         </div>
     </div>
 </div>
 <script type="text/javascript">
-    $("#Close").on("show.bs.modal", function (e) {
+    $("#Accept").on("show.bs.modal", function (e) {
         var a = $(e.relatedTarget), t = a.data("whatever"), o = $(this);
         o.find(".modal-body input").val(t)
     });
 </script>
-<!--=============================Ticket Delete Modal====================-->
-<div class="modal fade" id="Delete" tabindex="-1" role="dialog" aria-labelledby="DeleteLabel">
-    <div class="modal-dialog" role="document">
+<!--=============================Ticket Reject Modal====================-->
+<div class="modal fade" id="Reject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Delete">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="DeleteLabel"><?php echo $this->lang->line('delete_ticket'); ?></h4>
+            <div class="modal-header modal-header-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h2><i class="fa fa-ban"></i> Reject Ticket</h2>
             </div>
             <?php echo form_open('tickets/status/change'); ?>
             <div class="modal-body">
                 <input type="hidden" name="ticket_id" class="form-control" id="recipient-name">
-                <input type="hidden" name="ticketdelete" class="form-control" id="recipient-name">
+                <input type="hidden" name="ticketreject" class="form-control" id="recipient-name">
                 <div class="form-group">
                     <label for="message-text" class="control-label"><?php echo $this->lang->line('comment'); ?>:</label>
                     <textarea class="form-control" name="comment" minlength=10 id="message-text" required=""></textarea>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default"
-                        data-dismiss="modal"><?php echo $this->lang->line('close'); ?></button>
-                <input id="subscribe-email-submit" type="submit" value="send" class="btn btn-primary"/>
+                <input id="subscribe-email-submit" type="submit" value="Reject Ticket" class="btn btn-success"/>
             </div>
             <?php echo form_close(); ?>
         </div>
     </div>
 </div>
 <script type="text/javascript">
-    $("#Delete").on("show.bs.modal", function (e) {
-        var a = $(e.relatedTarget), t = a.data("whatever"), o = $(this);
-        o.find(".modal-body input").val(t)
-    });
-</script>
-<!--=============================Ticket Reminder Modal====================-->
-<div class="modal fade" id="Reminder" tabindex="-1" role="dialog" aria-labelledby="DeleteLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Delete">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="DeleteLabel"><?php echo $this->lang->line('send_reminder'); ?></h4>
-            </div>
-            <?php echo form_open('tickets/status/change'); ?>
-            <div class="modal-body">
-                <input type="hidden" name="ticket_id" class="form-control" id="recipient-name">
-                <input type="hidden" name="ticketreminder" class="form-control" id="recipient-name">
-                <div class="form-group">
-                    <label for="message-text" class="control-label"><?php echo $this->lang->line('comment'); ?>:</label>
-                    <textarea class="form-control" name="comment" id="message-text"></textarea>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default"
-                        data-dismiss="modal"><?php echo $this->lang->line('close'); ?></button>
-                <input id="subscribe-email-submit" type="submit" value="send" class="btn btn-primary"/>
-            </div>
-            <?php echo form_close(); ?>
-        </div>
-    </div>
-</div>
-<script type="text/javascript">
-    $("#Reminder").on("show.bs.modal", function (e) {
+    $("#Reject").on("show.bs.modal", function (e) {
         var a = $(e.relatedTarget), t = a.data("whatever"), o = $(this);
         o.find(".modal-body input").val(t)
     });
