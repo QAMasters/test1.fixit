@@ -13,7 +13,7 @@ include 'header.php';
         <h2><?php echo $this->lang->line('tickets'); ?></h2>
         <ol class="breadcrumb">
             <li>
-                <a href="index.html"><?php echo $this->lang->line('home'); ?></a>
+                <a href="<?php echo base_url() ?>dashboard"><?php echo $this->lang->line('home'); ?></a>
             </li>
             <li>
                 <a><?php echo $this->lang->line('tickets'); ?></a>
@@ -58,10 +58,10 @@ include 'header.php';
                                 $ticket_age = ticket_age($key->created_on);
                                 $created_on = creation_date_only($key->created_on);
                                 echo '<tr>
-                          <td>' . $key->ticket_id . '</td>
+                          <td>' . $key->community . '</td>
                           <td>' . $key->ini_name . '</td>
                           <td>' . $key->ini_phone . '</td>
-                          <td>' . $key->service . '</td>
+                          <td>' . $this->lang->line($key->service) . '</td>
                           <td>' . $created_on . ' - ' . $ticket_age . ' ' . $this->lang->line('day(s)') . '</td>
                           <td><span class="label label-' . status_label($key->status) . '">' . $key->status . '</span></td>                          
                         </tr>';

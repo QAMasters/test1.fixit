@@ -64,7 +64,6 @@ $route['tickets/share_ticket'] = "Tickets/share_ticket";
 $route['tickets/add_material'] = "Tickets/add_material";
 $route['tickets/drafts'] = "Tickets/draft_tickets";
 $route['tickets/publish'] = "Tickets/publish";
-$route['tickets/pdf'] = "Tickets/gen_pdf";
 $route['tickets/me'] = "Tickets/my_tickets";
 $route['tickets/open'] = "Tickets/open_tickets";
 $route['tickets/closed'] = "Tickets/closed_tickets";
@@ -75,6 +74,7 @@ $route['tickets/edit'] = "Tickets/new_tickets";
 $route['tickets/history'] = "Tickets/history";
 $route['tickets/addcomment'] = "Tickets/addcomment";
 $route['tickets/(:any)'] = "Tickets/ticket_edit/$1";
+$route['tickets/pdf'] = "Tickets/gen_pdf";
 $route['fetchservice'] = "Tickets/fetch_sub_service";
 $route['tickets/status/change'] = "Tickets/status_change";
 

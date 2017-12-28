@@ -204,7 +204,8 @@ include 'header.php';
                            cellspacing="0" cellpadding="0">
                         <thead>
                         <tr>
-                            <th><?php echo $this->lang->line('name'); ?></th>
+                            <th><?php echo $this->lang->line('invoice_id'); ?></th>
+                            <th><?php echo $this->lang->line('ticket_id'); ?></th>
                             <th><?php echo $this->lang->line('status'); ?></th>
                         </tr>
                         </thead>
@@ -212,6 +213,7 @@ include 'header.php';
                         <?php
                         foreach ($inv_tic as $key) {
                             echo '<tr>
+                                    <td>' . $key->invoice_id . '</td>
                                     <td>' . $key->ticket_id . '</td>
                                     <td><span class="label label-' . status_label($key->inv_status) . '">' . $key->inv_status . '</span></td>                          
                                     </tr>';
@@ -248,7 +250,6 @@ include 'header.php';
                 "searchPlaceholder": "<?php echo $this->lang->line('search_field_placeholder'); ?>",
                 "infoFiltered": "(filtered from _MAX_ total tickets)"
             }
-
         });
 
         // table.column(1).visible(false);
