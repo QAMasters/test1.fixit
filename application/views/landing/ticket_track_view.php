@@ -185,7 +185,7 @@ $js1 = array('id' => 'state', 'class' => '', 'style' => 'width:100%');
 
 $js3 = array('id' => 'pets', 'class' => 'select2_demo_3', 'style' => 'width:100%');
 
-$pets_data = array('type' => 'text', 'name' => 'pets_data', 'value' => $ticket->pets_data, 'placeholder' => 'Enter Pets Information', 'class' => 'form-control');
+$pets_data = array('type' => 'text', 'name' => 'pets_data', 'value' => $ticket->pets_data, 'placeholder' => $this->lang->line('enter_pet_data'), 'class' => 'form-control');
 
 $community1[''] = '';
 foreach ($communities as $key) {
@@ -210,7 +210,10 @@ echo form_hidden('ticket_id', $ticket->ticket_id);
                 <div class="portlet portlet-bordered">
                     <div class="portlet-title">
                         <p class="pull-left" style="font-size: 18px;"><?php echo $this->lang->line('lbl_pers_info'); ?>
-                            <input type="checkbox" class="emergency" name="emergency"/> <span
+                            <input type="checkbox" class="emergency"
+                                   name="emergency" <?php if ($ticket->emergency == '1') {
+                                echo 'checked';
+                            } ?> /> <span
                                     style="font-size: 15px; color: red; "><?php echo $this->lang->line('emergency_high_priority'); ?> </span>
                         </p>
                     </div>
@@ -334,7 +337,16 @@ echo form_hidden('ticket_id', $ticket->ticket_id);
                             <div class="col-sm-6 form-group">
                                 <label class="control-label"><?php echo $this->lang->line('location'); ?></label>
                                 <div class="input-group col-md-12 col-xs-12">
-                                    <?php echo form_dropdown('service', $services, $ticket->service, $serv_opt); ?>
+                                    <?php //echo form_dropdown('service', $services, $ticket->service, $serv_opt); ?>
+                                    <select name="service" class="select2_demo_3" onchange="fetch_select(this.value);"
+                                            required="required" data-error="Please Select a Serice" style="width: 100%">
+                                        <option value=""><?php echo $this->lang->line('select') ?></option>
+                                        <?php foreach ($services as $service) { ?>
+                                            <option value="<?php echo $service ?>" <?php if ($service == $ticket->service) {
+                                                echo "selected";
+                                            } ?> ><?php echo $this->lang->line($service) ?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
                                 <div class="help-block with-errors"></div>
                             </div>
@@ -448,7 +460,7 @@ echo form_hidden('ticket_id', $ticket->ticket_id);
 <script type="text/javascript">
     $(document).ready(function () {
         $('#state').select2({
-            placeholder: "Select or Type to add",
+            placeholder: "<?php echo $this->lang->line('type_or_add');?>",
             allowClear: true,
             tags: true,
             tokenSeparators: [",", ""],
@@ -464,7 +476,7 @@ echo form_hidden('ticket_id', $ticket->ticket_id);
 <script type="text/javascript">
     $(document).ready(function () {
         $('#community').select2({
-            placeholder: "Select or Type to add",
+            placeholder: "<?php echo $this->lang->line('type_or_add');?>",
             allowClear: true,
             tags: true,
             tokenSeparators: [",", " "],
@@ -582,7 +594,7 @@ echo form_hidden('ticket_id', $ticket->ticket_id);
                     <div class="form-group">
                         <label for="exampleInputEmail1"><?php echo $this->lang->line('email'); ?></label>
                         <input type="email" class="form-control" id="exampleInputEmail1" name="email"
-                               placeholder="Enter email">
+                               placeholder="<?php echo $this->lang->line('enter_email'); ?>">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1"><?php echo $this->lang->line('password'); ?></label>

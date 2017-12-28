@@ -13,7 +13,7 @@ include 'header.php';
         <h2><?php echo $this->lang->line('tickets'); ?></h2>
         <ol class="breadcrumb">
             <li>
-                <a href="index.html"><?php echo $this->lang->line('home'); ?></a>
+                <a href="<?php echo base_url() ?>dashboard"><?php echo $this->lang->line('home'); ?></a>
             </li>
             <li>
                 <a><?php echo $this->lang->line('tickets'); ?></a>
@@ -42,7 +42,7 @@ include 'header.php';
                     <form role="form" class="form-inline" method="POST" action="">
                         <div class="form-group">
                             <label><?php echo $this->lang->line('ticket_id'); ?></label> <input type="text"
-                                                                                                placeholder="Enter Ticket ID"
+                                                                                                placeholder="<?php echo $this->lang->line('placeholder_ticket_history_enter_ticket_id'); ?>"
                                                                                                 class="form-control"
                                                                                                 name="ticket_id"
                                                                                                 required="">

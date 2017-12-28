@@ -68,7 +68,7 @@ include 'header.php';
             <h2><?php echo $this->lang->line('tickets'); ?></h2>
             <ol class="breadcrumb">
                 <li>
-                    <a href="index.html"><?php echo $this->lang->line('home'); ?></a>
+                    <a href="<?php echo base_url() ?>dashboard"><?php echo $this->lang->line('home'); ?></a>
                 </li>
                 <li>
                     <a><?php echo $this->lang->line('tickets'); ?></a>
@@ -355,7 +355,17 @@ $sub_serv_opt = array('class' => 'select2_demo_3', 'id' => 'new_select', 'style'
                             <div class="col-sm-6">
                                 <div class="form-group"><label
                                             class="control-label"><?php echo $this->lang->line('location'); ?></label>
-                                    <?php echo form_dropdown('service', $services, $ticket->service, $serv_opt); ?>
+                                    <?php //echo form_dropdown('service', $services, $ticket->service, $serv_opt); ?>
+                                    <select name="service" class="form-control select2_demo_3"
+                                            onchange="fetch_select(this.value);" required="required"
+                                            data-error="Please Select a Serice" style="width: 100%">
+                                        <option value=""><?php echo $this->lang->line('select') ?></option>
+                                        <?php foreach ($services as $service) { ?>
+                                            <option value="<?php echo $service ?>" <?php if ($service == $ticket->service) {
+                                                echo "selected";
+                                            } ?> ><?php echo $this->lang->line($service) ?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -417,8 +427,10 @@ $sub_serv_opt = array('class' => 'select2_demo_3', 'id' => 'new_select', 'style'
 
 
                     <div>
-                        <button type="submit" class="ticket_update btn btn-success">Update</button>
-                        <button type="reset" onclick="window.history.go(-1);" class="btn btn-warning">Close</button>
+                        <button type="submit"
+                                class="ticket_update btn btn-success"><?php echo $this->lang->line('update'); ?></button>
+                        <button type="reset" onclick="window.history.go(-1);"
+                                class="btn btn-warning"><?php echo $this->lang->line('close'); ?></button>
                         <?php //echo form_button($form_reset); ?>
                     </div>
                 </div>
@@ -624,7 +636,7 @@ include 'footer.php';
     <script type="text/javascript">
         $(document).ready(function () {
             $('#ini_type').select2({
-                placeholder: "Select or Type to add",
+                placeholder: "<?php echo $this->lang->line('type_or_add');?>",
                 tags: true,
                 tokenSeparators: [",", ""],
                 createTag: function (newTag) {
@@ -640,7 +652,7 @@ include 'footer.php';
     <script type="text/javascript">
         $(document).ready(function () {
             $('#community').select2({
-                placeholder: "Select or Type to add",
+                placeholder: "<?php echo $this->lang->line('type_or_add');?>",
                 tags: true,
                 tokenSeparators: [",", ""],
                 createTag: function (newTag) {
@@ -792,7 +804,8 @@ include 'footer.php';
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-small btn-success" type="submit" name="avatar">Update</button>
+                    <button class="btn btn-small btn-success" type="submit"
+                            name="avatar"><?php echo $this->lang->line('update'); ?></button>
                     <button type="button" class="btn btn-warning"
                             data-dismiss="modal"><?php echo $this->lang->line('close'); ?></button>
                 </div>
@@ -864,7 +877,8 @@ $invoice_product_sub = array('type' => 'text', 'name' => 'invoice_product_sub', 
                         <input type="text" name="ticket_id" class="form-control" readonly>
                     </div>
                     <div class="form-group">
-                        <input type="email" name="email" class="form-control" placeholder="Enter Email">
+                        <input type="email" name="email" class="form-control"
+                               placeholder="<?php echo $this->lang->line('enter_email'); ?>">
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -107,7 +107,7 @@ include 'header.php';
                                border="0" cellspacing="0" cellpadding="0">
                             <thead>
                             <tr>
-                                <th><?php echo $this->lang->line('ticket_id'); ?></th>
+                                <th><?php echo $this->lang->line('community'); ?></th>
                                 <th><?php echo $this->lang->line('name'); ?></th>
                                 <th><?php echo $this->lang->line('phone'); ?></th>
                                 <th><?php echo $this->lang->line('services'); ?></th>
@@ -131,11 +131,11 @@ include 'header.php';
                                     $vendor = '';
                                 }
                                 echo '<tr style="cursor: pointer;">
-                          <td>' . $key->ticket_id . '</td>
+                          <td>' . $key->community . '</td>
                           <td onclick="window.document.location=\'' . base_url() . 'tickets/' . $key->ticket_id . '\'">' . $key->ini_name . '</td>
                           <td onclick="window.document.location=\'' . base_url() . 'tickets/' . $key->ticket_id . '\'">' . $key->ini_phone . '</td>
-                          <td onclick="window.document.location=\'' . base_url() . 'tickets/' . $key->ticket_id . '\'">' . $key->service . '</td>
-                          <td onclick="window.document.location=\'' . base_url() . 'tickets/' . $key->ticket_id . '\'">' . $created_on . ' - ' . $ticket_age . ' day(s)</td>
+                          <td onclick="window.document.location=\'' . base_url() . 'tickets/' . $key->ticket_id . '\'">' . $this->lang->line($key->service) . '</td>
+                          <td onclick="window.document.location=\'' . base_url() . 'tickets/' . $key->ticket_id . '\'">' . $created_on . ' - ' . $ticket_age . ' ' . $this->lang->line('day(s)') . '</td>
                           <td onclick="window.document.location=\'' . base_url() . 'tickets/' . $key->ticket_id . '\'"><span class="label label-' . status_label($key->status) . '">' . $key->status . ' ' . $vendor . '</span></td> 
                         </tr>';
                             }
@@ -192,7 +192,7 @@ include 'header.php';
         <div class="col-lg-8">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5><?php echo $this->lang->line('invoices'); ?></h5>
+                    <h5><?php echo $this->lang->line('invoices_status'); ?></h5>
                 </div>
                 <style>
                     .dataTables_wrapper {
@@ -204,8 +204,7 @@ include 'header.php';
                            cellspacing="0" cellpadding="0">
                         <thead>
                         <tr>
-                            <th><?php echo $this->lang->line('invoice_id'); ?></th>
-                            <th><?php echo $this->lang->line('ticket_id'); ?></th>
+                            <th><?php echo $this->lang->line('name'); ?></th>
                             <th><?php echo $this->lang->line('status'); ?></th>
                         </tr>
                         </thead>
@@ -213,7 +212,6 @@ include 'header.php';
                         <?php
                         foreach ($inv_tic as $key) {
                             echo '<tr>
-                                    <td>' . $key->invoice_id . '</td>
                                     <td>' . $key->ticket_id . '</td>
                                     <td><span class="label label-' . status_label($key->inv_status) . '">' . $key->inv_status . '</span></td>                          
                                     </tr>';
@@ -243,13 +241,14 @@ include 'header.php';
             "dom": "lfrti",
             "info": false,
             "language": {
-                "zeroRecords": "Sorry, Nothing Found here", //changes words used
-                "lengthMenu": "Show _MENU_ tickets per page", //changes words usedwords used
-                //"info": "Showing _START_ to _END_ of _TOTAL_ Tickets", //changes words used
+                "zeroRecords": "<?php echo $this->lang->line('search_result_zero_records'); ?>", //changes words used
+                "lengthMenu": "<?php echo $this->lang->line('search_label_show'); ?> _MENU_ <?php echo $this->lang->line('search_label_ticket'); ?>",
+                "info": "<?php echo $this->lang->line('search_label_showing'); ?> _START_ <?php echo $this->lang->line('search_label_to'); ?> _END_ <?php echo $this->lang->line('search_label_of'); ?> _TOTAL_ <?php echo $this->lang->line('search_label_ticket'); ?>", //changes words used
                 "search": "", //changes words used originally - Search programs:
-                "searchPlaceholder": "Search",
+                "searchPlaceholder": "<?php echo $this->lang->line('search_field_placeholder'); ?>",
                 "infoFiltered": "(filtered from _MAX_ total tickets)"
             }
+
         });
 
         // table.column(1).visible(false);

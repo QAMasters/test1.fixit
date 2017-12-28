@@ -8,12 +8,14 @@ $xheader = '
 
 ';
 $xfooter = '
-
+<script src="' . base_url() . 'assets/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="' . base_url() . 'assets/plugins/moment/moment.min.js"></script>
 <script src="' . base_url() . 'assets/plugins/dataTables/datatables.min.js"></script>
 <script src="' . base_url() . 'assets/invoice/bootstrap.datetime.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="' . base_url() . 'assets/plugins/datapicker/bootstrap-datepicker.js"></script>
+
+<script src="http://1000hz.github.io/bootstrap-validator/dist/validator.min.js" type="text/javascript"></script>
 ';
 include 'header.php';
 ?>
@@ -34,6 +36,7 @@ include 'header.php';
         </div>
         <div class="col-xs-5 col-sm-6 col-lg-4">
             <div class="title-action">
+                <button id="send" class="btn btn-danger"><i class="fa fa-send"></i> Send</button>
                 <a class="btn btn-primary"
                    href="<?php echo base_url() ?>invoice/pdf?ticket_id=<?php echo $tic->ticket_id; ?>"
                    target="_blank"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Print</a>
@@ -94,7 +97,8 @@ include 'header.php';
                                             echo get_user_name($tic->vendor)->fname;
                                         } ?></td>
                                     <td width="50%"><b><?php echo $this->lang->line('terms_of_payment'); ?></b> :
-                                        <select name="bill_due" class="" style="">
+                                        <select name="bill_due" class="" style=""
+                                                onchange="change_bill_due(this.value);">
                                             <?php
                                             if ($inv->bill_due == '10') {
                                                 echo '<option value="10" selected> 10 days </option><option value="20"> 20 days </option><option value="30"> 30 days </option>';
@@ -160,10 +164,14 @@ include 'header.php';
                                         <th width="30%"><h4><?php echo $this->lang->line('item'); ?></h4></th>
                                         <th width="10%"><h4><?php echo $this->lang->line('unit'); ?></h4></th>
                                         <th><h4><?php echo $this->lang->line('quantity'); ?></h4></th>
-                                        <th width="10%"><h4><?php echo $this->lang->line('price'); ?></h4></th>
-                                        <th width="9%"><h4><?php echo $this->lang->line('discount'); ?> %</h4></th>
-                                        <th width="10%"><h4><?php echo $this->lang->line('surcharge'); ?> %</h4></th>
-                                        <th width="13%"><h4><?php echo $this->lang->line('sub_total'); ?></h4></th>
+                                        <!--                                        <th width="10%"><h4>-->
+                                        <?php //echo $this->lang->line('price'); ?><!--</h4></th>-->
+                                        <!--                                        <th width="9%"><h4>-->
+                                        <?php //echo $this->lang->line('discount'); ?><!-- %</h4></th>-->
+                                        <!--                                        <th width="10%"><h4>-->
+                                        <?php //echo $this->lang->line('surcharge'); ?><!-- %</h4></th>-->
+                                        <!--                                        <th width="13%"><h4>-->
+                                        <?php //echo $this->lang->line('sub_total'); ?><!--</h4></th>-->
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -391,7 +399,8 @@ include 'footer.php';
                     </button>
                     <h4 class="modal-title" id="CloseLabel"><?php echo $this->lang->line('enter_rot'); ?></h4>
                 </div>
-                <form class="form-horizontal" method="POST" action="<?php echo base_url(); ?>invoices/update_rot">
+                <form class="form-horizontal" method="POST" action="<?php echo base_url(); ?>invoices/update_rot"
+                      data-toggle="validator">
                     <input type="hidden" name="ticket_id" class="form-control ticket_id"
                            value="<?php echo $tic->ticket_id; ?>">
                     <div class="modal-body">
@@ -427,7 +436,8 @@ include 'footer.php';
                                                              echo $rot->personal_number;
                                                          } ?>" class="form-control" placeholder="yyyymmddaaaa" min="0"
                                                          maxlength="12"
-                                                         oninput="this.value=this.value.slice(0,this.maxLength||1/1);this.value=(this.value   < 0) ? (1/1) : this.value;">
+                                                         oninput="this.value=this.value.slice(0,this.maxLength||1/1);this.value=(this.value   < 0) ? (1/1) : this.value;"
+                                                         required="" data-minlength="12">
                             </div>
                         </div>
                     </div>
@@ -441,7 +451,50 @@ include 'footer.php';
     </div>
 
     <script>
-        $('.datepicker').datepicker();
-
+        $('.datepicker').datepicker({
+            autoclose: true,
+        });
+        var datePicker = $('.datepicker').datepicker().on('changeDate', function (ev) {
+            //Functionality to be called whenever the date is changed
+            $.ajax
+            ({
+                type: "GET",
+                url: "<?php echo base_url()?>invoice/invoice_date_change",
+                data: "ticket_id=<?php echo $tic->ticket_id;?>&date=" + this.value,
+                success: function (result) {
+                    location.reload();
+                }
+            });
+        });
     </script>
+
+    <script type="text/javascript">
+        function change_bill_due(val) {
+            $.ajax
+            ({
+                type: "GET",
+                url: "<?php echo base_url()?>invoice/change_bill_due",
+                data: "ticket_id=<?php echo $tic->ticket_id;?>&bill_due=" + val,
+                success: function (result) {
+                    location.reload();
+                }
+            });
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#send").click(function () {
+                $.get("<?php echo base_url();?>invoice/send_email?ticket_id=<?php echo $tic->ticket_id;?>", function (data) {
+                    swal({
+                        title: "Invoice sent successfully!",
+                        timer: 2000,
+                        type: "success",
+                        showConfirmButton: false
+                    });
+                });
+            });
+        });
+    </script>
+
 <?php include 'invoice_cal.php' ?>

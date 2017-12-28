@@ -223,7 +223,7 @@ class Tickets extends CI_Controller
                     'comments' => 'Ticket Created by' . get_user_name($this->session->id)->fname,
                 );
                 $this->F_Model->add_history($his_data);
-                $data['message'] = 'Ticket Created Successfully';
+                $this->session->set_userdata('alert_msg', 'Ticket Created Successfully');
                 redirect('tickets/open');
             } else if (isset($save_draft)) {
                 $ini_type = $this->input->post('ini_type');
@@ -415,6 +415,7 @@ class Tickets extends CI_Controller
                 $data['sub_services'] = $this->F_Model->edit_sub_service($data['ticket']->service);
                 $where = "status = 1 AND role_id = 2";
                 $act_vendor = $this->F_Model->vendors($where)->result();
+                $vendor_array = [];
                 foreach ($act_vendor as $key) {
                     $vendor_array[$key->id] = $key->fname;
                 }
@@ -503,6 +504,8 @@ class Tickets extends CI_Controller
                 );
                 $this->F_Model->ticket_update($data, $where);
                 email_send($ticket_id, 'ticket_delete');
+                $where = 'title = "' . $ticket_id . '"';
+                $this->F_Model->delete_calendar_event($where);
                 $his_data = array(
                     'ticket_id' => $ticket_id,
                     'time' => current_time(),
@@ -592,6 +595,8 @@ class Tickets extends CI_Controller
                 redirect('tickets/open');
             }
             if ($this->input->post('ticket_id') AND $this->input->post('ticketreminder')) {
+                $ticket_id = $this->input->post('ticket_id');
+                email_send($ticket_id, 'send_reminder');
                 redirect($_SERVER['HTTP_REFERER']);
             }
         } else {
@@ -648,11 +653,12 @@ class Tickets extends CI_Controller
                 $data = array(
                     'ticket_id' => $ticket_id,
                     'item_name' => $invoice_product[$key],
-                    'quantity' => $invoice_product_qty[$key],
-                    'unit' => $unit[$key],
-                    'price' => $invoice_product_price[$key],
-                    'discount' => $invoice_product_discount[$key],
-                    'sub_total' => $invoice_product_sub[$key]
+                    'quantity' => $invoice_product_qty[$key]
+//                ,
+//                    'unit' => $unit[$key],
+//                    'price' => $invoice_product_price[$key],
+//                    'discount' => $invoice_product_discount[$key],
+//                    'sub_total' => $invoice_product_sub[$key]
                 );
                 if ($invoice_product[$key] != '') {
                     $this->F_Model->invoice_items($data);

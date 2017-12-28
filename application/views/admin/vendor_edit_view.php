@@ -12,7 +12,7 @@ include 'header.php';
         <h2><?php echo $this->lang->line('vendors'); ?></h2>
         <ol class="breadcrumb">
             <li>
-                <a href="index.html"><?php echo $this->lang->line('home'); ?></a>
+                <a href="<?php echo base_url() ?>dashboard"><?php echo $this->lang->line('home'); ?></a>
             </li>
             <li>
                 <a><?php echo $this->lang->line('vendors'); ?></a>

@@ -13,7 +13,7 @@ include 'header.php';
         <h2><?php echo $this->lang->line('tickets'); ?></h2>
         <ol class="breadcrumb">
             <li>
-                <a href="index.html"><?php echo $this->lang->line('home'); ?></a>
+                <a href="<?php echo base_url() ?>dashboard"><?php echo $this->lang->line('home'); ?></a>
             </li>
             <li>
                 <a><?php echo $this->lang->line('tickets'); ?></a>
@@ -71,8 +71,8 @@ include 'header.php';
                           <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $key->ticket_id . '</td>
                           <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $key->ini_name . '</td>
                           <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $key->ini_phone . '</td>
-                          <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $key->service . '</td>
-                          <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $created_on . ' - ' . $ticket_age . ' day(s)</td>
+                          <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $this->lang->line($key->service) . '</td>
+                          <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $created_on . ' - ' . $ticket_age . ' ' . $this->lang->line('day(s)') . '</td>
                           <td onclick="window.document.location=\'' . $key->ticket_id . '\'"><span class="label label-' . status_label($key->status) . '">' . $key->status . ' ' . $vendor . '</span></td>
                           <td>
                             <a href="#Accept" data-toggle="modal" data-hover="tooltip" title="Accept Ticket" data-placement="top" data-whatever="' . $key->ticket_id . '" class="btn btn-primary btn-circle btn-outline"><span class="glyphicon glyphicon-ok"></a>

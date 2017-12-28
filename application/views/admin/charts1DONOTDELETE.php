@@ -147,7 +147,7 @@ foreach ($closed_tickets1 as $key1) {
     });
 
     <?php
-    $this->db->where('service =', 'Hall');
+    $this->db->where('service =', 'Halll');
     $hall = $this->db->count_all_results('tickets');
     $this->db->where('service =', 'Bathroom');
     $bathroom = $this->db->count_all_results('tickets');

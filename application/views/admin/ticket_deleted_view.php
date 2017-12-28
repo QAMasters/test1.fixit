@@ -62,7 +62,7 @@ include 'header.php';
                           <td>' . $key->ini_name . '</td>
                           <td>' . $key->ini_phone . '</td>
                           <td>' . $key->service . '</td>
-                          <td>' . $created_on . ' - ' . $ticket_age . ' day(s)</td>
+                          <td>' . $created_on . ' - ' . $ticket_age . ' ' . $this->lang->line('day(s)') . '</td>
                           <td><span class="label label-' . status_label($key->status) . '">' . $key->status . '</span></td>                          
                         </tr>';
                             }
