@@ -314,7 +314,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
                         <input type="email" class="form-control" id="exampleInputEmail1" name="email"
-                               placeholder="Enter email">
+                               placeholder="<?php echo $this->lang->line('enter_email'); ?>">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>

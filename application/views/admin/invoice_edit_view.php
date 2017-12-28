@@ -164,10 +164,14 @@ include 'header.php';
                                         <th width="30%"><h4><?php echo $this->lang->line('item'); ?></h4></th>
                                         <th width="10%"><h4><?php echo $this->lang->line('unit'); ?></h4></th>
                                         <th><h4><?php echo $this->lang->line('quantity'); ?></h4></th>
-                                        <th width="10%"><h4><?php echo $this->lang->line('price'); ?></h4></th>
-                                        <th width="9%"><h4><?php echo $this->lang->line('discount'); ?> %</h4></th>
-                                        <th width="10%"><h4><?php echo $this->lang->line('surcharge'); ?> %</h4></th>
-                                        <th width="13%"><h4><?php echo $this->lang->line('sub_total'); ?></h4></th>
+                                        <!--                                        <th width="10%"><h4>-->
+                                        <?php //echo $this->lang->line('price'); ?><!--</h4></th>-->
+                                        <!--                                        <th width="9%"><h4>-->
+                                        <?php //echo $this->lang->line('discount'); ?><!-- %</h4></th>-->
+                                        <!--                                        <th width="10%"><h4>-->
+                                        <?php //echo $this->lang->line('surcharge'); ?><!-- %</h4></th>-->
+                                        <!--                                        <th width="13%"><h4>-->
+                                        <?php //echo $this->lang->line('sub_total'); ?><!--</h4></th>-->
                                     </tr>
                                     </thead>
                                     <tbody>

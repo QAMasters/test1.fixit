@@ -653,11 +653,12 @@ class Tickets extends CI_Controller
                 $data = array(
                     'ticket_id' => $ticket_id,
                     'item_name' => $invoice_product[$key],
-                    'quantity' => $invoice_product_qty[$key],
-                    'unit' => $unit[$key],
-                    'price' => $invoice_product_price[$key],
-                    'discount' => $invoice_product_discount[$key],
-                    'sub_total' => $invoice_product_sub[$key]
+                    'quantity' => $invoice_product_qty[$key]
+//                ,
+//                    'unit' => $unit[$key],
+//                    'price' => $invoice_product_price[$key],
+//                    'discount' => $invoice_product_discount[$key],
+//                    'sub_total' => $invoice_product_sub[$key]
                 );
                 if ($invoice_product[$key] != '') {
                     $this->F_Model->invoice_items($data);

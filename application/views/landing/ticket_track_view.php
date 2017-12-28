@@ -185,7 +185,7 @@ $js1 = array('id' => 'state', 'class' => '', 'style' => 'width:100%');
 
 $js3 = array('id' => 'pets', 'class' => 'select2_demo_3', 'style' => 'width:100%');
 
-$pets_data = array('type' => 'text', 'name' => 'pets_data', 'value' => $ticket->pets_data, 'placeholder' => 'Enter Pets Information', 'class' => 'form-control');
+$pets_data = array('type' => 'text', 'name' => 'pets_data', 'value' => $ticket->pets_data, 'placeholder' => $this->lang->line('enter_pet_data'), 'class' => 'form-control');
 
 $community1[''] = '';
 foreach ($communities as $key) {
@@ -594,7 +594,7 @@ echo form_hidden('ticket_id', $ticket->ticket_id);
                     <div class="form-group">
                         <label for="exampleInputEmail1"><?php echo $this->lang->line('email'); ?></label>
                         <input type="email" class="form-control" id="exampleInputEmail1" name="email"
-                               placeholder="Enter email">
+                               placeholder="<?php echo $this->lang->line('enter_email'); ?>">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1"><?php echo $this->lang->line('password'); ?></label>

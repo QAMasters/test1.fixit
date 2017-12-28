@@ -877,7 +877,8 @@ $invoice_product_sub = array('type' => 'text', 'name' => 'invoice_product_sub', 
                         <input type="text" name="ticket_id" class="form-control" readonly>
                     </div>
                     <div class="form-group">
-                        <input type="email" name="email" class="form-control" placeholder="Enter Email">
+                        <input type="email" name="email" class="form-control"
+                               placeholder="<?php echo $this->lang->line('enter_email'); ?>">
                     </div>
                 </div>
                 <div class="modal-footer">

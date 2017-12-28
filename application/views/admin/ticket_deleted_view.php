@@ -44,7 +44,7 @@ include 'header.php';
                         <table class="table table-striped table-bordered table-hover dataTables-example">
                             <thead>
                             <tr>
-                                <th><?php echo $this->lang->line('community'); ?></th>
+                                <th><?php echo $this->lang->line('ticket_id'); ?></th>
                                 <th><?php echo $this->lang->line('name'); ?></th>
                                 <th><?php echo $this->lang->line('phone'); ?></th>
                                 <th><?php echo $this->lang->line('services'); ?></th>
@@ -62,7 +62,7 @@ include 'header.php';
                           <td>' . $key->ini_name . '</td>
                           <td>' . $key->ini_phone . '</td>
                           <td>' . $this->lang->line($key->service) . '</td>
-                          <td>' . $created_on . ' - ' . $ticket_age . ' day(s)</td>
+                          <td>' . $created_on . ' - ' . $ticket_age . ' ' . $this->lang->line('day(s)') . '</td>
                           <td><span class="label label-' . status_label($key->status) . '">' . $key->status . '</span></td>                          
                         </tr>';
                             }
