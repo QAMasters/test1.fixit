@@ -19,7 +19,7 @@ include 'header.php';
                 <a><?php echo $this->lang->line('tickets'); ?></a>
             </li>
             <li class="active">
-                <strong>Ticket History</strong>
+                <strong><?php echo $this->lang->line('ticket_histor'); ?></strong>
             </li>
         </ol>
     </div>
@@ -36,7 +36,7 @@ include 'header.php';
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Ticket History</h5>
+                    <h5><?php echo $this->lang->line('ticket_history'); ?></h5>
                 </div>
                 <div class="ibox-content">
                     <form role="form" class="form-inline" method="POST" action="">

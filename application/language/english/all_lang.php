@@ -6,19 +6,24 @@ $lang["search_label_showing"] = "Showing";
 $lang["search_label_to"] = "to";
 $lang["search_label_of"] = "of";
 $lang["type_or_add"] = "Select or Type to add";
+$lang["yes"] = "Yes";
+$lang["no"] = "No";
+$lang["email_ticket_created_successfully"] = "Ticket created successfully.";
 
 $lang["amount_billed"] = "Amount Billed";
 $lang["rot"] = "ROT";
 $lang["moms"] = "VAT";
 $lang["invoices_status"] = "Invoice status";
-
+$lang["enter_email"] = "Please Enter Email";
 $lang["images"] = "Images";
 $lang["select_images"] = "Select Image";
-
-
+$lang["want_another_ticket"] = "Want Create Another Ticket?";
+$lang["enter_pet_data"] = "Enter Pets Information";
+$lang["please_enter_name"] = "Please Enter Name";
 $lang["search_field_placeholder"] = "Search";
 $lang["search_result_zero_records"] = "Sorry, Nothing Found here";
-
+$lang["enter_valid_phone_number"] = "Please Enter Valid Phone Number";
+$lang["day(s)"] = "day(s)";
 
 $lang["new_ticket"] = "New Ticket";
 $lang["open_tickets"] = "Open Tickets";

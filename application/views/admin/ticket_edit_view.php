@@ -441,7 +441,7 @@ $sub_serv_opt = array('class' => 'select2_demo_3', 'id' => 'new_select', 'style'
                     <div class="ibox-content">
 
                         <?php
-                        $invoice_product = array('type' => 'text', 'name' => 'invoice_product[]', 'placeholder' => 'Enter item title and / or description', 'class' => 'form-control form-group-sm item-input invoice_product calculate auto');
+                        $invoice_product = array('type' => 'text', 'name' => 'invoice_product[]', 'placeholder' => $this->lang->line('phold_item_name'), 'class' => 'form-control form-group-sm item-input invoice_product calculate auto');
                         $unit_options = array('hours' => 'Hours', 'pieces' => 'Pieces');
                         $js1 = array('id' => 'state', 'class' => 'form-control', 'style' => 'width:100%');
                         $invoice_product_qty = array('type' => 'text', 'name' => 'invoice_product_qty[]', 'class' => 'form-control invoice_product_qty calculate');
@@ -459,13 +459,10 @@ $sub_serv_opt = array('class' => 'select2_demo_3', 'id' => 'new_select', 'style'
                                 <tr>
                                     <th width="5%"><a href="#" class="btn btn-primary btn-xs add-row"><span
                                                     class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></th>
-                                    <th width="30%">Item</th>
-                                    <th width="10%">Unit</th>
-                                    <th width="15%">Qty</th>
-                                    <th width="10%">Price</th>
-                                    <th width="15%">Disc %</th>
-                                    <th width="15%">Sur %</th>
-                                    <th width="13%">Sub Total</th>
+                                    <th width="30%"><?php echo $this->lang->line('item'); ?></th>
+                                    <th width="10%"><?php echo $this->lang->line('unit'); ?></th>
+                                    <th width="15%"><?php echo $this->lang->line('quantity'); ?></th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -493,26 +490,7 @@ $sub_serv_opt = array('class' => 'select2_demo_3', 'id' => 'new_select', 'style'
                                                 <?php echo form_input($invoice_product_qty, $inv_item->quantity); ?>
                                             </div>
                                         </td>
-                                        <td class="text-right" width="10%">
-                                            <div class="input-group input-group-sm  no-margin-bottom">
-                                                <?php echo form_input($invoice_product_price, $inv_item->price); ?>
-                                            </div>
-                                        </td>
-                                        <td class="">
-                                            <div class="form-group form-group-sm  no-margin-bottom">
-                                                <?php echo form_input($invoice_product_discount, $inv_item->discount); ?>
-                                            </div>
-                                        </td>
-                                        <td class="">
-                                            <div class="form-group form-group-sm  no-margin-bottom">
-                                                <?php echo form_input($invoice_product_surcharge, ''); ?>
-                                            </div>
-                                        </td>
-                                        <td class="text-right" width="10%">
-                                            <div class="input-group input-group-sm">
-                                                <?php echo form_input($invoice_product_sub, $inv_item->sub_total); ?>
-                                            </div>
-                                        </td>
+
                                     </tr>
                                 <?php } ?>
                                 <!--empty row -->
@@ -538,25 +516,7 @@ $sub_serv_opt = array('class' => 'select2_demo_3', 'id' => 'new_select', 'style'
                                             <?php echo form_input($invoice_product_qty, '1'); ?>
                                         </div>
                                     </td>
-                                    <td class="text-right" width="10%">
-                                        <div class="input-group input-group-sm  no-margin-bottom">
-                                            <?php echo form_input($invoice_product_price); ?>
-                                        </div>
-                                    </td>
-                                    <td class="">
-                                        <div class="form-group form-group-sm  no-margin-bottom">
-                                            <?php echo form_input($invoice_product_discount); ?>
-                                        </div>
-                                    </td>
-                                    <td class="">
-                                        <div class="form-group form-group-sm  no-margin-bottom">
-                                            <?php echo form_input($invoice_product_surcharge); ?>
-                                        </div>
-                                    </td>
-                                    <td class="text-right" width="10%">
-                                        <div class="input-group input-group-sm">
-                                            <?php echo form_input($invoice_product_sub, '0.00'); ?></div>
-                                    </td>
+
                                 </tr>
                                 </tbody>
                             </table>

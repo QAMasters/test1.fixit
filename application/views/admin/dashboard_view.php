@@ -151,80 +151,81 @@ include 'header.php';
         </div>
     </div>
 
+    <?php if ($this->session->role_id == 1) { ?>
 
-    <div class="row">
-        <div class="col-lg-4">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5><?php echo $this->lang->line('services'); ?></h5>
-                </div>
-                <div class="ibox-content">
-                    <div id="donut"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-8">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5><?php echo $this->lang->line('monthly_stats'); ?></h5>
-                    <div class="pull-right">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5><?php echo $this->lang->line('services'); ?></h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div id="donut"></div>
                     </div>
                 </div>
-                <div class="ibox-content" style="position: relative">
-                    <div id="line1"></div>
-                </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-4">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5><?php echo $this->lang->line('invoice_stats'); ?></h5>
-                </div>
-                <div class="ibox-content">
-                    <div>
-                        <div id="donut2"></div>
+            <div class="col-lg-8">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5><?php echo $this->lang->line('monthly_stats'); ?></h5>
+                        <div class="pull-right">
+                        </div>
+                    </div>
+                    <div class="ibox-content" style="position: relative">
+                        <div id="line1"></div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-8">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5><?php echo $this->lang->line('invoices_status'); ?></h5>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5><?php echo $this->lang->line('invoice_stats'); ?></h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div>
+                            <div id="donut2"></div>
+                        </div>
+                    </div>
                 </div>
-                <style>
-                    .dataTables_wrapper {
-                        padding-bottom: 10px;
-                    }
-                </style>
-                <div class="ibox-content">
-                    <table class="table table-striped table-bordered table-hover invoice_table" width="100%" border="0"
-                           cellspacing="0" cellpadding="0">
-                        <thead>
-                        <tr>
-                            <th><?php echo $this->lang->line('invoice_id'); ?></th>
-                            <th><?php echo $this->lang->line('ticket_id'); ?></th>
-                            <th><?php echo $this->lang->line('status'); ?></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                        foreach ($inv_tic as $key) {
-                            echo '<tr>
-                                    <td>' . $key->invoice_id . '</td>
+            </div>
+            <div class="col-lg-8">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5><?php echo $this->lang->line('invoices_status'); ?></h5>
+                    </div>
+                    <style>
+                        .dataTables_wrapper {
+                            padding-bottom: 10px;
+                        }
+                    </style>
+                    <div class="ibox-content">
+                        <table class="table table-striped table-bordered table-hover invoice_table" width="100%"
+                               border="0" cellspacing="0" cellpadding="0">
+                            <thead>
+                            <tr>
+                                <th><?php echo $this->lang->line('name'); ?></th>
+                                <th><?php echo $this->lang->line('status'); ?></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            foreach ($inv_tic as $key) {
+                                echo '<tr>
                                     <td>' . $key->ticket_id . '</td>
                                     <td><span class="label label-' . status_label($key->inv_status) . '">' . $key->inv_status . '</span></td>                          
                                     </tr>';
-                        }
-                        ?>
-                        </tbody>
-                    </table>
+                            }
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    <?php } ?>
 
     <?php include 'footer.php'; ?>
 
@@ -250,6 +251,7 @@ include 'header.php';
                 "searchPlaceholder": "<?php echo $this->lang->line('search_field_placeholder'); ?>",
                 "infoFiltered": "(filtered from _MAX_ total tickets)"
             }
+
         });
 
         // table.column(1).visible(false);

@@ -68,7 +68,7 @@ include 'header.php';
                                 }
 
                                 echo '<tr style="cursor: pointer;">
-                          <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $key->ticket_id . '</td>
+                          <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $key->community . '</td>
                           <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $key->ini_name . '</td>
                           <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $key->ini_phone . '</td>
                           <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $this->lang->line($key->service) . '</td>

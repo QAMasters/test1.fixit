@@ -365,7 +365,7 @@ if (!isset($_COOKIE['lang'])) {
                     <div class="form-group">
                         <label for="exampleInputPassword1"><?php echo $this->lang->line('password'); ?></label>
                         <input type="password" class="form-control" id="exampleInputPassword1" name="password"
-                               placeholder="Password">
+                               placeholder="******">
                     </div>
             </div>
             <div class="modal-footer">

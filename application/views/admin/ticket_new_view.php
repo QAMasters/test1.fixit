@@ -219,15 +219,7 @@ echo form_open_multipart('tickets/new', 'data-toggle="validator"');
                         <div class="col-sm-6">
                             <div class="form-group"><label
                                         class="control-label"><?php echo $this->lang->line('location'); ?></label>
-                                <?php //echo form_dropdown('service', $services, '', $serv_opt); ?>
-                                <select name="service" class="form-control select2_demo_3"
-                                        onchange="fetch_select(this.value);" required="required"
-                                        data-error="Please Select a Serice" style="width: 100%">
-                                    <option value=""><?php echo $this->lang->line('select') ?></option>
-                                    <?php foreach ($services as $service) { ?>
-                                        <option value="<?php echo $service ?>"><?php echo $this->lang->line($service) ?></option>
-                                    <?php } ?>
-                                </select>
+                                <?php echo form_dropdown('service', $services, '', $serv_opt); ?>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>

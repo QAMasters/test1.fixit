@@ -105,8 +105,8 @@ class Landing extends CI_Controller
                 )
             );
             email_send($ticket_id, 'ticket_create');
-            $data['message'] = 'Ticket Created Successfully';
-            $data['text'] = 'Ticket ID is <b>' . $ticket_id . '</b>. Details sent via email, please check your email!';
+            $data['message'] = '"Ärendet är Skapad"';
+            $data['text'] = 'Ticket ID is <b>' . $ticket_id . '</b>. Ärende info. skickades via e-post, kolla din Epost!';
             $data['new_ticket_id'] = $ticket_id;
         }
         $ini_where = 'all';

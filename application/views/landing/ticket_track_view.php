@@ -165,10 +165,10 @@ include 'header.php';
 </div>
 
 <?php
-$i_name = array('type' => 'text', 'name' => 'i_name', 'value' => $ticket->ini_name, 'placeholder' => $this->lang->line('phold_name'), 'class' => 'form-control', 'required' => 'required', 'data-error' => 'Please Enter Name');
+$i_name = array('type' => 'text', 'name' => 'i_name', 'value' => $ticket->ini_name, 'placeholder' => $this->lang->line('phold_name'), 'class' => 'form-control', 'required' => 'required', 'data-error' => $this->lang->line('please_enter_name'));
 
-$i_email = array('type' => 'email', 'name' => 'i_email', 'value' => $ticket->ini_email, 'placeholder' => $this->lang->line('phold_email'), 'class' => 'form-control', 'data-validation' => 'email', 'required' => 'required', 'data-error' => 'Please Enter Email');
-$i_phone = array('type' => 'number', 'name' => 'i_phone', 'value' => $ticket->ini_phone, 'placeholder' => $this->lang->line('phold_phone'), 'class' => 'form-control', 'oninput' => 'this.value=this.value.slice(0,this.maxLength||1/1);this.value=(this.value   < 0) ? (1/1) : this.value;', 'maxlength' => '10', 'required' => 'required', 'data-minlength' => '10', 'min' => '0', 'data-error' => 'Please Enter Valid Phone Number');
+$i_email = array('type' => 'email', 'name' => 'i_email', 'value' => $ticket->ini_email, 'placeholder' => $this->lang->line('phold_email'), 'class' => 'form-control', 'data-validation' => 'email', 'required' => 'required', 'data-error' => $this->lang->line('enter_email'));
+$i_phone = array('type' => 'number', 'name' => 'i_phone', 'value' => $ticket->ini_phone, 'placeholder' => $this->lang->line('phold_phone'), 'class' => 'form-control', 'oninput' => 'this.value=this.value.slice(0,this.maxLength||1/1);this.value=(this.value   < 0) ? (1/1) : this.value;', 'maxlength' => '10', 'required' => 'required', 'data-minlength' => '10', 'min' => '0', 'data-error' => $this->lang->line('enter_valid_phone_number'));
 $i_address = array('type' => 'text', 'name' => 'i_address', 'value' => $ticket->ini_address, 'placeholder' => $this->lang->line('phold_address'), 'class' => 'form-control', "data-validation" => "required");
 $i_door_code = array('type' => 'text', 'name' => 'i_door_code', 'value' => $ticket->ini_doornum, 'placeholder' => $this->lang->line('phold_doorcode'), 'class' => 'form-control', "data-validation" => "required");
 $i_desc = array('type' => 'textarea', 'name' => 'i_desc', 'value' => $ticket->description, 'placeholder' => $this->lang->line('phold_description'), 'class' => 'form-control', "data-validation" => "required", 'rows' => '4');

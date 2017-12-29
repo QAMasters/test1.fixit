@@ -15,8 +15,7 @@
         </div>
         <div class="form-group">
             <label>Email:</label>
-            <input type="email" name="email" class="form-control"
-                   placeholder="<?php echo $this->lang->line('enter_email'); ?>" required>
+            <input type="email" name="email" class="form-control" placeholder="Enter Email" required>
         </div>
         <div class="form-group">
             <label>Website URL:</label>

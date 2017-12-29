@@ -36,6 +36,7 @@ include 'header.php';
             <!--<a href="<?php echo base_url(); ?>tickets/new" class="btn btn-success"><i class="fa fa-plus-circle"></i> New Ticket</a>-->
         </div>
     </div>
+
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
@@ -46,9 +47,14 @@ include 'header.php';
                 </div>
                 <div class="ibox-content">
                     <ul class="list-inline">
-                        <li><a href="#" class="all btn btn-success btn-sm"><?php echo $this->lang->line('all'); ?></a</li>
-                        <li><a href="#" class="inprogress btn btn-success btn-sm"><?php echo $this->lang->line('show_inprogress'); ?></a></li>
-                        <li><a href="#" class="unassigned btn btn-success btn-sm"><?php echo $this->lang->line('show_unassigned'); ?></a></li>
+                        <li><a href="#" class="all btn btn-success btn-sm"><?php echo $this->lang->line('all'); ?></a>
+                        </li>
+                        <li><a href="#"
+                               class="inprogress btn btn-success btn-sm"><?php echo $this->lang->line('show_inprogress'); ?></a>
+                        </li>
+                        <li><a href="#"
+                               class="unassigned btn btn-success btn-sm"><?php echo $this->lang->line('show_unassigned'); ?></a>
+                        </li>
                     </ul>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover open-tickets" width="100%"
@@ -223,7 +229,7 @@ include 'header.php';
         <div class="modal-content">
             <div class="modal-header modal-header-primary">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h2><i class="fa fa-ban"></i> Close Ticket</h2>
+                <h2><i class="fa fa-ban"></i> <?php echo $this->lang->line('close_ticket'); ?></h2>
             </div>
             <?php echo form_open('tickets/status/change'); ?>
             <div class="modal-body">
@@ -253,7 +259,7 @@ include 'header.php';
         <div class="modal-content">
             <div class="modal-header modal-header-primary">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h2><i class="fa fa-trash"></i><?php echo $this->lang->line('delete_ticket'); ?></h2>
+                <h2><i class="fa fa-trash"></i> <?php echo $this->lang->line('delete_ticket'); ?></h2>
             </div>
             <?php echo form_open('tickets/status/change'); ?>
             <div class="modal-body">

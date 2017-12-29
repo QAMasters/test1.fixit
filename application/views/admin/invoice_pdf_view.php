@@ -115,8 +115,8 @@ body.body-small .footer.fixed {
 <div class="row">
 <table width="100%">
 <tr>
-<td width="50%" rowspan="3"><img src="' . $logo . '" width="300px" height="200px"></td>
-<td width="60%" height="50px">
+<td width="50%" rowspan="3"><img src="' . $logo . '" ></td>
+<td width="50%" height="50px">
 <table width="100%" class="table table-bordered">
 <tr><td height="50px" colspan="4" align="center" style="font-size:14px;"><h2>Faktura</h2></td></tr>
 <tr><td height="50px" align="center"><b>Fakturanummer</b><br>' . $invoice->invoice_id . '</td>
@@ -129,10 +129,10 @@ body.body-small .footer.fixed {
 </table>
 <br>
 <table width="100%">
-<tr><td width="50%" height="25px" style="padding-left: 2cm;"><b>var referns</b> : ' . $ticket->vendor . '</td>
+<tr><td width="50%" height="25px" style="padding-left: 2cm;"><b>Vår referns</b> : ' . $ticket->vendor . '</td>
 <td width="50%" style="padding-left: 2cm;"><b>Betalningsvillkor</b>  : ' . $invoice->bill_due . ' days</td></tr>
 <tr><td width="50%" height="25px" style="padding-left: 2cm;"><b>Er referens</b> : ' . $ticket->ini_name . '</td>
-<td width="50%" style="padding-left: 2cm;"><b>förfallodatum</b>  : ' . date('Y-m-d', strtotime($invoice->invoice_date . ' + ' . $invoice->bill_due . ' days')) . '</td></tr>
+<td width="50%" style="padding-left: 2cm;"><b>Förfallodatum</b>  : ' . date('Y-m-d', strtotime($invoice->invoice_date . ' + ' . $invoice->bill_due . ' days')) . '</td></tr>
 <tr><td width="50%" height="25px" style="padding-left: 2cm;"><b>Ert Ordernummer</b> : ' . $invoice->ticket_id . '</td></tr>
 </table>
 </div>
@@ -140,13 +140,13 @@ body.body-small .footer.fixed {
 
 <div class="row">
 <table class="table table-bordered" width="100%">
-<tr><th width="30%" height="40px" align="center">Item</th>
-<th width="10%" align="center">Unit</th>
-<th width="10%" align="center">Qty</th>
-<th width="10%" align="center">Price</th>
-<th width="10%" align="center">Discount</th>
-<th width="10%" align="center">Surcharge</th>
-<th width="15%" align="center">Sub Total</th>
+<tr><th width="30%" height="40px" align="center">Artikel</th>
+<th width="10%" align="center">Enhet</th>
+<th width="10%" align="center">Antal</th>
+<th width="10%" align="center">Pris</th>
+<th width="10%" align="center">Rabatt</th>
+<th width="10%" align="center">Påslag</th>
+<th width="15%" align="center">Total</th>
 </tr>
 <tr><td colspan="7" height="60px"><i>' . $invoice->description . '</i></td>
 </tr>

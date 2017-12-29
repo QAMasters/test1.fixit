@@ -99,7 +99,8 @@ include 'header.php';
                     </table>
 
                     <h4>ROT Status: <?php echo $inv->rot; ?></h4>
-                    <a href='#Rot' data-toggle='modal' data-hover='tooltip' title='Close Ticket' data-placement='top'
+                    <a href='#Rot' data-toggle='modal' data-hover='tooltip'
+                       title=<?php echo $this->lang->line('close_ticket'); ?> data-placement='top'
                        data-whatever="<?php echo $tic->ticket_id; ?>" class='btn btn-primary'>View/Add ROT Data</a>
 
                     <input type="hidden" name="ticket_id" value="<?php echo $tic->ticket_id; ?>">

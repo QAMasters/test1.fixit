@@ -58,7 +58,7 @@ include 'header.php';
                           <td onclick="window.document.location=\'edit/' . $key->ticket_id . '\'">' . $key->ini_name . '</td>
                           <td onclick="window.document.location=\'edit/' . $key->ticket_id . '\'">' . $key->ini_phone . '</td>
                           <td onclick="window.document.location=\'edit/' . $key->ticket_id . '\'">' . $key->service . '</td>
-                          <td onclick="window.document.location=\'edit/' . $key->ticket_id . '\'">' . $created_on . ' - ' . $ticket_age . ' day(s)</td>
+                          <td onclick="window.document.location=\'edit/' . $key->ticket_id . '\'">' . $created_on . ' - ' . $ticket_age . ' ' . $this->lang->line('day(s)') . '</td>
                           <td onclick="window.document.location=\'edit/' . $key->ticket_id . '\'"><span class="label label-' . status_label($invoice_status) . '">' . $invoice_status . '</span></td>
                           <td>
                           <div class="btn-group">
