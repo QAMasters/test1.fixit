@@ -91,10 +91,10 @@ include 'header.php';
                           <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $created_on . ' - ' . $ticket_age . ' ' . $this->lang->line('day(s)') . '</td>
                           <td onclick="window.document.location=\'' . $key->ticket_id . '\'"><span class="label label-' . status_label($key->status) . '">' . $key->status . ' ' . $vendor . '</span></td>
                           <td>
-                            <a href="' . $key->ticket_id . '" data-hover="tooltip" title="Edit" data-placement="top" class="btn btn-success btn-circle btn-outline"><i class="fa fa-pencil"></i></a>
-                            <a href="#Close" data-toggle="modal" data-hover="tooltip" title="Close Ticket" data-placement="top" data-whatever="' . $key->ticket_id . '" class="btn btn-warning btn-circle btn-outline"><span class="glyphicon glyphicon-remove"></a>
-                            <a href="#Delete" data-toggle="modal" data-hover="tooltip" title="Delete Ticket" data-placement="top" data-whatever="' . $key->ticket_id . '" class="btn btn-danger btn-circle btn-outline"><span class="glyphicon glyphicon-trash"></a>
-                            <a href="#Reminder" data-toggle="modal" data-hover="tooltip" title="Send Reminder" data-placement="top" data-whatever="' . $key->ticket_id . '" class="btn btn-primary btn-circle btn-outline"><span class="glyphicon glyphicon-send"></a>
+                            <a href="' . $key->ticket_id . '" data-hover="tooltip" title="' . $this->lang->line('edit') . '" data-placement="top" class="btn btn-success btn-circle btn-outline"><i class="fa fa-pencil"></i></a>
+                            <a href="#Close" data-toggle="modal" data-hover="tooltip" title="' . $this->lang->line('close_ticket') . '" data-placement="top" data-whatever="' . $key->ticket_id . '" class="btn btn-warning btn-circle btn-outline"><span class="glyphicon glyphicon-remove"></a>
+                            <a href="#Delete" data-toggle="modal" data-hover="tooltip" title="' . $this->lang->line('delete_ticket') . '" data-placement="top" data-whatever="' . $key->ticket_id . '" class="btn btn-danger btn-circle btn-outline"><span class="glyphicon glyphicon-trash"></a>
+                            <a href="#Reminder" data-toggle="modal" data-hover="tooltip" title="' . $this->lang->line('send_reminder') . '" data-placement="top" data-whatever="' . $key->ticket_id . '" class="btn btn-primary btn-circle btn-outline"><span class="glyphicon glyphicon-send"></a>
                           </td>
                         </tr>';
                             }

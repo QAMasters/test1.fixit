@@ -24,6 +24,7 @@ $lang["search_field_placeholder"] = "Search";
 $lang["search_result_zero_records"] = "Sorry, Nothing Found here";
 $lang["enter_valid_phone_number"] = "Please Enter Valid Phone Number";
 $lang["day(s)"] = "day(s)";
+$lang["ticket_history"] = "Ticket History";
 
 $lang["new_ticket"] = "New Ticket";
 $lang["open_tickets"] = "Open Tickets";
