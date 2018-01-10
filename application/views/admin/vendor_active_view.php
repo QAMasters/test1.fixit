@@ -59,7 +59,7 @@ include 'header.php';
                           <td>' . $key->lname . '</td>
                           <td>' . $key->email . '</td>
 
-                          <td><span class="label label-' . vendor_status_lbl($status) . '">' . $status . '</span></td>
+                          <td><span class="label label-' . vendor_status_lbl($status) . '">' . $this->lang->line(strtolower($status)) . '</span></td>
                           <td><a class="btn btn-success btn-sm waves-effect" href="' . base_url() . 'vendor/edit/' . $key->id . '"><i class="fa fa-edit"></i> ' . $this->lang->line('manage') . '</a></td>
                         </tr>';
                             }

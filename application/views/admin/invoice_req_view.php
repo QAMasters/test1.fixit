@@ -58,7 +58,7 @@ include 'header.php';
                           <td>' . $key->ini_phone . '</td>
                           <td>' . $key->service . '</td>
                           <td>' . $created_on . ' - ' . $ticket_age . ' ' . $this->lang->line('day(s)') . '</td>
-                          <td><span class="label label-' . status_label($key->status) . '">' . $key->status . '</span></td>
+                          <td><span class="label label-' . status_label($key->status) . '">' . $this->lang->line(strtolower($key->status)) . '</span></td>
                           <td><a class="btn btn-success btn-sm waves-effect" href="' . base_url() . 'invoice/generate/' . $key->ticket_id . '"><i class="fa fa-file"></i> ' . $this->lang->line('gen_invoice') . '</a></td>
                         </tr>';
                             }

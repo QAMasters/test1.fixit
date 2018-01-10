@@ -388,7 +388,7 @@ $sub_serv_opt = array('class' => 'select2_demo_3', 'id' => 'new_select', 'style'
                 <div class="ibox collapsed">
                     <a class="collapse-link" style="color: inherit;">
                         <div class="ibox-title">
-                            <h5>Images</h5>
+                            <h5><?php echo $this->lang->line('images'); ?></h5>
                             <div class="ibox-tools">
                                 <i class="fa fa-chevron-up"></i>
                             </div>
@@ -397,7 +397,8 @@ $sub_serv_opt = array('class' => 'select2_demo_3', 'id' => 'new_select', 'style'
                     <div class="ibox-content">
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="form-group"><label class="control-label">Selct Image</label>
+                                <div class="form-group"><label
+                                            class="control-label"><?php echo $this->lang->line('select_images'); ?></label>
                                     <input type="file" name="image" class="form-control">
                                 </div>
                             </div>
@@ -442,7 +443,7 @@ $sub_serv_opt = array('class' => 'select2_demo_3', 'id' => 'new_select', 'style'
 
                         <?php
                         $invoice_product = array('type' => 'text', 'name' => 'invoice_product[]', 'placeholder' => $this->lang->line('phold_item_name'), 'class' => 'form-control form-group-sm item-input invoice_product calculate auto');
-                        $unit_options = array('hours' => 'Hours', 'pieces' => 'Pieces');
+                        $unit_options = array('hours' => $this->lang->line("hours"), 'pieces' => $this->lang->line("pieces"));
                         $js1 = array('id' => 'state', 'class' => 'form-control', 'style' => 'width:100%');
                         $invoice_product_qty = array('type' => 'text', 'name' => 'invoice_product_qty[]', 'class' => 'form-control invoice_product_qty calculate');
                         $invoice_product_price = array('type' => 'text', 'name' => 'invoice_product_price[]', 'placeholder' => '00.00', 'class' => 'form-control calculate invoice_product_price required', 'id' => 'invoice_product_price');
@@ -460,7 +461,7 @@ $sub_serv_opt = array('class' => 'select2_demo_3', 'id' => 'new_select', 'style'
                                     <th width="5%"><a href="#" class="btn btn-primary btn-xs add-row"><span
                                                     class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></th>
                                     <th width="30%"><?php echo $this->lang->line('item'); ?></th>
-                                    <th width="10%"><?php echo $this->lang->line('unit'); ?></th>
+                                    <th width="15%"><?php echo $this->lang->line('unit'); ?></th>
                                     <th width="15%"><?php echo $this->lang->line('quantity'); ?></th>
 
                                 </tr>
@@ -782,7 +783,7 @@ include 'footer.php';
 
 <?php
 $invoice_product = array('type' => 'text', 'name' => 'invoice_product', 'placeholder' => 'Enter item title and / or description', 'class' => 'form-control form-group-sm item-input invoice_product calculate');
-$unit_options = array('hours' => 'Hours', 'pieces' => 'Pieces');
+$unit_options = array('hours' => $this->lang->line("hours"), 'pieces' => $this->lang->line("pieces"));
 $js1 = array('id' => 'state', 'class' => 'form-control', 'style' => 'width:100%');
 $invoice_product_qty = array('type' => 'text', 'name' => 'invoice_product_qty', 'class' => 'form-control invoice_product_qty calculate');
 $invoice_product_price = array('type' => 'text', 'name' => 'invoice_product_price', 'placeholder' => '00.00', 'class' => 'form-control calculate invoice_product_price required');

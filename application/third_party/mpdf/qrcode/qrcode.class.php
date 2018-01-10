@@ -244,7 +244,7 @@ if (!defined('__CLASS_QRCODE__')) {
                     for ($i = 0; $i < $this->length; $i++)
                         $this->addData(ord(substr($this->value, $i, 1)), 8);
                 } else {
-                    // type : alphanum
+                    // type : alphanum	
                     $this->type = 'alphanum';
                     $this->addData(2, 4);
 
@@ -271,7 +271,7 @@ if (!defined('__CLASS_QRCODE__')) {
                         $this->data_cur++;
                 }
             } else {
-                // type : num
+                // type : num	
                 $this->type = 'num';
                 $this->addData(1, 4);
 
@@ -420,7 +420,7 @@ if (!defined('__CLASS_QRCODE__')) {
             $this->matrix_remain = $matrix_remain_bit[$this->version];
             unset($matrix_remain_bit);
 
-            // lecture du fichier : data file of geometry & mask for version V ,ecc level N
+            // lecture du fichier : data file of geometry & mask for version V ,ecc level N			
             $this->byte_num = $this->matrix_remain + 8 * $this->max_word;
             $filename = dirname(__FILE__) . "/data/qrv" . $this->version . "_" . $this->ec . ".dat";
             $fp1 = fopen($filename, "rb");

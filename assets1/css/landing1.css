@@ -763,7 +763,7 @@ ol.linenums {
     width: 100%;
     height: 5%;
     position: relative;
-    background-size: cover;
+    background: background-size: cover;
 }
 
 .overlay {

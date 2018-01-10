@@ -215,7 +215,7 @@ include 'header.php';
                             foreach ($inv_tic as $key) {
                                 echo '<tr>
                                     <td>' . $key->ticket_id . '</td>
-                                    <td><span class="label label-' . status_label($key->inv_status) . '">' . $key->inv_status . '</span></td>                          
+                                    <td><span class="label label-' . status_label($key->inv_status) . '">' . $this->lang->line(strtolower($key->inv_status)) . '</span></td>                          
                                     </tr>';
                             }
                             ?>

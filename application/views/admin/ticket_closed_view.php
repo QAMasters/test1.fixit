@@ -67,9 +67,7 @@ include 'header.php';
                           <td onclick="window.document.location=\'' . $key->ticket_id . '\'"><span class="label label-' . status_label($key->status) . '">' . $key->status . '</span></td>
                           <td>
                           <a href="#Reopen" data-toggle="modal" data-hover="tooltip" title="Reopen Ticket" data-placement="top" data-whatever="' . $key->ticket_id . '" class="btn btn-primary btn-circle btn-outline"><span class="glyphicon glyphicon-folder-open"></a>
-                          <a href="#Delete" data-toggle="modal" data-hover="tooltip" title="Close Ticket"title="Delete Ticket" data-placement="top" data-whatever="' . $key->ticket_id . '" class="btn btn-danger btn-circle btn-outline"><span class="glyphicon glyphicon-trash"></a>
-                          <!-- a href="#Delete" data-toggle="modal" data-hover="tooltip" title="Delete Ticket" data-placement="top" data-whatever="' . $key->ticket_id . '" class="btn btn-danger btn-circle btn-outline"><span class="glyphicon glyphicon-trash"></a 
-                          -->
+                          <a href="#Delete" data-toggle="modal" data-hover="tooltip" title="Delete Ticket" data-placement="top" data-whatever="' . $key->ticket_id . '" class="btn btn-danger btn-circle btn-outline"><span class="glyphicon glyphicon-trash"></a>                          
                           </td>
                         </tr>';
                             }

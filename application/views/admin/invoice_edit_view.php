@@ -144,7 +144,7 @@ include 'header.php';
                             <!--items start here-->
                             <?php
                             $invoice_product = array('type' => 'text', 'name' => 'invoice_product[]', 'placeholder' => $this->lang->line('phold_item_name'), 'class' => 'form-control form-group-sm item-input invoice_product calculate auto');
-                            $unit_options = array('hours' => 'Hours', 'pieces' => 'Pieces');
+                            $unit_options = array('hours' => $this->lang->line("hours"), 'pieces' => $this->lang->line("pieces"));
                             $js1 = array('id' => 'state', 'class' => 'form-control invoice_product_unit', 'style' => 'width:100%');
                             $invoice_product_qty = array('type' => 'text', 'name' => 'invoice_product_qty[]', 'class' => 'form-control invoice_product_qty calculate');
                             $invoice_product_price = array('type' => 'text', 'name' => 'invoice_product_price[]', 'placeholder' => $this->lang->line('phold_item_price'), 'class' => 'form-control calculate invoice_product_price required', 'id' => 'invoice_product_price');

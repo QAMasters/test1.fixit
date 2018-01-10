@@ -59,13 +59,13 @@ include 'header.php';
                           <td onclick="window.document.location=\'edit/' . $key->ticket_id . '\'">' . $key->ini_phone . '</td>
                           <td onclick="window.document.location=\'edit/' . $key->ticket_id . '\'">' . $key->service . '</td>
                           <td onclick="window.document.location=\'edit/' . $key->ticket_id . '\'">' . $created_on . ' - ' . $ticket_age . ' ' . $this->lang->line('day(s)') . '</td>
-                          <td onclick="window.document.location=\'edit/' . $key->ticket_id . '\'"><span class="label label-' . status_label($invoice_status) . '">' . $invoice_status . '</span></td>
+                          <td onclick="window.document.location=\'edit/' . $key->ticket_id . '\'"><span class="label label-' . status_label($invoice_status) . '">' . $this->lang->line(strtolower($invoice_status)) . '</span></td>
                           <td>
                           <div class="btn-group">
-                            <button data-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle" aria-expanded="false">Change Status <span class="caret"></span></button>
+                            <button data-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle" aria-expanded="false">' . $this->lang->line("change_status") . '<span class="caret"></span></button>
                             <ul class="dropdown-menu">
-                                <li><a href="invoice_status_change?ticket_id=' . $key->ticket_id . '&status=Paid">Paid</a></li>
-                                <li><a href="invoice_status_change?ticket_id=' . $key->ticket_id . '&status=UnPaid">UnPaid</a></li>
+                                <li><a href="invoice_status_change?ticket_id=' . $key->ticket_id . '&status=Paid">' . $this->lang->line("paid") . '</a></li>
+                                <li><a href="invoice_status_change?ticket_id=' . $key->ticket_id . '&status=UnPaid">' . $this->lang->line("unpaid") . '</a></li>
                             </ul>
                         </div>
                           </td>
