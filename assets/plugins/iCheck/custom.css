@@ -17,16 +17,20 @@
 .icheckbox_square-green {
     background-position: 0 0;
 }
+
 .icheckbox_square-green.hover {
     background-position: -24px 0;
 }
+
 .icheckbox_square-green.checked {
     background-position: -48px 0;
 }
+
 .icheckbox_square-green.disabled {
     background-position: -72px 0;
     cursor: default;
 }
+
 .icheckbox_square-green.checked.disabled {
     background-position: -96px 0;
 }
@@ -34,16 +38,20 @@
 .iradio_square-green {
     background-position: -120px 0;
 }
+
 .iradio_square-green.hover {
     background-position: -144px 0;
 }
+
 .iradio_square-green.checked {
     background-position: -168px 0;
 }
+
 .iradio_square-green.disabled {
     background-position: -192px 0;
     cursor: default;
 }
+
 .iradio_square-green.checked.disabled {
     background-position: -216px 0;
 }
@@ -77,36 +85,44 @@
 .icheckbox_square-orange {
     background-position: 0 0;
 }
-    .icheckbox_square-orange.hover {
-        background-position: -24px 0;
-    }
-    .icheckbox_square-orange.checked {
-        background-position: -48px 0;
-    }
-    .icheckbox_square-orange.disabled {
-        background-position: -72px 0;
-        cursor: default;
-    }
-    .icheckbox_square-orange.checked.disabled {
-        background-position: -96px 0;
-    }
+
+.icheckbox_square-orange.hover {
+    background-position: -24px 0;
+}
+
+.icheckbox_square-orange.checked {
+    background-position: -48px 0;
+}
+
+.icheckbox_square-orange.disabled {
+    background-position: -72px 0;
+    cursor: default;
+}
+
+.icheckbox_square-orange.checked.disabled {
+    background-position: -96px 0;
+}
 
 .iradio_square-orange {
     background-position: -120px 0;
 }
-    .iradio_square-orange.hover {
-        background-position: -144px 0;
-    }
-    .iradio_square-orange.checked {
-        background-position: -168px 0;
-    }
-    .iradio_square-orange.disabled {
-        background-position: -192px 0;
-        cursor: default;
-    }
-    .iradio_square-orange.checked.disabled {
-        background-position: -216px 0;
-    }
+
+.iradio_square-orange.hover {
+    background-position: -144px 0;
+}
+
+.iradio_square-orange.checked {
+    background-position: -168px 0;
+}
+
+.iradio_square-orange.disabled {
+    background-position: -192px 0;
+    cursor: default;
+}
+
+.iradio_square-orange.checked.disabled {
+    background-position: -216px 0;
+}
 
 /* HiDPI support */
 @media (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi), (min-resolution: 1.25dppx) {
@@ -137,36 +153,44 @@
 .icheckbox_square-red {
     background-position: 0 0;
 }
-    .icheckbox_square-red.hover {
-        background-position: -24px 0;
-    }
-    .icheckbox_square-red.checked {
-        background-position: -48px 0;
-    }
-    .icheckbox_square-red.disabled {
-        background-position: -72px 0;
-        cursor: default;
-    }
-    .icheckbox_square-red.checked.disabled {
-        background-position: -96px 0;
-    }
+
+.icheckbox_square-red.hover {
+    background-position: -24px 0;
+}
+
+.icheckbox_square-red.checked {
+    background-position: -48px 0;
+}
+
+.icheckbox_square-red.disabled {
+    background-position: -72px 0;
+    cursor: default;
+}
+
+.icheckbox_square-red.checked.disabled {
+    background-position: -96px 0;
+}
 
 .iradio_square-red {
     background-position: -120px 0;
 }
-    .iradio_square-red.hover {
-        background-position: -144px 0;
-    }
-    .iradio_square-red.checked {
-        background-position: -168px 0;
-    }
-    .iradio_square-red.disabled {
-        background-position: -192px 0;
-        cursor: default;
-    }
-    .iradio_square-red.checked.disabled {
-        background-position: -216px 0;
-    }
+
+.iradio_square-red.hover {
+    background-position: -144px 0;
+}
+
+.iradio_square-red.checked {
+    background-position: -168px 0;
+}
+
+.iradio_square-red.disabled {
+    background-position: -192px 0;
+    cursor: default;
+}
+
+.iradio_square-red.checked.disabled {
+    background-position: -216px 0;
+}
 
 /* HiDPI support */
 @media (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi), (min-resolution: 1.25dppx) {
@@ -197,36 +221,44 @@
 .icheckbox_square-yellow {
     background-position: 0 0;
 }
-    .icheckbox_square-yellow.hover {
-        background-position: -24px 0;
-    }
-    .icheckbox_square-yellow.checked {
-        background-position: -48px 0;
-    }
-    .icheckbox_square-yellow.disabled {
-        background-position: -72px 0;
-        cursor: default;
-    }
-    .icheckbox_square-yellow.checked.disabled {
-        background-position: -96px 0;
-    }
+
+.icheckbox_square-yellow.hover {
+    background-position: -24px 0;
+}
+
+.icheckbox_square-yellow.checked {
+    background-position: -48px 0;
+}
+
+.icheckbox_square-yellow.disabled {
+    background-position: -72px 0;
+    cursor: default;
+}
+
+.icheckbox_square-yellow.checked.disabled {
+    background-position: -96px 0;
+}
 
 .iradio_square-yellow {
     background-position: -120px 0;
 }
-    .iradio_square-yellow.hover {
-        background-position: -144px 0;
-    }
-    .iradio_square-yellow.checked {
-        background-position: -168px 0;
-    }
-    .iradio_square-yellow.disabled {
-        background-position: -192px 0;
-        cursor: default;
-    }
-    .iradio_square-yellow.checked.disabled {
-        background-position: -216px 0;
-    }
+
+.iradio_square-yellow.hover {
+    background-position: -144px 0;
+}
+
+.iradio_square-yellow.checked {
+    background-position: -168px 0;
+}
+
+.iradio_square-yellow.disabled {
+    background-position: -192px 0;
+    cursor: default;
+}
+
+.iradio_square-yellow.checked.disabled {
+    background-position: -216px 0;
+}
 
 /* HiDPI support */
 @media (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi), (min-resolution: 1.25dppx) {

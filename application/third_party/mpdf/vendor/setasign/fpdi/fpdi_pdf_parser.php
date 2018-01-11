@@ -18,6 +18,24 @@ if (!class_exists('pdf_parser')) {
 class fpdi_pdf_parser extends pdf_parser
 {
     /**
+     * Current page number
+     *
+     * @var integer
+     */
+    public $pageNo;
+    /**
+     * PDF version of imported document
+     *
+     * @var string
+     */
+    public $_pdfVersion;
+    /**
+     * Available BoxTypes
+     *
+     * @var array
+     */
+    public $availableBoxes = array('/MediaBox', '/CropBox', '/BleedBox', '/TrimBox', '/ArtBox');
+    /**
      * Pages
      *
      * Index begins at 0
@@ -25,35 +43,13 @@ class fpdi_pdf_parser extends pdf_parser
      * @var array
      */
     protected $_pages;
-    
     /**
      * Page count
      *
      * @var integer
      */
     protected $_pageCount;
-    
-    /**
-     * Current page number
-     *
-     * @var integer
-     */
-    public $pageNo;
-    
-    /**
-     * PDF version of imported document
-     *
-     * @var string
-     */
-    public $_pdfVersion;
-    
-    /**
-     * Available BoxTypes
-     *
-     * @var array
-     */
-    public $availableBoxes = array('/MediaBox', '/CropBox', '/BleedBox', '/TrimBox', '/ArtBox');
-        
+
     /**
      * The constructor.
      *
@@ -68,11 +64,62 @@ class fpdi_pdf_parser extends pdf_parser
 
         // Read pages
         $this->_readPages($pages, $this->_pages);
-        
+
         // count pages;
         $this->_pageCount = count($this->_pages);
     }
-    
+
+    /**
+     * Read all pages
+     *
+     * @param array $pages /Pages dictionary
+     * @param array $result The result array
+     * @throws Exception
+     */
+    protected function _readPages(&$pages, &$result)
+    {
+        // Get the kids dictionary
+        $_kids = $this->resolveObject($pages[1][1]['/Kids']);
+
+        if (!is_array($_kids)) {
+            throw new Exception('Cannot find /Kids in current /Page-Dictionary');
+        }
+
+        if ($_kids[0] === self::TYPE_OBJECT) {
+            $_kids = $_kids[1];
+        }
+
+        $kids = $_kids[1];
+
+        foreach ($kids as $v) {
+            $pg = $this->resolveObject($v);
+            if ($pg[1][1]['/Type'][1] === '/Pages') {
+                // If one of the kids is an embedded
+                // /Pages array, resolve it as well.
+                $this->_readPages($pg, $result);
+            } else {
+                $result[] = $pg;
+            }
+        }
+    }
+
+    /**
+     * Set the page number.
+     *
+     * @param int $pageNo Page number to use
+     * @throws InvalidArgumentException
+     */
+    public function setPageNo($pageNo)
+    {
+        $pageNo = ((int)$pageNo) - 1;
+
+        if ($pageNo < 0 || $pageNo >= $this->getPageCount()) {
+            throw new InvalidArgumentException('Invalid page number!');
+        }
+
+        $this->pageNo = $pageNo;
+    }
+
     /**
      * Get page count from source file.
      *
@@ -84,23 +131,6 @@ class fpdi_pdf_parser extends pdf_parser
     }
 
     /**
-     * Set the page number.
-     *
-     * @param int $pageNo Page number to use
-     * @throws InvalidArgumentException
-     */
-    public function setPageNo($pageNo)
-    {
-        $pageNo = ((int) $pageNo) - 1;
-
-        if ($pageNo < 0 || $pageNo >= $this->getPageCount()) {
-            throw new InvalidArgumentException('Invalid page number!');
-        }
-
-        $this->pageNo = $pageNo;
-    }
-    
-    /**
      * Get page-resources from current page
      *
      * @return array|boolean
@@ -109,7 +139,7 @@ class fpdi_pdf_parser extends pdf_parser
     {
         return $this->_getPageResources($this->_pages[$this->pageNo]);
     }
-    
+
     /**
      * Get page-resources from a /Page dictionary.
      *
@@ -151,14 +181,14 @@ class fpdi_pdf_parser extends pdf_parser
     public function getContent()
     {
         $buffer = '';
-        
+
         if (isset($this->_pages[$this->pageNo][1][1]['/Contents'])) {
             $contents = $this->_getPageContent($this->_pages[$this->pageNo][1][1]['/Contents']);
             foreach ($contents AS $tmpContent) {
                 $buffer .= $this->_unFilterStream($tmpContent) . ' ';
             }
         }
-        
+
         return $buffer;
     }
 
@@ -171,7 +201,7 @@ class fpdi_pdf_parser extends pdf_parser
     protected function _getPageContent($contentRef)
     {
         $contents = array();
-        
+
         if ($contentRef[0] == pdf_parser::TYPE_OBJREF) {
             $content = $this->resolveObject($contentRef);
             if ($content[1][0] == pdf_parser::TYPE_ARRAY) {
@@ -186,6 +216,43 @@ class fpdi_pdf_parser extends pdf_parser
         }
 
         return $contents;
+    }
+
+    /**
+     * Get all page boundary boxes by page number
+     *
+     * @param int $pageNo The page number
+     * @param float $k Scale factor from user space units to points
+     * @return array
+     * @throws InvalidArgumentException
+     */
+    public function getPageBoxes($pageNo, $k)
+    {
+        if (!isset($this->_pages[$pageNo - 1])) {
+            throw new InvalidArgumentException('Page ' . $pageNo . ' does not exists.');
+        }
+
+        return $this->_getPageBoxes($this->_pages[$pageNo - 1], $k);
+    }
+
+    /**
+     * Get all boxes from /Page dictionary
+     *
+     * @param array $page A /Page dictionary
+     * @param float $k Scale factor from user space units to points
+     * @return array
+     */
+    protected function _getPageBoxes($page, $k)
+    {
+        $boxes = array();
+
+        foreach ($this->availableBoxes AS $box) {
+            if ($_box = $this->_getPageBox($page, $box, $k)) {
+                $boxes[$box] = $_box;
+            }
+        }
+
+        return $boxes;
     }
 
     /**
@@ -206,12 +273,12 @@ class fpdi_pdf_parser extends pdf_parser
         if (isset($page[1][1][$boxIndex])) {
             $box = $page[1][1][$boxIndex];
         }
-        
+
         if (!is_null($box) && $box[0] == pdf_parser::TYPE_OBJREF) {
             $tmp_box = $this->resolveObject($box);
             $box = $tmp_box[1];
         }
-            
+
         if (!is_null($box) && $box[0] == pdf_parser::TYPE_ARRAY) {
             $b = $box[1];
             return array(
@@ -229,43 +296,6 @@ class fpdi_pdf_parser extends pdf_parser
         } else {
             return $this->_getPageBox($this->resolveObject($page[1][1]['/Parent']), $boxIndex, $k);
         }
-    }
-
-    /**
-     * Get all page boundary boxes by page number
-     * 
-     * @param int $pageNo The page number
-     * @param float $k Scale factor from user space units to points
-     * @return array
-     * @throws InvalidArgumentException
-     */
-    public function getPageBoxes($pageNo, $k)
-    {
-        if (!isset($this->_pages[$pageNo - 1])) {
-            throw new InvalidArgumentException('Page ' . $pageNo . ' does not exists.');
-        }
-
-        return $this->_getPageBoxes($this->_pages[$pageNo - 1], $k);
-    }
-    
-    /**
-     * Get all boxes from /Page dictionary
-     *
-     * @param array $page A /Page dictionary
-     * @param float $k Scale factor from user space units to points
-     * @return array
-     */
-    protected function _getPageBoxes($page, $k)
-    {
-        $boxes = array();
-
-        foreach($this->availableBoxes AS $box) {
-            if ($_box = $this->_getPageBox($page, $box, $k)) {
-                $boxes[$box] = $_box;
-            }
-        }
-
-        return $boxes;
     }
 
     /**
@@ -309,39 +339,5 @@ class fpdi_pdf_parser extends pdf_parser
             return $res[1];
 
         return $res;
-    }
-
-    /**
-     * Read all pages
-     *
-     * @param array $pages /Pages dictionary
-     * @param array $result The result array
-     * @throws Exception
-     */
-    protected function _readPages(&$pages, &$result)
-    {
-        // Get the kids dictionary
-        $_kids = $this->resolveObject($pages[1][1]['/Kids']);
-
-        if (!is_array($_kids)) {
-            throw new Exception('Cannot find /Kids in current /Page-Dictionary');
-        }
-
-        if ($_kids[0] === self::TYPE_OBJECT) {
-            $_kids =  $_kids[1];
-        }
-
-        $kids = $_kids[1];
-
-        foreach ($kids as $v) {
-            $pg = $this->resolveObject($v);
-            if ($pg[1][1]['/Type'][1] === '/Pages') {
-                // If one of the kids is an embedded
-                // /Pages array, resolve it as well.
-                $this->_readPages($pg, $result);
-            } else {
-                $result[] = $pg;
-            }
-        }
     }
 }

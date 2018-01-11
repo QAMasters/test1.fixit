@@ -47,12 +47,18 @@ include 'header.php';
                 </div>
                 <div class="ibox-content">
                     <ul class="list-inline">
-                        <li><a href="#" class="all btn btn-success btn-sm"><?php echo $this->lang->line('all'); ?></a></li>
-                        <li><a href="#" class="inprogress btn btn-success btn-sm"><?php echo $this->lang->line('show_inprogress'); ?></a></li>
-                        <li><a href="#" class="unassigned btn btn-success btn-sm"><?php echo $this->lang->line('show_unassigned'); ?></a>                        </li>
+                        <li><a href="#" class="all btn btn-success btn-sm"><?php echo $this->lang->line('all'); ?></a>
+                        </li>
+                        <li><a href="#"
+                               class="inprogress btn btn-success btn-sm"><?php echo $this->lang->line('show_inprogress'); ?></a>
+                        </li>
+                        <li><a href="#"
+                               class="unassigned btn btn-success btn-sm"><?php echo $this->lang->line('show_unassigned'); ?></a>
+                        </li>
                     </ul>
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover open-tickets" width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <table class="table table-striped table-bordered table-hover open-tickets" width="100%"
+                               border="0" cellspacing="0" cellpadding="0">
                             <thead>
                             <tr>
                                 <th><?php echo $this->lang->line('community'); ?></th>
@@ -82,7 +88,7 @@ include 'header.php';
                           <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $key->ini_name . '</td>
                           <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $key->ini_phone . '</td>
                           <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $this->lang->line($key->service) . '</td>
-                          <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $created_on . ' - ' . $ticket_age.' '. $this->lang->line('day(s)') .'</td>
+                          <td onclick="window.document.location=\'' . $key->ticket_id . '\'">' . $created_on . ' - ' . $ticket_age . ' ' . $this->lang->line('day(s)') . '</td>
                           <td onclick="window.document.location=\'' . $key->ticket_id . '\'"><span class="label label-' . status_label($key->status) . '">' . $key->status . ' ' . $vendor . '</span></td>
                           <td>
                             <a href="' . $key->ticket_id . '" data-hover="tooltip" title="' . $this->lang->line('edit') . '" data-placement="top" class="btn btn-success btn-circle btn-outline"><i class="fa fa-pencil"></i></a>
@@ -234,7 +240,7 @@ include 'header.php';
                     <textarea class="form-control" name="comment" id="message-text" required=""></textarea>
                 </div>
             </div>
-             <div class="modal-footer">
+            <div class="modal-footer">
                 <input type="submit" value="Close Ticket" class="btn btn-success"/>
             </div>
             <?php echo form_close(); ?>
@@ -253,7 +259,7 @@ include 'header.php';
         <div class="modal-content">
             <div class="modal-header modal-header-primary">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h2><i class="fa fa-trash"></i> <?php echo $this->lang->line('delete_ticket');?></h2>
+                <h2><i class="fa fa-trash"></i> <?php echo $this->lang->line('delete_ticket'); ?></h2>
             </div>
             <?php echo form_open('tickets/status/change'); ?>
             <div class="modal-body">

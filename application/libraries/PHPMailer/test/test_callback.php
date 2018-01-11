@@ -29,7 +29,7 @@ function callbackAction($result, $to, $cc, $bcc, $subject, $body)
     $bcc = cleanEmails($bcc[0], 'cc');
     echo $result . "\tTo: " . $to['Name'] . "\tTo: " . $to['Email'] . "\tCc: " . $cc['Name'] .
         "\tCc: " . $cc['Email'] . "\tBcc: " . $bcc['Name'] . "\tBcc: " . $bcc['Email'] .
-        "\t" . $subject . "\n\n". $body . "\n";
+        "\t" . $subject . "\n\n" . $body . "\n";
     return true;
 }
 

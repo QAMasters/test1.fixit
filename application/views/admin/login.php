@@ -18,35 +18,37 @@
 
 <body class="gray-bg">
 
-    <div class="middle-box text-center loginscreen animated fadeInDown">
+<div class="middle-box text-center loginscreen animated fadeInDown">
+    <div>
         <div>
-            <div>
-            </div>
-            <h3>Welcome to Fixit</h3>
-            
-            <p>Login in. To see it in action.</p>
-            <div>
-                <div class="ibox-content">
-                    <form class="m-t" role="form" action="" method="POST">
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Email" required="" name="email">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Password" required="" name="password">
-                        </div>
-                        <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
-
-                        <a href="#">
-                            <small>Forgot password?</small>
-                        </a>
-                        
-                    </form>
-                    
-                </div>
-            </div>
-            <p class="m-t"> <small>Fixit &copy; 2017</small> </p>
         </div>
+        <h3>Welcome to Fixit</h3>
+
+        <p>Login in. To see it in action.</p>
+        <div>
+            <div class="ibox-content">
+                <form class="m-t" role="form" action="" method="POST">
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Email" required="" name="email">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Password" required="" name="password">
+                    </div>
+                    <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+
+                    <a href="#">
+                        <small>Forgot password?</small>
+                    </a>
+
+                </form>
+
+            </div>
+        </div>
+        <p class="m-t">
+            <small>Fixit &copy; 2017</small>
+        </p>
     </div>
+</div>
 
 </body>
 
