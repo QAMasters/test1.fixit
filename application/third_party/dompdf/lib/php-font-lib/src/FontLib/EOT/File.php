@@ -41,7 +41,7 @@ class File extends \FontLib\TrueType\File
             $mtx_offset_2 = $this->readUInt8() << 16 | $this->readUInt8() << 8 | $this->readUInt8();
             /*
             var_dump("$mtx_version $mtx_copy_limit $mtx_offset_1 $mtx_offset_2");
-
+      
             $pos = $this->pos();
             $size = $mtx_offset_1 - $pos;
             var_dump("pos: $pos");

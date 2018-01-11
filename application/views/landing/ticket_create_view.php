@@ -268,16 +268,7 @@ echo form_open_multipart('', 'data-toggle="validator"');
                             <div class="col-sm-6 form-group">
                                 <label class="control-label"><?php echo $this->lang->line('location'); ?></label>
                                 <div class="input-group col-md-12 col-xs-12">
-                                    <?php //echo form_dropdown('service', $services, $selected_service, $serv_opt); ?>
-                                    <select name="service" class="select2_demo_3" onchange="fetch_select(this.value);"
-                                            required="required" data-error="Vänligen välj en läge" style="width: 100%">
-                                        <option value=""><?php echo $this->lang->line('select') ?></option>
-                                        <?php foreach ($services as $service) { ?>
-                                            <option value="<?php echo $service ?>" <?php if ($service == $selected_service) {
-                                                echo "selected";
-                                            } ?> ><?php echo $this->lang->line($service) ?></option>
-                                        <?php } ?>
-                                    </select>
+                                    <?php echo form_dropdown('service', $services, $selected_service, $serv_opt); ?>
                                 </div>
                                 <div class="help-block with-errors"></div>
                             </div>
