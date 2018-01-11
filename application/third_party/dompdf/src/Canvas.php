@@ -144,8 +144,8 @@ interface Canvas
      * Rotate
      *
      * @param float $angle angle in degrees for counter-clockwise rotation
-     * @param float $x Origin abscissa
-     * @param float $y Origin ordinate
+     * @param float $x     Origin abscissa
+     * @param float $y     Origin ordinate
      */
     function rotate($angle, $x, $y);
 
@@ -164,8 +164,8 @@ interface Canvas
      *
      * @param float $s_x scaling factor for width as percent
      * @param float $s_y scaling factor for height as percent
-     * @param float $x Origin abscissa
-     * @param float $y Origin ordinate
+     * @param float $x   Origin abscissa
+     * @param float $y   Origin ordinate
      */
     function scale($s_x, $s_y, $x, $y);
 

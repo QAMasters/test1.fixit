@@ -1,36 +1,36 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <items>
     <item>
-        <ItemName>pra1</ItemName>
-        <Unit>pieces</Unit>
-        <Quantity>1</Quantity>
-        <Price>50</Price>
-        <Discount>15</Discount>
-        <Surcharge>15</Surcharge>
+      <ItemName>pra1</ItemName>
+      <Unit>pieces</Unit>
+      <Quantity>1</Quantity>
+      <Price>50</Price>
+      <Discount>15</Discount>
+      <Surcharge>15</Surcharge>
     </item>
     <item>
-        <ItemName>test Item2</ItemName>
-        <Unit>pieces</Unit>
-        <Quantity>2</Quantity>
-        <Price>50</Price>
-        <Discount></Discount>
-        <Surcharge>15</Surcharge>
+      <ItemName>test Item2</ItemName>
+      <Unit>pieces</Unit>
+      <Quantity>2</Quantity>
+      <Price>50</Price>
+      <Discount></Discount>
+      <Surcharge>15</Surcharge>
     </item>
     <item>
-        <ItemName>test Item3</ItemName>
-        <Unit>pieces</Unit>
-        <Quantity>2</Quantity>
-        <Price>5</Price>
-        <Discount></Discount>
-        <Surcharge>15</Surcharge>
+      <ItemName>test Item3</ItemName>
+      <Unit>pieces</Unit>
+      <Quantity>2</Quantity>
+      <Price>5</Price>
+      <Discount></Discount>
+      <Surcharge>15</Surcharge>
     </item>
     <item>
-        <ItemName>test Item4</ItemName>
-        <Unit>pieces</Unit>
-        <Quantity>2</Quantity>
-        <Price>50</Price>
-        <Discount></Discount>
-        <Surcharge>15</Surcharge>
+      <ItemName>test Item4</ItemName>
+      <Unit>pieces</Unit>
+      <Quantity>2</Quantity>
+      <Price>50</Price>
+      <Discount></Discount>
+      <Surcharge>15</Surcharge>
     </item>
 </items>
 

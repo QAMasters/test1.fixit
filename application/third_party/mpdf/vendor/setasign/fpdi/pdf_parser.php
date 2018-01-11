@@ -202,6 +202,37 @@ class pdf_parser
     }
 
     /**
+     * Destructor
+     */
+    public function __destruct()
+    {
+        $this->closeFile();
+    }
+
+    /**
+     * Close the opened file
+     */
+    public function closeFile()
+    {
+        if (isset($this->_f) && is_resource($this->_f)) {
+            fclose($this->_f);
+            unset($this->_f);
+        }
+    }
+
+    /**
+     * Check Trailer for Encryption
+     *
+     * @throws Exception
+     */
+    public function getEncryption()
+    {
+        if (isset($this->_xref['trailer'][1]['/Encrypt'])) {
+            throw new Exception('File is encrypted!');
+        }
+    }
+
+    /**
      * Get PDF-Version
      *
      * @return string
@@ -216,6 +247,54 @@ class pdf_parser
         }
 
         return $this->_pdfVersion;
+    }
+
+    /**
+     * Read the /Root dictionary
+     */
+    protected function _readRoot()
+    {
+        if ($this->_xref['trailer'][1]['/Root'][0] != self::TYPE_OBJREF) {
+            throw new Exception('Wrong Type of Root-Element! Must be an indirect reference');
+        }
+
+        $this->_root = $this->resolveObject($this->_xref['trailer'][1]['/Root']);
+    }
+
+    /**
+     * Find the xref table
+     *
+     * @return integer
+     * @throws Exception
+     */
+    protected function _findXref()
+    {
+        $toRead = self::$searchForStartxrefLength;
+
+        $stat = fseek($this->_f, -$toRead, SEEK_END);
+        if ($stat === -1) {
+            fseek($this->_f, 0);
+        }
+
+        $data = fread($this->_f, $toRead);
+
+        $keywordPos = strpos(strrev($data), strrev('startxref'));
+        if (false === $keywordPos) {
+            $keywordPos = strpos(strrev($data), strrev('startref'));
+        }
+
+        if (false === $keywordPos) {
+            throw new Exception('Unable to find "startxref" keyword.');
+        }
+
+        $pos = strlen($data) - $keywordPos;
+        $data = substr($data, $pos);
+
+        if (!preg_match('/\s*(\d+).*$/s', $data, $matches)) {
+            throw new Exception('Unable to find pointer to xref table.');
+        }
+
+        return (int) $matches[1];
     }
 
     /**
@@ -297,10 +376,10 @@ class pdf_parser
             if ($line) {
                 $pieces = explode(' ', $line);
                 $c = count($pieces);
-                switch ($c) {
+                switch($c) {
                     case 2:
                         $start = (int)$pieces[0];
-                        $end = $start + (int)$pieces[1];
+                        $end   = $start + (int)$pieces[1];
                         if ($end > $result['maxObject'])
                             $result['maxObject'] = $end;
                         break;
@@ -308,8 +387,8 @@ class pdf_parser
                         if (!isset($result['xref'][$start]))
                             $result['xref'][$start] = array();
 
-                        if (!array_key_exists($gen = (int)$pieces[1], $result['xref'][$start])) {
-                            $result['xref'][$start][$gen] = $pieces[2] == 'n' ? (int)$pieces[0] : null;
+                        if (!array_key_exists($gen = (int) $pieces[1], $result['xref'][$start])) {
+                            $result['xref'][$start][$gen] = $pieces[2] == 'n' ? (int) $pieces[0] : null;
                         }
                         $start++;
                         break;
@@ -364,7 +443,7 @@ class pdf_parser
 
                 $pos = $c->offset;
 
-                while (1) {
+                while(1) {
 
                     $match = strpos($c->buffer, '>', $pos);
 
@@ -382,7 +461,7 @@ class pdf_parser
                     $result = substr($c->buffer, $c->offset, $match - $c->offset);
                     $c->offset = $match + 1;
 
-                    return array(self::TYPE_HEX, $result);
+                    return array (self::TYPE_HEX, $result);
                 }
                 break;
 
@@ -398,7 +477,7 @@ class pdf_parser
                         return false;
                     }
 
-                    if (($value = $this->_readValue($c)) === false) {
+                    if (($value =   $this->_readValue($c)) === false) {
                         return false;
                     }
 
@@ -411,7 +490,7 @@ class pdf_parser
                     $result[$key] = $value;
                 }
 
-                return array(self::TYPE_DICTIONARY, $result);
+                return array (self::TYPE_DICTIONARY, $result);
 
             case '[':
                 // This is an array.
@@ -432,7 +511,7 @@ class pdf_parser
                     $result[] = $value;
                 }
 
-                return array(self::TYPE_ARRAY, $result);
+                return array (self::TYPE_ARRAY, $result);
 
             case '(':
                 // This is a string
@@ -452,12 +531,12 @@ class pdf_parser
                                 $pos++;
                         }
                     }
-                } while ($openBrackets != 0 && $c->increaseLength());
+                } while($openBrackets != 0 && $c->increaseLength());
 
                 $result = substr($c->buffer, $c->offset, $pos - $c->offset - 1);
                 $c->offset = $pos;
 
-                return array(self::TYPE_STRING, $result);
+                return array (self::TYPE_STRING, $result);
 
             case 'stream':
                 $tempPos = $c->getPos() - strlen($c->buffer);
@@ -542,11 +621,105 @@ class pdf_parser
                 } else if ($token == 'true' || $token == 'false') {
                     return array(self::TYPE_BOOLEAN, $token == 'true');
                 } else if ($token == 'null') {
-                    return array(self::TYPE_NULL);
+                   return array(self::TYPE_NULL);
                 } else {
                     // Just a token. Return it.
                     return array(self::TYPE_TOKEN, $token);
                 }
+         }
+    }
+
+    /**
+     * Resolve an object
+     *
+     * @param array $objSpec The object-data
+     * @return array|boolean
+     * @throws Exception
+     */
+    public function resolveObject($objSpec)
+    {
+        $c = $this->_c;
+
+        // Exit if we get invalid data
+        if (!is_array($objSpec)) {
+            return false;
+        }
+
+        if ($objSpec[0] == self::TYPE_OBJREF) {
+
+            // This is a reference, resolve it
+            if (isset($this->_xref['xref'][$objSpec[1]][$objSpec[2]])) {
+
+                // Save current file position
+                // This is needed if you want to resolve
+                // references while you're reading another object
+                // (e.g.: if you need to determine the length
+                // of a stream)
+
+                $oldPos = $c->getPos();
+
+                // Reposition the file pointer and
+                // load the object header.
+
+                $c->reset($this->_xref['xref'][$objSpec[1]][$objSpec[2]]);
+
+                $header = $this->_readValue($c);
+
+                if ($header[0] != self::TYPE_OBJDEC || $header[1] != $objSpec[1] || $header[2] != $objSpec[2]) {
+                    $toSearchFor = $objSpec[1] . ' ' . $objSpec[2] . ' obj';
+                    if (preg_match('/' . $toSearchFor . '/', $c->buffer)) {
+                        $c->offset = strpos($c->buffer, $toSearchFor) + strlen($toSearchFor);
+                        // reset stack
+                        $c->stack = array();
+                    } else {
+                        throw new Exception(
+                            sprintf("Unable to find object (%s, %s) at expected location.", $objSpec[1], $objSpec[2])
+                        );
+                    }
+                }
+
+                // If we're being asked to store all the information
+                // about the object, we add the object ID and generation
+                // number for later use
+                $result = array (
+                    self::TYPE_OBJECT,
+                    'obj' => $objSpec[1],
+                    'gen' => $objSpec[2]
+                );
+
+                $this->_currentObj =& $result;
+
+                // Now simply read the object data until
+                // we encounter an end-of-object marker
+                while (true) {
+                    $value = $this->_readValue($c);
+                    if ($value === false || count($result) > 4) {
+                        // in this case the parser couldn't find an "endobj" so we break here
+                        break;
+                    }
+
+                    if ($value[0] == self::TYPE_TOKEN && $value[1] === 'endobj') {
+                        break;
+                    }
+
+                    $result[] = $value;
+                }
+
+                $c->reset($oldPos);
+
+                if (isset($result[2][0]) && $result[2][0] == self::TYPE_STREAM) {
+                    $result[0] = self::TYPE_STREAM;
+                }
+
+            } else {
+                throw new Exception(
+                    sprintf("Unable to find object (%s, %s) at expected location.", $objSpec[1], $objSpec[2])
+                );
+            }
+
+            return $result;
+        } else {
+            return $objSpec;
         }
     }
 
@@ -613,7 +786,7 @@ class pdf_parser
                 // This is a comment - jump over it!
 
                 $pos = $c->offset;
-                while (1) {
+                while(1) {
                     $match = preg_match("/(\r\n|\r|\n)/", $c->buffer, $m, PREG_OFFSET_CAPTURE, $pos);
                     if ($match === 0) {
                         if (!$c->increaseLength()) {
@@ -638,7 +811,7 @@ class pdf_parser
                     return false;
                 }
 
-                while (1) {
+                while(1) {
 
                     // Determine the length of the token
 
@@ -662,179 +835,6 @@ class pdf_parser
                 $c->offset += $pos;
 
                 return $result;
-        }
-    }
-
-    /**
-     * Resolve an object
-     *
-     * @param array $objSpec The object-data
-     * @return array|boolean
-     * @throws Exception
-     */
-    public function resolveObject($objSpec)
-    {
-        $c = $this->_c;
-
-        // Exit if we get invalid data
-        if (!is_array($objSpec)) {
-            return false;
-        }
-
-        if ($objSpec[0] == self::TYPE_OBJREF) {
-
-            // This is a reference, resolve it
-            if (isset($this->_xref['xref'][$objSpec[1]][$objSpec[2]])) {
-
-                // Save current file position
-                // This is needed if you want to resolve
-                // references while you're reading another object
-                // (e.g.: if you need to determine the length
-                // of a stream)
-
-                $oldPos = $c->getPos();
-
-                // Reposition the file pointer and
-                // load the object header.
-
-                $c->reset($this->_xref['xref'][$objSpec[1]][$objSpec[2]]);
-
-                $header = $this->_readValue($c);
-
-                if ($header[0] != self::TYPE_OBJDEC || $header[1] != $objSpec[1] || $header[2] != $objSpec[2]) {
-                    $toSearchFor = $objSpec[1] . ' ' . $objSpec[2] . ' obj';
-                    if (preg_match('/' . $toSearchFor . '/', $c->buffer)) {
-                        $c->offset = strpos($c->buffer, $toSearchFor) + strlen($toSearchFor);
-                        // reset stack
-                        $c->stack = array();
-                    } else {
-                        throw new Exception(
-                            sprintf("Unable to find object (%s, %s) at expected location.", $objSpec[1], $objSpec[2])
-                        );
-                    }
-                }
-
-                // If we're being asked to store all the information
-                // about the object, we add the object ID and generation
-                // number for later use
-                $result = array(
-                    self::TYPE_OBJECT,
-                    'obj' => $objSpec[1],
-                    'gen' => $objSpec[2]
-                );
-
-                $this->_currentObj =& $result;
-
-                // Now simply read the object data until
-                // we encounter an end-of-object marker
-                while (true) {
-                    $value = $this->_readValue($c);
-                    if ($value === false || count($result) > 4) {
-                        // in this case the parser couldn't find an "endobj" so we break here
-                        break;
-                    }
-
-                    if ($value[0] == self::TYPE_TOKEN && $value[1] === 'endobj') {
-                        break;
-                    }
-
-                    $result[] = $value;
-                }
-
-                $c->reset($oldPos);
-
-                if (isset($result[2][0]) && $result[2][0] == self::TYPE_STREAM) {
-                    $result[0] = self::TYPE_STREAM;
-                }
-
-            } else {
-                throw new Exception(
-                    sprintf("Unable to find object (%s, %s) at expected location.", $objSpec[1], $objSpec[2])
-                );
-            }
-
-            return $result;
-        } else {
-            return $objSpec;
-        }
-    }
-
-    /**
-     * Find the xref table
-     *
-     * @return integer
-     * @throws Exception
-     */
-    protected function _findXref()
-    {
-        $toRead = self::$searchForStartxrefLength;
-
-        $stat = fseek($this->_f, -$toRead, SEEK_END);
-        if ($stat === -1) {
-            fseek($this->_f, 0);
-        }
-
-        $data = fread($this->_f, $toRead);
-
-        $keywordPos = strpos(strrev($data), strrev('startxref'));
-        if (false === $keywordPos) {
-            $keywordPos = strpos(strrev($data), strrev('startref'));
-        }
-
-        if (false === $keywordPos) {
-            throw new Exception('Unable to find "startxref" keyword.');
-        }
-
-        $pos = strlen($data) - $keywordPos;
-        $data = substr($data, $pos);
-
-        if (!preg_match('/\s*(\d+).*$/s', $data, $matches)) {
-            throw new Exception('Unable to find pointer to xref table.');
-        }
-
-        return (int)$matches[1];
-    }
-
-    /**
-     * Check Trailer for Encryption
-     *
-     * @throws Exception
-     */
-    public function getEncryption()
-    {
-        if (isset($this->_xref['trailer'][1]['/Encrypt'])) {
-            throw new Exception('File is encrypted!');
-        }
-    }
-
-    /**
-     * Read the /Root dictionary
-     */
-    protected function _readRoot()
-    {
-        if ($this->_xref['trailer'][1]['/Root'][0] != self::TYPE_OBJREF) {
-            throw new Exception('Wrong Type of Root-Element! Must be an indirect reference');
-        }
-
-        $this->_root = $this->resolveObject($this->_xref['trailer'][1]['/Root']);
-    }
-
-    /**
-     * Destructor
-     */
-    public function __destruct()
-    {
-        $this->closeFile();
-    }
-
-    /**
-     * Close the opened file
-     */
-    public function closeFile()
-    {
-        if (isset($this->_f) && is_resource($this->_f)) {
-            fclose($this->_f);
-            unset($this->_f);
         }
     }
 

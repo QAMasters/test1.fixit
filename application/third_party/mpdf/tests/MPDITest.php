@@ -49,9 +49,41 @@ class MPDITest extends PHPUnit_Framework_TestCase
         require_once _MPDF_PATH . 'vendor/autoload.php';
 
         /* Set up our test objects */
-        $this->mpdf = new mPDF();
-        $this->fpdi_parser = new fpdi_pdf_parser(_MPDF_PATH . 'tests/data/pdfs/2-Page-PDF_1_4.pdf', $this->mpdf);
-        $this->parser = new pdf_parser(_MPDF_PATH . 'tests/data/pdfs/2-Page-PDF_1_4.pdf');
+        $this->mpdf        = new mPDF();
+        $this->fpdi_parser = new fpdi_pdf_parser( _MPDF_PATH . 'tests/data/pdfs/2-Page-PDF_1_4.pdf', $this->mpdf );
+        $this->parser      = new pdf_parser( _MPDF_PATH . 'tests/data/pdfs/2-Page-PDF_1_4.pdf' );
+    }
+
+    /**
+     * Call protected/private method of a class.
+     *
+     * @param object &$object    Instantiated object that we will run method on.
+     * @param string $methodName Method name to call
+     * @param array  $parameters Array of parameters to pass into method.
+     *
+     * @return mixed Method return.
+     */
+    protected function invokeMethod( &$object, $methodName, array $parameters = array() )
+    {
+        $reflection = new \ReflectionClass( get_class($object) );
+        $method = $reflection->getMethod( $methodName );
+        $method->setAccessible( true );
+
+        return $method->invokeArgs($object, $parameters);
+    }
+
+    /**
+     * Retreve protected/private properties of a class.
+     *
+     * @param object &$object    Instantiated object that we will run method on.
+     * @param string $propertyName Property name to retreve
+     */
+    protected function getProperty( &$object, $propertyName ) {
+        $reflection = new \ReflectionClass( get_class($object) );
+        $property = $reflection->getProperty( $propertyName );
+        $property->setAccessible( true );
+
+        return $property->getValue( $object );
     }
 
     /**
@@ -61,25 +93,7 @@ class MPDITest extends PHPUnit_Framework_TestCase
      */
     public function test_pdf_find_xref()
     {
-        $this->assertEquals(116, $this->invokeMethod($this->parser, '_findXref'));
-    }
-
-    /**
-     * Call protected/private method of a class.
-     *
-     * @param object &$object Instantiated object that we will run method on.
-     * @param string $methodName Method name to call
-     * @param array $parameters Array of parameters to pass into method.
-     *
-     * @return mixed Method return.
-     */
-    protected function invokeMethod(&$object, $methodName, array $parameters = array())
-    {
-        $reflection = new \ReflectionClass(get_class($object));
-        $method = $reflection->getMethod($methodName);
-        $method->setAccessible(true);
-
-        return $method->invokeArgs($object, $parameters);
+        $this->assertEquals(116, $this->invokeMethod( $this->parser, '_findXref' ) );
     }
 
     /**
@@ -91,7 +105,7 @@ class MPDITest extends PHPUnit_Framework_TestCase
     {
         $xref = array();
 
-        $this->invokeMethod($this->parser, '_readXref', array(& $xref, $this->invokeMethod($this->parser, '_findXref')));
+        $this->invokeMethod( $this->parser, '_readXref', array( & $xref, $this->invokeMethod( $this->parser, '_findXref' ) ) );
 
         /* Verify the xref array */
         $this->assertArrayHasKey('xrefLocation', $xref);
@@ -169,26 +183,11 @@ class MPDITest extends PHPUnit_Framework_TestCase
      */
     public function test_pdf_read_root()
     {
-        $root = $this->getProperty($this->parser, '_root');
+        $root = $this->getProperty( $this->parser, '_root' );
 
         $this->assertEquals(9, $root[0]);
-        $this->assertEquals(true, is_array($root[1]));
+        $this->assertEquals(true, is_array( $root[1] ) );
         $this->assertEquals(0, $root[2]);
-    }
-
-    /**
-     * Retreve protected/private properties of a class.
-     *
-     * @param object &$object Instantiated object that we will run method on.
-     * @param string $propertyName Property name to retreve
-     */
-    protected function getProperty(&$object, $propertyName)
-    {
-        $reflection = new \ReflectionClass(get_class($object));
-        $property = $reflection->getProperty($propertyName);
-        $property->setAccessible(true);
-
-        return $property->getValue($object);
     }
 
     /**
@@ -198,7 +197,7 @@ class MPDITest extends PHPUnit_Framework_TestCase
      */
     public function test_resolve_object()
     {
-        $resolved = $this->parser->resolveObject($this->getProperty($this->parser, '_root'));
+        $resolved = $this->parser->resolveObject( $this->getProperty( $this->parser, '_root' ) );
 
         /* Check for the correct results */
         $this->assertEquals(9, $resolved[0]);
@@ -237,9 +236,9 @@ class MPDITest extends PHPUnit_Framework_TestCase
      */
     public function test_fpdi_pdf_parser()
     {
-        $this->assertSame(2, $this->fpdi_parser->getPageCount());
+        $this->assertSame(2, $this->fpdi_parser->getPageCount() );
 
-        $_pages = $this->getProperty($this->fpdi_parser, '_pages');
+        $_pages = $this->getProperty( $this->fpdi_parser, '_pages' );
 
         $page1 = $_pages[0];
         $page2 = $_pages[1];
@@ -393,8 +392,8 @@ class MPDITest extends PHPUnit_Framework_TestCase
     public function test_fpdi_get_page_resources()
     {
 
-        $_pages = $this->getProperty($this->fpdi_parser, '_pages');
-        $resources = $this->invokeMethod($this->fpdi_parser, '_getPageResources', array($_pages[0]));
+        $_pages = $this->getProperty( $this->fpdi_parser, '_pages' );
+        $resources = $this->invokeMethod( $this->fpdi_parser, '_getPageResources', array( $_pages[0] ) );
 
         /* Run our tests */
         $this->assertEquals(5, $resources[0]);
@@ -469,7 +468,7 @@ class MPDITest extends PHPUnit_Framework_TestCase
         /**
          * Check for basics on Page 2
          */
-        $resources = $this->invokeMethod($this->fpdi_parser, '_getPageResources', array($_pages[1]));
+        $resources = $this->invokeMethod( $this->fpdi_parser, '_getPageResources', array( $_pages[1] ) );
 
         /* Run our tests */
         $this->assertEquals(5, $resources[0]);
@@ -509,8 +508,8 @@ class MPDITest extends PHPUnit_Framework_TestCase
      */
     public function test_get_page_box()
     {
-        $_pages = $this->getProperty($this->fpdi_parser, '_pages');
-        $box = $this->invokeMethod($this->fpdi_parser, '_getPageBox', array($_pages[0], '/TrimBox', _MPDFK));
+        $_pages = $this->getProperty( $this->fpdi_parser, '_pages' );
+        $box = $this->invokeMethod( $this->fpdi_parser, '_getPageBox', array( $_pages[0], '/TrimBox', _MPDFK ) );
 
         $this->assertEquals('0', $box['x']);
         $this->assertEquals('0.074436111111111', $box['y']);

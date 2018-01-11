@@ -57,7 +57,7 @@ $this->biDirectional = false; // automatically determine BIDI text in LTR page
 // AUTOMATIC FONT SELECTION
 // Based on script and/or language
 $this->autoScriptToLang = false; // mPDF 6.0 (similar to previously using function SetAutoFont() )
-$this->baseScript = 1;    // =Latin; to set another base script see constants in classes/ucdn.php
+$this->baseScript = 1;	// =Latin; to set another base script see constants in classes/ucdn.php
 $this->autoVietnamese = true;
 $this->autoArabic = true;
 
@@ -72,7 +72,7 @@ $this->allow_output_buffering = false;
 $this->enableImports = false; // Adding mPDFI functions
 
 $this->collapseBlockMargins = true; // Allows top and bottom margins to collapse between block elements
-$this->progressBar = 0;    // Shows progress-bars whilst generating file 0 off, 1 simple, 2 advanced
+$this->progressBar = 0;	// Shows progress-bars whilst generating file 0 off, 1 simple, 2 advanced
 $this->progbar_heading = 'mPDF file progress';
 
 $this->progbar_altHTML = ''; // Should include <html> and <body> but NOT end tags
@@ -105,16 +105,16 @@ $this->incrementFPR4 = 50; // i.e. will alter by 1/[50]th of width and try again
 $this->restrictColorSpace = 0;
 
 // PDFX/1-a Compliant files
-$this->PDFX = false;    // true=Forces compliance with PDFX-1a spec
+$this->PDFX = false;	// true=Forces compliance with PDFX-1a spec
 // Cannot be used with $this->restrictColorSpace (i.e. no RGB)
 $this->PDFXauto = false; // Overrides warnings making changes when possible to force PDFX1-a compliance
 
 // PDFA1-b Compliant files
-$this->PDFA = false;    // true=Forces compliance with PDFA-1b spec
+$this->PDFA = false;	// true=Forces compliance with PDFA-1b spec
 // Can use with $this->restrictColorSpace=3 (for a CMYK file)
 // Any other settings, uses RGB profile
 $this->PDFAauto = false; // Overrides warnings making changes when possible to force PDFA1-b compliance
-$this->ICCProfile = '';    // Colour profile OutputIntent
+$this->ICCProfile = '';	// Colour profile OutputIntent
 // sRGB_IEC61966-2-1 (=default if blank and PDFA),  or other added .icc profile
 // Must be CMYK for PDFX, or appropriate type for PDFA(RGB or CMYK)
 
@@ -216,7 +216,7 @@ $this->tableMinSizePriority = false; // If page-break-inside:avoid but cannot fi
 // exceeding autosize; setting this value to true will force respect for
 // autosize, and disable the page-break-inside:avoid
 
-$this->use_kwt = false;    // "Keep-with-table" Attempts to keep a <h1> to <h6> tagged heading together
+$this->use_kwt = false;	// "Keep-with-table" Attempts to keep a <h1> to <h6> tagged heading together
 // with a table which comes immediately after it.
 $this->iterationCounter = false; // Set to TRUE to use table Head iteration counter
 $this->splitTableBorderWidth = 0; // Use table border (using this width in mm) when table breaks across pages
@@ -236,9 +236,9 @@ $this->img_dpi = 96; // Default dpi to output images if size not defined
 
 // TEXT SPACING & JUSTIFICATION
 
-$this->useKerning = false;    // Specify whether kerning should be used when CSS font-kerning="auto" used for HTML;
+$this->useKerning = false;	// Specify whether kerning should be used when CSS font-kerning="auto" used for HTML;
 // Also whether kerning should be used in any direct writing e.g. $mpdf->Text();
-$this->justifyB4br = false;    // In justified text, <BR> does not cause the preceding text to be justified in browsers
+$this->justifyB4br = false;	// In justified text, <BR> does not cause the preceding text to be justified in browsers
 // Change to true to force justification (as in MS Word)
 
 $this->tabSpaces = 8; // Number of spaces to replace for a TAB in <pre> sections
@@ -288,14 +288,14 @@ $this->ColGap = 5;
 
 // LISTS
 // mPDF 6
-$this->list_auto_mode = 'browser';        // 'mpdf' or 'browser' - Specify whether to use mPDF custom method of automatic
+$this->list_auto_mode = 'browser';		// 'mpdf' or 'browser' - Specify whether to use mPDF custom method of automatic
 // indentation of lists, or standard browser-compatible
 // custom mPDF method is ignored if list-style-position: inside, or image used for marker (or custom U+)
-$this->list_indent_default = '40px';    // List Indentation when set to 'auto' if using standard browser-compatible method
-$this->list_indent_default_mpdf = '0em';    // List Indentation when set to 'auto' if using mPDF custom method
-$this->list_indent_first_level = 0;        // 1/0 yes/no to indent first level of list, if using mPDF custom method
+$this->list_indent_default = '40px';	// List Indentation when set to 'auto' if using standard browser-compatible method
+$this->list_indent_default_mpdf = '0em';	// List Indentation when set to 'auto' if using mPDF custom method
+$this->list_indent_first_level = 0;		// 1/0 yes/no to indent first level of list, if using mPDF custom method
 
-$this->list_number_suffix = '.';        // Content to follow a numbered list marker e.g. '.' gives 1. or IV.; ')' gives 1) or a)
+$this->list_number_suffix = '.';		// Content to follow a numbered list marker e.g. '.' gives 1. or IV.; ')' gives 1) or a)
 
 // To specify a bullet size and offset proportional to the list item's font size:
 //$this->list_marker_offset = '0.45em';	// Offset (CSS length) of list marker bullets (disc/circle/square)
@@ -329,213 +329,216 @@ $this->autoPadding = false; // Automatically increases padding in block elements
 
 // Default values if no style sheet offered	(cf. http://www.w3.org/TR/CSS21/sample.html)
 $this->defaultCSS = array(
-    'BODY' => array(
-        'FONT-FAMILY' => 'serif',
-        'FONT-SIZE' => '11pt',
-        'TEXT-INDENT' => '0pt',
-        'LINE-HEIGHT' => 'normal',
-        'MARGIN-COLLAPSE' => 'collapse', /* Custom property to collapse top/bottom margins at top/bottom of page - ignored in tables/lists */
-        'HYPHENS' => 'manual', /* mPDF 5.6.08 */
-        'FONT-KERNING' => 'auto', /* mPDF 6 */
-    ),
-    'P' => array(
-        'MARGIN' => '1.12em 0',
-    ),
-    'H1' => array(
-        'FONT-SIZE' => '2em',
-        'FONT-WEIGHT' => 'bold',
-        'MARGIN' => '0.67em 0',
-        'PAGE-BREAK-AFTER' => 'avoid',
-    ),
-    'H2' => array(
-        'FONT-SIZE' => '1.5em',
-        'FONT-WEIGHT' => 'bold',
-        'MARGIN' => '0.75em 0',
-        'PAGE-BREAK-AFTER' => 'avoid',
-    ),
-    'H3' => array(
-        'FONT-SIZE' => '1.17em',
-        'FONT-WEIGHT' => 'bold',
-        'MARGIN' => '0.83em 0',
-        'PAGE-BREAK-AFTER' => 'avoid',
-    ),
-    'H4' => array(
-        'FONT-WEIGHT' => 'bold',
-        'MARGIN' => '1.12em 0',
-        'PAGE-BREAK-AFTER' => 'avoid',
-    ),
-    'H5' => array(
-        'FONT-SIZE' => '0.83em',
-        'FONT-WEIGHT' => 'bold',
-        'MARGIN' => '1.5em 0',
-        'PAGE-BREAK-AFTER' => 'avoid',
-    ),
-    'H6' => array(
-        'FONT-SIZE' => '0.75em',
-        'FONT-WEIGHT' => 'bold',
-        'MARGIN' => '1.67em 0',
-        'PAGE-BREAK-AFTER' => 'avoid',
-    ),
-    'HR' => array(
-        'COLOR' => '#888888',
-        'TEXT-ALIGN' => 'center',
-        'WIDTH' => '100%',
-        'HEIGHT' => '0.2mm',
-        'MARGIN-TOP' => '0.83em',
-        'MARGIN-BOTTOM' => '0.83em',
-    ),
-    'PRE' => array(
-        'MARGIN' => '0.83em 0',
-        'FONT-FAMILY' => 'monospace',
-    ),
-    'S' => array(
-        'TEXT-DECORATION' => 'line-through',
-    ),
-    'STRIKE' => array(
-        'TEXT-DECORATION' => 'line-through',
-    ),
-    'DEL' => array(
-        'TEXT-DECORATION' => 'line-through',
-    ),
-    'SUB' => array(
-        'VERTICAL-ALIGN' => 'sub',
-        'FONT-SIZE' => '55%', /* Recommended 0.83em */
-    ),
-    'SUP' => array(
-        'VERTICAL-ALIGN' => 'super',
-        'FONT-SIZE' => '55%', /* Recommended 0.83em */
-    ),
-    'U' => array(
-        'TEXT-DECORATION' => 'underline',
-    ),
-    'INS' => array(
-        'TEXT-DECORATION' => 'underline',
-    ),
-    'B' => array(
-        'FONT-WEIGHT' => 'bold',
-    ),
-    'STRONG' => array(
-        'FONT-WEIGHT' => 'bold',
-    ),
-    'I' => array(
-        'FONT-STYLE' => 'italic',
-    ),
-    'CITE' => array(
-        'FONT-STYLE' => 'italic',
-    ),
-    'Q' => array(
-        'FONT-STYLE' => 'italic',
-    ),
-    'EM' => array(
-        'FONT-STYLE' => 'italic',
-    ),
-    'VAR' => array(
-        'FONT-STYLE' => 'italic',
-    ),
-    'SAMP' => array(
-        'FONT-FAMILY' => 'monospace',
-    ),
-    'CODE' => array(
-        'FONT-FAMILY' => 'monospace',
-    ),
-    'KBD' => array(
-        'FONT-FAMILY' => 'monospace',
-    ),
-    'TT' => array(
-        'FONT-FAMILY' => 'monospace',
-    ),
-    'SMALL' => array(
-        'FONT-SIZE' => '83%',
-    ),
-    'BIG' => array(
-        'FONT-SIZE' => '117%',
-    ),
-    'ACRONYM' => array(
-        'FONT-SIZE' => '77%',
-        'FONT-WEIGHT' => 'bold',
-    ),
-    'ADDRESS' => array(
-        'FONT-STYLE' => 'italic',
-    ),
-    'BLOCKQUOTE' => array(
-        'MARGIN-LEFT' => '40px',
-        'MARGIN-RIGHT' => '40px',
-        'MARGIN-TOP' => '1.12em',
-        'MARGIN-BOTTOM' => '1.12em',
-    ),
-    'A' => array(
-        'COLOR' => '#0000FF',
-        'TEXT-DECORATION' => 'underline',
-    ),
-    'UL' => array(
-        'PADDING' => '0 auto', /* mPDF 6 */
-        'MARGIN-TOP' => '0.83em', /* mPDF 6 */
-        'MARGIN-BOTTOM' => '0.83em', /* mPDF 6 */
-    ),
-    'OL' => array(
-        'PADDING' => '0 auto', /* mPDF 6 */
-        'MARGIN-TOP' => '0.83em', /* mPDF 6 */
-        'MARGIN-BOTTOM' => '0.83em', /* mPDF 6 */
-    ),
-    'DL' => array(
-        'MARGIN' => '1.67em 0',
-    ),
-    'DT' => array(),
-    'DD' => array(
-        'PADDING-LEFT' => '40px',
-    ),
-    'TABLE' => array(
-        'MARGIN' => '0',
-        'BORDER-COLLAPSE' => 'separate',
-        'BORDER-SPACING' => '2px',
-        'EMPTY-CELLS' => 'show',
-        'LINE-HEIGHT' => '1.2',
-        'VERTICAL-ALIGN' => 'middle',
-        'HYPHENS' => 'manual', /* mPDF 6 */
-        'FONT-KERNING' => 'auto', /* mPDF 6 */
-    ),
-    'THEAD' => array(),
-    'TFOOT' => array(),
-    'TH' => array(
-        'FONT-WEIGHT' => 'bold',
-        'TEXT-ALIGN' => 'center',
-        'PADDING-LEFT' => '0.1em',
-        'PADDING-RIGHT' => '0.1em',
-        'PADDING-TOP' => '0.1em',
-        'PADDING-BOTTOM' => '0.1em',
-    ),
-    'TD' => array(
-        'PADDING-LEFT' => '0.1em',
-        'PADDING-RIGHT' => '0.1em',
-        'PADDING-TOP' => '0.1em',
-        'PADDING-BOTTOM' => '0.1em',
-    ),
-    'CAPTION' => array(
-        'TEXT-ALIGN' => 'center',
-    ),
-    'IMG' => array(
-        'MARGIN' => '0',
-        'VERTICAL-ALIGN' => 'baseline',
-        'IMAGE-RENDERING' => 'auto',
-    ),
-    'INPUT' => array(
-        'FONT-FAMILY' => 'sans-serif',
-        'VERTICAL-ALIGN' => 'middle',
-        'FONT-SIZE' => '0.9em',
-    ),
-    'SELECT' => array(
-        'FONT-FAMILY' => 'sans-serif',
-        'FONT-SIZE' => '0.9em',
-        'VERTICAL-ALIGN' => 'middle',
-    ),
-    'TEXTAREA' => array(
-        'FONT-FAMILY' => 'monospace',
-        'FONT-SIZE' => '0.9em',
-        'VERTICAL-ALIGN' => 'text-bottom',
-    ),
-    'MARK' => array(/* mPDF 5.5.09 */
-        'BACKGROUND-COLOR' => 'yellow',
-    ),
+	'BODY' => array(
+		'FONT-FAMILY' => 'serif',
+		'FONT-SIZE' => '11pt',
+		'TEXT-INDENT' => '0pt',
+		'LINE-HEIGHT' => 'normal',
+		'MARGIN-COLLAPSE' => 'collapse', /* Custom property to collapse top/bottom margins at top/bottom of page - ignored in tables/lists */
+		'HYPHENS' => 'manual', /* mPDF 5.6.08 */
+		'FONT-KERNING' => 'auto', /* mPDF 6 */
+	),
+	'P' => array(
+		'MARGIN' => '1.12em 0',
+	),
+	'H1' => array(
+		'FONT-SIZE' => '2em',
+		'FONT-WEIGHT' => 'bold',
+		'MARGIN' => '0.67em 0',
+		'PAGE-BREAK-AFTER' => 'avoid',
+	),
+	'H2' => array(
+		'FONT-SIZE' => '1.5em',
+		'FONT-WEIGHT' => 'bold',
+		'MARGIN' => '0.75em 0',
+		'PAGE-BREAK-AFTER' => 'avoid',
+	),
+	'H3' => array(
+		'FONT-SIZE' => '1.17em',
+		'FONT-WEIGHT' => 'bold',
+		'MARGIN' => '0.83em 0',
+		'PAGE-BREAK-AFTER' => 'avoid',
+	),
+	'H4' => array(
+		'FONT-WEIGHT' => 'bold',
+		'MARGIN' => '1.12em 0',
+		'PAGE-BREAK-AFTER' => 'avoid',
+	),
+	'H5' => array(
+		'FONT-SIZE' => '0.83em',
+		'FONT-WEIGHT' => 'bold',
+		'MARGIN' => '1.5em 0',
+		'PAGE-BREAK-AFTER' => 'avoid',
+	),
+	'H6' => array(
+		'FONT-SIZE' => '0.75em',
+		'FONT-WEIGHT' => 'bold',
+		'MARGIN' => '1.67em 0',
+		'PAGE-BREAK-AFTER' => 'avoid',
+	),
+	'HR' => array(
+		'COLOR' => '#888888',
+		'TEXT-ALIGN' => 'center',
+		'WIDTH' => '100%',
+		'HEIGHT' => '0.2mm',
+		'MARGIN-TOP' => '0.83em',
+		'MARGIN-BOTTOM' => '0.83em',
+	),
+	'PRE' => array(
+		'MARGIN' => '0.83em 0',
+		'FONT-FAMILY' => 'monospace',
+	),
+	'S' => array(
+		'TEXT-DECORATION' => 'line-through',
+	),
+	'STRIKE' => array(
+		'TEXT-DECORATION' => 'line-through',
+	),
+	'DEL' => array(
+		'TEXT-DECORATION' => 'line-through',
+	),
+	'SUB' => array(
+		'VERTICAL-ALIGN' => 'sub',
+		'FONT-SIZE' => '55%', /* Recommended 0.83em */
+	),
+	'SUP' => array(
+		'VERTICAL-ALIGN' => 'super',
+		'FONT-SIZE' => '55%', /* Recommended 0.83em */
+	),
+	'U' => array(
+		'TEXT-DECORATION' => 'underline',
+	),
+	'INS' => array(
+		'TEXT-DECORATION' => 'underline',
+	),
+	'B' => array(
+		'FONT-WEIGHT' => 'bold',
+	),
+	'STRONG' => array(
+		'FONT-WEIGHT' => 'bold',
+	),
+	'I' => array(
+		'FONT-STYLE' => 'italic',
+	),
+	'CITE' => array(
+		'FONT-STYLE' => 'italic',
+	),
+	'Q' => array(
+		'FONT-STYLE' => 'italic',
+	),
+	'EM' => array(
+		'FONT-STYLE' => 'italic',
+	),
+	'VAR' => array(
+		'FONT-STYLE' => 'italic',
+	),
+	'SAMP' => array(
+		'FONT-FAMILY' => 'monospace',
+	),
+	'CODE' => array(
+		'FONT-FAMILY' => 'monospace',
+	),
+	'KBD' => array(
+		'FONT-FAMILY' => 'monospace',
+	),
+	'TT' => array(
+		'FONT-FAMILY' => 'monospace',
+	),
+	'SMALL' => array(
+		'FONT-SIZE' => '83%',
+	),
+	'BIG' => array(
+		'FONT-SIZE' => '117%',
+	),
+	'ACRONYM' => array(
+		'FONT-SIZE' => '77%',
+		'FONT-WEIGHT' => 'bold',
+	),
+	'ADDRESS' => array(
+		'FONT-STYLE' => 'italic',
+	),
+	'BLOCKQUOTE' => array(
+		'MARGIN-LEFT' => '40px',
+		'MARGIN-RIGHT' => '40px',
+		'MARGIN-TOP' => '1.12em',
+		'MARGIN-BOTTOM' => '1.12em',
+	),
+	'A' => array(
+		'COLOR' => '#0000FF',
+		'TEXT-DECORATION' => 'underline',
+	),
+	'UL' => array(
+		'PADDING' => '0 auto', /* mPDF 6 */
+		'MARGIN-TOP' => '0.83em', /* mPDF 6 */
+		'MARGIN-BOTTOM' => '0.83em', /* mPDF 6 */
+	),
+	'OL' => array(
+		'PADDING' => '0 auto', /* mPDF 6 */
+		'MARGIN-TOP' => '0.83em', /* mPDF 6 */
+		'MARGIN-BOTTOM' => '0.83em', /* mPDF 6 */
+	),
+	'DL' => array(
+		'MARGIN' => '1.67em 0',
+	),
+	'DT' => array(
+	),
+	'DD' => array(
+		'PADDING-LEFT' => '40px',
+	),
+	'TABLE' => array(
+		'MARGIN' => '0',
+		'BORDER-COLLAPSE' => 'separate',
+		'BORDER-SPACING' => '2px',
+		'EMPTY-CELLS' => 'show',
+		'LINE-HEIGHT' => '1.2',
+		'VERTICAL-ALIGN' => 'middle',
+		'HYPHENS' => 'manual', /* mPDF 6 */
+		'FONT-KERNING' => 'auto', /* mPDF 6 */
+	),
+	'THEAD' => array(
+	),
+	'TFOOT' => array(
+	),
+	'TH' => array(
+		'FONT-WEIGHT' => 'bold',
+		'TEXT-ALIGN' => 'center',
+		'PADDING-LEFT' => '0.1em',
+		'PADDING-RIGHT' => '0.1em',
+		'PADDING-TOP' => '0.1em',
+		'PADDING-BOTTOM' => '0.1em',
+	),
+	'TD' => array(
+		'PADDING-LEFT' => '0.1em',
+		'PADDING-RIGHT' => '0.1em',
+		'PADDING-TOP' => '0.1em',
+		'PADDING-BOTTOM' => '0.1em',
+	),
+	'CAPTION' => array(
+		'TEXT-ALIGN' => 'center',
+	),
+	'IMG' => array(
+		'MARGIN' => '0',
+		'VERTICAL-ALIGN' => 'baseline',
+		'IMAGE-RENDERING' => 'auto',
+	),
+	'INPUT' => array(
+		'FONT-FAMILY' => 'sans-serif',
+		'VERTICAL-ALIGN' => 'middle',
+		'FONT-SIZE' => '0.9em',
+	),
+	'SELECT' => array(
+		'FONT-FAMILY' => 'sans-serif',
+		'FONT-SIZE' => '0.9em',
+		'VERTICAL-ALIGN' => 'middle',
+	),
+	'TEXTAREA' => array(
+		'FONT-FAMILY' => 'monospace',
+		'FONT-SIZE' => '0.9em',
+		'VERTICAL-ALIGN' => 'text-bottom',
+	),
+	'MARK' => array(/* mPDF 5.5.09 */
+		'BACKGROUND-COLOR' => 'yellow',
+	),
 );
 
 

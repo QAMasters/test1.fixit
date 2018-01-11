@@ -5,8 +5,9 @@
  * @author  Fabien Ménager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
-
 namespace Dompdf;
+
+use Dompdf\Frame;
 
 /**
  * Embeds Javascript into the PDF document
@@ -32,6 +33,14 @@ class JavascriptEmbedder
     }
 
     /**
+     * @param $script
+     */
+    public function insert($script)
+    {
+        $this->_dompdf->getCanvas()->javascript($script);
+    }
+
+    /**
      * @param \Dompdf\Frame $frame
      */
     public function render(Frame $frame)
@@ -41,13 +50,5 @@ class JavascriptEmbedder
         }
 
         $this->insert($frame->get_node()->nodeValue);
-    }
-
-    /**
-     * @param $script
-     */
-    public function insert($script)
-    {
-        $this->_dompdf->getCanvas()->javascript($script);
     }
 }

@@ -5,7 +5,6 @@
  * @author  Benj Carson <benjcarson@digitaljunkies.ca>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
-
 namespace Dompdf;
 
 /**
@@ -44,7 +43,9 @@ class CanvasFactory
                 class_exists("PDFLib", false)
             ) {
                 $class = "Dompdf\\Adapter\\PDFLib";
-            } else {
+            }
+
+            else {
                 if ($backend === "gd") {
                     $class = "Dompdf\\Adapter\\GD";
                 } else {

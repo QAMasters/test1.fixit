@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function() {
     var $validator = $("#wizardForm").validate({
         rules: {
             exampleInputName: {
@@ -6,73 +6,73 @@ $(document).ready(function () {
             },
             exampleInputName2: {
                 required: true
-            },
-            exampleInputEmail: {
+		    },
+		    exampleInputEmail: {
                 required: true,
                 email: true
-            },
-            exampleInputPassword1: {
+		    },
+		    exampleInputPassword1: {
                 required: true
-            },
-            exampleInputPassword2: {
+		    },
+		    exampleInputPassword2: {
                 required: true,
                 equalTo: '#exampleInputPassword1'
-            },
-            exampleInputProductName: {
+		    },
+		    exampleInputProductName: {
+                required: true
+		    },
+		    exampleInputProductId: {
+                required: true
+		    },
+		    exampleInputQuantity: {
                 required: true
             },
-            exampleInputProductId: {
-                required: true
-            },
-            exampleInputQuantity: {
-                required: true
-            },
-            exampleInputCard: {
+		    exampleInputCard: {
                 required: true,
                 number: true
-            },
-            exampleInputSecurity: {
+		    },
+		    exampleInputSecurity: {
                 required: true,
                 number: true
-            },
-            exampleInputHolder: {
+		    },
+		    exampleInputHolder: {
                 required: true
             },
-            exampleInputExpiration: {
+		    exampleInputExpiration: {
                 required: true,
                 date: true
             },
-            exampleInputCsv: {
+		    exampleInputCsv: {
                 required: true,
                 number: true
             }
         }
     });
-
+ 
     $('#rootwizard').bootstrapWizard({
         'tabClass': 'nav nav-tabs',
-        onTabShow: function (tab, navigation, index) {
+        onTabShow: function(tab, navigation, index) {
             var $total = navigation.find('li').length;
-            var $current = index + 1;
-            var $percent = ($current / $total) * 100;
-            $('#rootwizard').find('.progress-bar').css({width: $percent + '%'});
+            var $current = index+1;
+            var $percent = ($current/$total) * 100;
+            $('#rootwizard').find('.progress-bar').css({width:$percent+'%'});
         },
-        'onNext': function (tab, navigation, index) {
+        'onNext': function(tab, navigation, index) {
             var $valid = $("#wizardForm").valid();
-            if (!$valid) {
+            if(!$valid) {
                 $validator.focusInvalid();
                 return false;
             }
         },
-        'onTabClick': function (tab, navigation, index) {
+        'onTabClick': function(tab, navigation, index) {
             var $valid = $("#wizardForm").valid();
-            if (!$valid) {
+            if(!$valid) {
                 $validator.focusInvalid();
                 return false;
             }
         },
     });
-
+    
     $('.date-picker').datepicker({
         orientation: "top auto",
         autoclose: true

@@ -1,19 +1,19 @@
 <phpunit
-        bootstrap="tests/bootstrap.php"
-        colors="true"
-        backupGlobals="false">
+	bootstrap="tests/bootstrap.php"
+	colors="true"
+	backupGlobals="false">
 
-    <testsuites>
-        <testsuite>
-            <directory suffix=".php">./tests</directory>
-        </testsuite>
-    </testsuites>
+	<testsuites>
+		<testsuite>
+			<directory suffix=".php">./tests</directory>
+		</testsuite>
+	</testsuites>
 
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <file>mpdf.php</file>
-            <directory suffix=".php">classes</directory>
-        </whitelist>
-    </filter>
+	<filter>
+		<whitelist processUncoveredFilesFromWhitelist="true">
+			<file>mpdf.php</file>
+			<directory suffix=".php">classes</directory>
+		</whitelist>
+	</filter>
 
 </phpunit>
