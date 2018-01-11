@@ -1123,8 +1123,6 @@ class PDFLib implements Canvas
         $this->_page_text[] = compact("_t", "code", "type");
     }
 
-    //........................................................................
-
     /**
      *
      */
@@ -1159,6 +1157,8 @@ class PDFLib implements Canvas
         }
 
     }
+
+    //........................................................................
 
     /**
      * @param string $filename

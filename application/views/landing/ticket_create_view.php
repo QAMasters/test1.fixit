@@ -1,7 +1,7 @@
 <?php
 $xheader = '
 <link href="' . base_url() . 'assets1/plugins/pricing-tables/css/style.css" rel="stylesheet" type="text/css">
-<link href="' . base_url() . 'assets1/css/landing.css" rel="stylesheet" type="text/css"/>
+<link href="' . base_url() . 'assets1/css/landing1.css" rel="stylesheet" type="text/css"/>
 <link href="' . base_url() . 'assets1/custom.css" rel="stylesheet" type="text/css">
 <link href="' . base_url() . 'assets/plugins/iCheck/custom.css" rel="stylesheet">
 <link href="' . base_url() . 'assets/plugins/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">

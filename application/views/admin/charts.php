@@ -110,22 +110,33 @@ foreach ($closed_tickets1 as $key1) {
             },
             data: {
                 columns: [
-                    ['OpenTickets', jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec],
-                    ['ClosedTickets', jan1, feb1, mar1, apr1, may1, jun1, jul1, aug1, sep1, oct1, nov1, dec1]
+                    ['<?php echo $this->lang->line('OpenTickets'); ?>', jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec],
+                    ['<?php echo $this->lang->line('ClosedTickets'); ?>', jan1, feb1, mar1, apr1, may1, jun1, jul1, aug1, sep1, oct1, nov1, dec1]
                 ],
                 types: {
-                    OpenTickets: 'area-spline',
-                    ClosedTickets: 'area-spline'
+                    '<?php echo $this->lang->line('OpenTickets'); ?>': 'area-spline',
+                    '<?php echo $this->lang->line('ClosedTickets'); ?>': 'area-spline'
                     // 'line', 'spline', 'step', 'area', 'area-step' are also available to stack
                 },
                 colors: {
-                    OpenTickets: '#39c7aa',
-                    ClosedTickets: '#efa6ad'
+                    '<?php echo $this->lang->line('OpenTickets'); ?>': '#39c7aa',
+                    '<?php echo $this->lang->line('ClosedTickets'); ?>': '#efa6ad'
                 }
             }, axis: {
                 x: {
                     type: 'category',
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+                    categories: ['<?php echo $this->lang->line('jan'); ?>',
+                        '<?php echo $this->lang->line('feb'); ?>',
+                        '<?php echo $this->lang->line('mar'); ?>',
+                        '<?php echo $this->lang->line('apr'); ?>',
+                        '<?php echo $this->lang->line('may'); ?>',
+                        '<?php echo $this->lang->line('jun'); ?>',
+                        '<?php echo $this->lang->line('jul'); ?>',
+                        '<?php echo $this->lang->line('aug'); ?>',
+                        '<?php echo $this->lang->line('sep'); ?>',
+                        '<?php echo $this->lang->line('oct'); ?>',
+                        '<?php echo $this->lang->line('nov'); ?>',
+                        '<?php echo $this->lang->line('dec'); ?>']
                 }
             }
         });

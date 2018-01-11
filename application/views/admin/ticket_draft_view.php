@@ -20,7 +20,7 @@ include 'header.php';
                 <a><?php echo $this->lang->line('tickets'); ?></a>
             </li>
             <li class="active">
-                <strong>Draft Tickets</strong>
+                <strong><?php echo $this->lang->line('draft_tickets'); ?></strong>
             </li>
         </ol>
     </div>
