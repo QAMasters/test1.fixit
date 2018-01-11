@@ -11,6 +11,7 @@ $lang["no"] = "No";
 $lang["paid"] = "Paid";
 $lang["change_status"] = "Change Status";
 $lang["unpaid"] = "UnPaid";
+$lang["email_ticket_created_successfully"] = "Ticket created successfully.";
 $lang["amount_billed"] = "Amount Billed";
 $lang["rot"] = "ROT";
 $lang["moms"] = "VAT";

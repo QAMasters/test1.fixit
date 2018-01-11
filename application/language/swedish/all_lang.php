@@ -12,6 +12,7 @@ $lang["yes"] = "Ja";
 $lang["no"] = "Nej";
 $lang["paid"] = "Betald";
 $lang["unpaid"] = "Obetald";
+$lang["email_ticket_created_successfully"] = "Ticket created successfully.";
 $lang["change_status"] = "Byt status";
 $lang["amount_billed"] = "Fakturerad";
 $lang["rot"] = "ROT";

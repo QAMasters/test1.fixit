@@ -101,12 +101,12 @@ if (isset($n_ticket)) {
 }
 
 $js = array('class' => 'form-control', 'class' => 'select2_demo_3', 'style' => 'width:100%');
-$options = array('' => 'Select', 'Yes' => 'Yes', 'No' => 'No');
+$options = array('placeholder' => $this->lang->line('select'), 'Yes' => $this->lang->line('yes'), 'No' => $this->lang->line('no'));
 
-$i_name = array('type' => 'text', 'name' => 'i_name', 'value' => $n_name, 'placeholder' => $this->lang->line('phold_name'), 'class' => 'form-control', 'required' => 'required', 'data-error' => 'Please Enter Name');
+$i_name = array('type' => 'text', 'name' => 'i_name', 'value' => $n_name, 'placeholder' => $this->lang->line('phold_name'), 'class' => 'form-control', 'required' => 'required', 'data-error' => $this->lang->line('please_enter_name'));
 
-$i_email = array('type' => 'email', 'name' => 'i_email', 'value' => $n_email, 'placeholder' => $this->lang->line('phold_email'), 'class' => 'form-control', 'required' => 'required', 'data-error' => 'Please Enter Email');
-$i_phone = array('type' => 'number', 'name' => 'i_phone', 'value' => $n_phone, 'placeholder' => $this->lang->line('phold_phone'), 'class' => 'form-control', 'oninput' => 'this.value=this.value.slice(0,this.maxLength||1/1);this.value=(this.value   < 0) ? (1/1) : this.value;', 'maxlength' => '10', 'required' => 'required', 'data-minlength' => '10', 'min' => '0', 'data-error' => 'Please Enter Valid Phone Number');
+$i_email = array('type' => 'email', 'name' => 'i_email', 'value' => $n_email, 'placeholder' => $this->lang->line('phold_email'), 'class' => 'form-control', 'required' => 'required', 'data-error' => $this->lang->line('enter_email'));
+$i_phone = array('type' => 'number', 'name' => 'i_phone', 'value' => $n_phone, 'placeholder' => $this->lang->line('phold_phone'), 'class' => 'form-control', 'oninput' => 'this.value=this.value.slice(0,this.maxLength||1/1);this.value=(this.value   < 0) ? (1/1) : this.value;', 'maxlength' => '10', 'required' => 'required', 'data-minlength' => '10', 'min' => '0', 'data-error' => $this->lang->line('enter_valid_phone_number'));
 $i_address = array('type' => 'text', 'name' => 'i_address', 'value' => $n_address, 'placeholder' => $this->lang->line('phold_address'), 'class' => 'form-control');
 $i_door_code = array('type' => 'text', 'name' => 'i_door_code', 'value' => $n_door_code, 'placeholder' => $this->lang->line('phold_doorcode'), 'class' => 'form-control');
 
@@ -119,7 +119,7 @@ $js1 = array('id' => 'state', 'class' => '', 'style' => 'width:100%');
 
 $js3 = array('id' => 'pets', 'class' => 'select2_demo_3', 'style' => 'width:100%');
 
-$pets_data = array('type' => 'text', 'name' => 'pets_data', 'value' => $n_pets_data, 'placeholder' => 'Enter Pets Information', 'class' => 'form-control');
+$pets_data = array('type' => 'text', 'name' => 'pets_data', 'value' => $n_pets_data, 'placeholder' => $this->lang->line('enter_pet_data'), 'class' => 'form-control');
 
 $community1[''] = '';
 foreach ($communities as $key) {
@@ -275,7 +275,7 @@ echo form_open_multipart('', 'data-toggle="validator"');
                             <div class="col-sm-6">
                                 <label class="control-label"><?php echo $this->lang->line('problem'); ?></label>
                                 <div class="input-group col-md-12 col-xs-12">
-                                    <?php echo form_dropdown('sub_service', $selected_sub_service, $selected_sub_service1, $sub_serv_opt); ?>
+                                    <?php echo form_dropdown('sub_service', $selected_sub_service, $selected_sub_service, $sub_serv_opt); ?>
                                 </div>
                             </div>
                         </div>
@@ -294,12 +294,12 @@ echo form_open_multipart('', 'data-toggle="validator"');
                 <!-- BEGIN Portlet PORTLET-->
                 <div class="portlet portlet-bordered">
                     <div class="portlet-title">
-                        <p class="pull-left" style="font-size: 18px;">Images</p>
+                        <p class="pull-left" style="font-size: 18px;"><?php echo $this->lang->line('images'); ?></p>
                     </div>
                     <div class="portlet-body">
                         <div class="row">
                             <div class="col-sm-12 form-group">
-                                <label class="control-label">Select Image</label>
+                                <label class="control-label"><?php echo $this->lang->line('select_images'); ?></label>
                                 <div class="input-group col-md-12 col-xs-12">
                                     <input type="file" name="image" class="form-control">
                                 </div>
@@ -360,7 +360,7 @@ echo form_open_multipart('', 'data-toggle="validator"');
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 cancelButtonText: 'OK',
-                confirmButtonText: 'Want Create Another Ticket?'
+                confirmButtonText: '<?php echo $this->lang->line('want_another_ticket');?>'
             }).then(function () {
                 document.getElementById("m_ticket").submit();
             })
@@ -378,7 +378,7 @@ echo form_open_multipart('', 'data-toggle="validator"');
 <script type="text/javascript">
     $(document).ready(function () {
         $('#state').select2({
-            placeholder: "Select or Type to add",
+            placeholder: "<?php echo $this->lang->line('type_or_add');?>",
             allowClear: true,
             tags: true,
             tokenSeparators: [",", ""],
@@ -394,7 +394,7 @@ echo form_open_multipart('', 'data-toggle="validator"');
 <script type="text/javascript">
     $(document).ready(function () {
         $('#community').select2({
-            placeholder: "Select or Type to add",
+            placeholder: "<?php echo $this->lang->line('type_or_add');?>",
             allowClear: true,
             tags: true,
             tokenSeparators: [",", " "],
@@ -479,7 +479,7 @@ echo form_open_multipart('', 'data-toggle="validator"');
                     <div class="form-group">
                         <label for="exampleInputEmail1"><?php echo $this->lang->line('email'); ?></label>
                         <input type="email" class="form-control" id="exampleInputEmail1" name="email"
-                               placeholder="Enter email">
+                               placeholder="<?php echo $this->lang->line('enter_email'); ?>">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1"><?php echo $this->lang->line('password'); ?></label>
